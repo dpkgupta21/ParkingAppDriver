@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_black">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/book_now_button"
+        android:background="@color/light_black">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/light_black">
+
+            <RelativeLayout
+                android:id="@+id/drop_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                android:paddingBottom="@dimen/margin_50dp"
+                android:scrollbars="none">
+
+                <TextView
+                    android:id="@+id/drop_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_30dp"
+                    android:padding="@dimen/margin_20dp"
+                    android:text="@string/drop_off"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_22sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/drop_tv"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:id="@+id/drop_date_rl"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_20dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="@dimen/margin_10dp">
+
+                        <TextView
+                            android:id="@+id/dropdate_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/calendar"
+                            android:drawablePadding="@dimen/margin_10dp"
+                            android:text="@string/drop_date"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_18sp" />
+
+                        <View
+                            android:id="@+id/drop_date_view"
+                            android:layout_width="80dp"
+                            android:layout_height="@dimen/horizontal_line_height"
+                            android:layout_below="@+id/dropdate_tv"
+                            android:layout_marginLeft="@dimen/margin_25dp"
+                            android:background="@color/light_green_darken" />
+
+                        <TextView
+                            android:id="@+id/drop_date_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/drop_date_view"
+                            android:layout_marginTop="@dimen/margin_10dp"
+                            android:text="10 /27 /2015"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_22sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="@dimen/horizontal_line_height"
+                        android:layout_height="match_parent"
+                        android:background="@color/white_faded" />
+
+                    <RelativeLayout
+                        android:id="@+id/drop_time_rl"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_20dp"
+                        android:layout_marginRight="@dimen/margin_20dp"
+
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:paddingBottom="@dimen/margin_10dp">
+
+                        <TextView
+                            android:id="@+id/droptime_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/clock"
+                            android:drawablePadding="@dimen/margin_10dp"
+                            android:text="@string/drop_time"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_18sp" />
+
+                        <View
+                            android:id="@+id/drop_time_view"
+                            android:layout_width="80dp"
+                            android:layout_height="@dimen/horizontal_line_height"
+                            android:layout_below="@+id/droptime_tv"
+                            android:layout_marginLeft="@dimen/margin_25dp"
+                            android:background="@color/light_green_darken" />
+
+                        <TextView
+                            android:id="@+id/drop_time_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/drop_time_view"
+
+                            android:layout_marginTop="@dimen/margin_10dp"
+                            android:text="12:30"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_22sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/drop_time_view"
+                            android:layout_marginLeft="@dimen/margin_10dp"
+                            android:layout_marginTop="@dimen/margin_15dp"
+                            android:layout_toRightOf="@+id/drop_time_tv"
+                            android:text="PM"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_16sp"
+                            android:textStyle="normal" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/pick_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/drop_rl"
+                android:background="@color/light_black">
+
+                <TextView
+                    android:id="@+id/pick_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_30dp"
+                    android:padding="@dimen/margin_20dp"
+                    android:text="@string/pick_up"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_22sp" />
+
+                <LinearLayout
+                    android:id="@+id/pick_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pick_tv"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/margin_50dp"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:id="@+id/pick_date_rl"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_20dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="@dimen/margin_10dp">
+
+                        <TextView
+                            android:id="@+id/pickdate_tv"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/calendar"
+                            android:drawablePadding="@dimen/margin_10dp"
+                            android:text="@string/pick_date"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_18sp" />
+
+                        <View
+                            android:id="@+id/pick_date_view"
+                            android:layout_width="80dp"
+                            android:layout_height="@dimen/horizontal_line_height"
+                            android:layout_below="@+id/pickdate_tv"
+                            android:layout_marginLeft="@dimen/margin_25dp"
+                            android:background="@color/light_green_darken" />
+
+                        <TextView
+                            android:id="@+id/pick_date_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/pick_date_view"
+                            android:layout_marginTop="@dimen/margin_10dp"
+                            android:text="10 /27 /2015"
+                            android:textColor="@color/white"
+
+                            android:textSize="@dimen/text_size_22sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="@dimen/horizontal_line_height"
+                        android:layout_height="match_parent"
+                        android:background="@color/white_faded" />
+
+                    <RelativeLayout
+                        android:id="@+id/pick_time_rl"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_20dp"
+                        android:layout_marginRight="@dimen/margin_20dp"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:paddingBottom="@dimen/margin_10dp">
+
+                        <TextView
+                            android:id="@+id/picktime_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/clock"
+                            android:drawablePadding="@dimen/margin_10dp"
+                            android:text="@string/pick_time"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_18sp" />
+
+                        <View
+                            android:id="@+id/pick_time_view"
+                            android:layout_width="80dp"
+                            android:layout_height="@dimen/horizontal_line_height"
+                            android:layout_below="@+id/picktime_tv"
+                            android:layout_marginLeft="@dimen/margin_25dp"
+                            android:background="@color/light_green_darken" />
+
+                        <TextView
+                            android:id="@+id/pick_time_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/pick_time_view"
+                            android:layout_marginTop="@dimen/margin_10dp"
+                            android:text="12:30"
+                            android:textColor="@color/white"
+
+                            android:textSize="@dimen/text_size_22sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/picktime_tv"
+                            android:layout_marginLeft="@dimen/margin_10dp"
+                            android:layout_marginTop="@dimen/margin_15dp"
+                            android:layout_toRightOf="@+id/pick_time_tv"
+                            android:text="PM"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_16sp"
+                            android:textStyle="normal" />
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/book_now_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_20dp"
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
+        android:background="@drawable/green_round_corner_btn_selector_btn"
+        android:gravity="center"
+        android:padding="@dimen/margin_10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/book_now"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20sp" />
+    </RelativeLayout>
+</RelativeLayout>

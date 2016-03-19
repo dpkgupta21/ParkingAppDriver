@@ -1,0 +1,47 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.parking.app.parkingappdriver">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+
+        <activity android:name=".view.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".view.UserProfileScreen"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+
+            />
+
+        <activity
+            android:name=".view.LoginScreen"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+
+        <activity
+            android:name=".appIntroduction.WelcomeScreen"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+
+        <activity android:name=".drivermodel.captureImage.CapturePicture" />
+        <activity android:name=".drivermodel.captureImage.ShowFullSnapShotOnGUI" />
+        <activity android:name=".drivermodel.captureImage.ShowingSnapshotScreen" />
+
+        <activity android:name=".drivermodel.navigationDrawer.DriverNavigationDrawerActivity" />
+        <activity android:name=".drivermodel.VehicleInspectionScreen" />
+        <activity android:name=".drivermodel.CustomerComments" />
+
+    </application>
+
+</manifest>
