@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ParkNfly</string>
+    <string name="app_name">ParkNfly Driver</string>
     <string name="enter_email">Enter your Email</string>
     <string name="password">Password</string>
     <string name="forgot_pwd">Forgot Password?</string>
@@ -131,5 +131,12 @@
     <string name="submit">Submit</string>
     <string name="no_image_found">No Image Found</string>
     <string name="delete">Delete</string>
+    <string name="network_slow_error">Slow internet connection</string>
+    <string name="no_network">Please check your internet connection</string>
+    <string name="network_error">Please check your internet connection</string>
+    <string name="please_enter_email">Please Enter Email</string>
+    <string name="please_enter_pwd">Please Enter Password</string>
+    <string name="confirm_job">Confirm Job</string>
+
 </resources>
 

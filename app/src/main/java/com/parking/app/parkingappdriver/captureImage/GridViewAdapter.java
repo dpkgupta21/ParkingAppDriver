@@ -1,4 +1,4 @@
-package com.parking.app.parkingappdriver.drivermodel.captureImage;
+package com.parking.app.parkingappdriver.captureImage;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

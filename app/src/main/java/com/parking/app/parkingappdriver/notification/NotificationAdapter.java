@@ -1,4 +1,4 @@
-package com.parking.app.parkingappdriver.drivermodel.notification;
+package com.parking.app.parkingappdriver.notification;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

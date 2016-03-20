@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.8"
                 android:padding="@dimen/margin_10dp"
                 android:singleLine="true"
                 android:text="Gregory Gray"
@@ -30,15 +30,16 @@
                 android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:gravity="right"
                 android:padding="@dimen/margin_10dp"
                 android:singleLine="true"
                 android:text="0000 000 000 "
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16sp"
+                android:textSize="@dimen/text_size_10sp"
                 android:textStyle="normal" />
         </LinearLayout>
 
@@ -152,6 +153,18 @@
                 android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/confirm_job_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_four"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:background="@drawable/green_round_corner_btn_selector_btn"
+            android:padding="@dimen/margin_10dp"
+            android:text="@string/confirm_job" />
+
     </RelativeLayout>
 
     <View

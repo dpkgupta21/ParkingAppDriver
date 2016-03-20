@@ -1,4 +1,4 @@
-package com.parking.app.parkingappdriver.drivermodel.myjobs;
+package com.parking.app.parkingappdriver.notification;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,20 +13,19 @@ import com.parking.app.parkingappdriver.R;
 import java.util.ArrayList;
 
 
-public class MyJobsFragment extends Fragment implements View.OnClickListener {
+public class NotificationFragment extends Fragment implements View.OnClickListener {
 
-    private Toolbar mToolbar;
-    private View view;
+    Toolbar mToolbar;
+    View view;
 
-    private ListView listView;
-
-    private MyJobsAdapter myJobsAdapter;
+    ListView listView;
+    NotificationAdapter mNotificationAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_myjobs_screen, container, false);
+        view = inflater.inflate(R.layout.fragment_notification_screen, container, false);
         return view;
 
     }
@@ -37,7 +36,7 @@ public class MyJobsFragment extends Fragment implements View.OnClickListener {
 
         initViews();
         assignClicks();
-        myJobsAdapter = new MyJobsAdapter(getActivity());
+        mNotificationAdapter = new NotificationAdapter(getActivity());
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("aas");
         arrayList.add("aas");
@@ -47,9 +46,9 @@ public class MyJobsFragment extends Fragment implements View.OnClickListener {
         arrayList.add("aas");
         arrayList.add("aas");
 
-        myJobsAdapter.addDataOnList(arrayList);
+        mNotificationAdapter.addDataOnList(arrayList);
 
-        listView.setAdapter(myJobsAdapter);
+        listView.setAdapter(mNotificationAdapter);
 
     }
 
@@ -59,7 +58,7 @@ public class MyJobsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initViews() {
-        listView = (ListView) view.findViewById(R.id.jobs_listview);
+        listView = (ListView) view.findViewById(R.id.notification_listview);
 
     }
 

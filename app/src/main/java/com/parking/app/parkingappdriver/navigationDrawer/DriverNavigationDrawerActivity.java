@@ -1,4 +1,4 @@
-package com.parking.app.parkingappdriver.drivermodel.navigationDrawer;
+package com.parking.app.parkingappdriver.navigationDrawer;
 
 
 import android.app.Activity;
@@ -18,8 +18,8 @@ import android.view.View;
 
 import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.drivermodel.StartJobFragment;
-import com.parking.app.parkingappdriver.drivermodel.myjobs.MyJobsFragment;
-import com.parking.app.parkingappdriver.drivermodel.notification.NotificationFragment;
+import com.parking.app.parkingappdriver.myjobs.MyJobsFragment;
+import com.parking.app.parkingappdriver.notification.NotificationFragment;
 import com.parking.app.parkingappdriver.view.UserProfileScreen;
 
 

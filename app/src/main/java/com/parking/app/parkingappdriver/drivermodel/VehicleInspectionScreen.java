@@ -18,8 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parking.app.parkingappdriver.R;
-import com.parking.app.parkingappdriver.drivermodel.captureImage.CapturePicture;
-import com.parking.app.parkingappdriver.drivermodel.captureImage.ShowingSnapshotScreen;
+import com.parking.app.parkingappdriver.captureImage.CapturePicture;
+import com.parking.app.parkingappdriver.captureImage.ShowingSnapshotScreen;
 
 
 public class VehicleInspectionScreen extends AppCompatActivity implements View.OnClickListener {

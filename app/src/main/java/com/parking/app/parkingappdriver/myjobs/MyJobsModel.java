@@ -1,4 +1,4 @@
-package com.parking.app.parkingappdriver.drivermodel.myjobs;
+package com.parking.app.parkingappdriver.myjobs;
 
 /**
  * Created by Harish on 12/29/2015.

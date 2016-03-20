@@ -1,4 +1,4 @@
-package com.parking.app.parkingappdriver.drivermodel.captureImage;
+package com.parking.app.parkingappdriver.captureImage;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
