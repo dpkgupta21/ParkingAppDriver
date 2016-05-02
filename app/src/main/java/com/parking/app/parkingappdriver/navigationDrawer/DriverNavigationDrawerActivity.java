@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.currentjobs.CurrentJobsFragment;
 import com.parking.app.parkingappdriver.drivermodel.StartJobFragment;
 import com.parking.app.parkingappdriver.myjobs.MyJobsFragment;
 import com.parking.app.parkingappdriver.notification.NotificationFragment;
@@ -129,7 +130,8 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
                 title = "My Jobs";
                 break;
             case 1:
-                fragment = new StartJobFragment();
+                //fragment = new StartJobFragment();
+                fragment = new CurrentJobsFragment();
                 title = "My Current Job";
                 break;
             case 2:

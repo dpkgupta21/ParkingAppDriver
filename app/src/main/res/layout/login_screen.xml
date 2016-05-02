@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:gravity="center"
-                android:text="luc2@test.com"
+                android:text="luc3@test.com"
                 android:hint="@string/enter_email"
                 android:inputType="textEmailAddress"
                 android:padding="@dimen/margin_15dp"

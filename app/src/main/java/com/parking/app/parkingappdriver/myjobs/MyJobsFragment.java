@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.model.LoadJobsDTO;
-import com.parking.app.parkingappdriver.model.MyJobsDTO;
 import com.parking.app.parkingappdriver.webservices.handler.ConfirmJobAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.MyJobsAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
@@ -31,7 +30,7 @@ public class MyJobsFragment extends Fragment implements View.OnClickListener {
     private static MyJobsAPIHandler myJobsAPIHandler;
     private static ConfirmJobAPIHandler confirmJobAPIHandler;
 
-    private static ArrayList<MyJobsDTO> myJobsDTOArrayList;
+    private static ArrayList<LoadJobsDTO> myJobsDTOArrayList;
     private static MyJobsAdapter myJobsAdapter;
 
     @Override
@@ -50,7 +49,7 @@ public class MyJobsFragment extends Fragment implements View.OnClickListener {
         mActivity = getActivity();
         initViews();
         assignClicks();
-        myJobsDTOArrayList = new ArrayList<MyJobsDTO>();
+        myJobsDTOArrayList = new ArrayList<LoadJobsDTO>();
 
         myJobsAPIHandler = new MyJobsAPIHandler(mActivity, manageResponseListner());
 
@@ -74,7 +73,7 @@ public class MyJobsFragment extends Fragment implements View.OnClickListener {
                     myJobsDTOArrayList.clear();
                 }
                 myJobsDTOArrayList = gson.fromJson(response, listType);
-                //myJobsAdapter.addDataOnList(myJobsDTOArrayList);
+                myJobsAdapter.addDataOnList(myJobsDTOArrayList);
                 myJobsAdapter.notifyDataSetChanged();
 
             }
@@ -105,11 +104,11 @@ public class MyJobsFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    public static void confirmJob(String jobId) {
-        confirmJobAPIHandler = new ConfirmJobAPIHandler(mActivity, jobId, "10002", new WebAPIResponseListener() {
+    public static void confirmJob(LoadJobsDTO jobsDTO) {
+        confirmJobAPIHandler = new ConfirmJobAPIHandler(mActivity, jobsDTO.getJobId(),
+                "5721bd345de9114b647d6d5c", new WebAPIResponseListener() {
             @Override
             public void onSuccessOfResponse(Object... arguments) {
-
                 myJobsAPIHandler = new MyJobsAPIHandler(mActivity, manageResponseListner());
             }
 
@@ -118,7 +117,6 @@ public class MyJobsFragment extends Fragment implements View.OnClickListener {
 
             }
         });
-
 
     }
 

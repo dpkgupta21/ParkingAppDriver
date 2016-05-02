@@ -19,6 +19,7 @@
             android:weightSum="2">
 
             <TextView
+                android:id="@+id/txt_customer_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
@@ -30,7 +31,7 @@
                 android:textStyle="normal" />
 
             <TextView
-                android:id="@+id/id"
+                android:id="@+id/txt_mobile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
@@ -52,6 +53,7 @@
             android:weightSum="2">
 
             <TextView
+                android:id="@+id/txt_plate_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -63,6 +65,7 @@
                 android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/txt_make"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -84,6 +87,7 @@
             android:weightSum="2">
 
             <TextView
+                android:id="@+id/txt_color"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -95,6 +99,7 @@
                 android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/txt_model"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -124,6 +129,7 @@
             android:weightSum="2">
 
             <TextView
+                android:id="@+id/txt_job_start_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -142,6 +148,7 @@
                 android:background="@color/grey" />
 
             <TextView
+                android:id="@+id/txt_venue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -160,10 +167,39 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_four"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/white"
             android:background="@drawable/green_round_corner_btn_selector_btn"
             android:padding="@dimen/margin_10dp"
-            android:text="@string/confirm_job" />
+            android:text="@string/confirm_job"
+            android:textColor="@color/white" />
+
+        <RelativeLayout
+            android:id="@+id/current_job_buttons_rl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_four"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btn_start_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/green_round_corner_btn_selector_btn"
+                android:text="Start job"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_release_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_20dp"
+                android:layout_toRightOf="@id/btn_start_job"
+                android:background="@drawable/green_round_corner_btn_selector_btn"
+                android:text="Release job"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

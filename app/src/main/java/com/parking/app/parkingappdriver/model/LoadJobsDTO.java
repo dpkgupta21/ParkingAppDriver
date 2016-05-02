@@ -1,5 +1,7 @@
 package com.parking.app.parkingappdriver.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -11,16 +13,36 @@ public class LoadJobsDTO implements Serializable {
     private String CustomerName;
     private String email;
     private String mobile_no;
+    private String JobStartTime;
+
+    @SerializedName("JobId")
     private String jobId;
+
+    @SerializedName("Plate No")
     private String Plate_No;
+
+    @SerializedName("Vehicle Make")
     private String Vehicle_Make;
+
+    @SerializedName("Vehicle Model")
     private String Vehicle_Model;
+
+    @SerializedName("Vehicle Color")
     private String Vehicle_Color;
+
+    @SerializedName("JobStatus")
     private String Job_Status;
     private String slotName;
     private String slotLevel;
     private String venueName;
 
+    public String getJobStartTime() {
+        return JobStartTime;
+    }
+
+    public void setJobStartTime(String jobStartTime) {
+        JobStartTime = jobStartTime;
+    }
 
     public String getVehicle_Make() {
         return Vehicle_Make;

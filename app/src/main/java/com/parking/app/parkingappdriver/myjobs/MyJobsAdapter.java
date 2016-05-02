@@ -1,16 +1,18 @@
 package com.parking.app.parkingappdriver.myjobs;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.currentjobs.CurrentJobsFragment;
 import com.parking.app.parkingappdriver.model.LoadJobsDTO;
-import com.parking.app.parkingappdriver.model.MyJobsDTO;
 
 import java.util.ArrayList;
 
@@ -25,13 +27,12 @@ public class MyJobsAdapter extends BaseAdapter {
     LayoutInflater mLayoutInflater;
 
     ArrayList<LoadJobsDTO> mMyJobsModelArrayList;
-    private MyJobsFragment myJobsFragment;
+    private Fragment myJobsFragment;
 
 
-    public MyJobsAdapter(Activity mActivity, MyJobsFragment myJobsFragment) {
+    public MyJobsAdapter(Activity mActivity, Fragment fragment) {
         this.mActivity = mActivity;
-        this.myJobsFragment = myJobsFragment;
-
+        this.myJobsFragment = fragment;
         mMyJobsModelArrayList = new ArrayList<>();
         try {
             mLayoutInflater = (LayoutInflater) mActivity
@@ -82,9 +83,19 @@ public class MyJobsAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = mLayoutInflater.inflate(R.layout.my_jobs_screen_row, parent, false);
             holder = new ViewHolder();
-            holder.id = (TextView) convertView.findViewById(R.id.id);
+            holder.mobile = (TextView) convertView.findViewById(R.id.txt_mobile);
             holder.confirm_job_btn = (TextView) convertView.findViewById(R.id.confirm_job_btn);
-
+            holder.startTime = (TextView) convertView.findViewById(R.id.txt_job_start_time);
+            holder.txt_color = (TextView) convertView.findViewById(R.id.txt_color);
+            holder.txt_make = (TextView) convertView.findViewById(R.id.txt_make);
+            holder.venue = (TextView) convertView.findViewById(R.id.txt_venue);
+            holder.model = (TextView) convertView.findViewById(R.id.txt_model);
+            holder.customer = (TextView) convertView.findViewById(R.id.txt_customer_name);
+            holder.plateNumber = (TextView) convertView.findViewById(R.id.txt_plate_number);
+            holder.startBtn = (Button) convertView.findViewById(R.id.btn_start_job);
+            holder.releaseBtn = (Button) convertView.findViewById(R.id.btn_release_job);
+            holder.currentjobbuttonLayout = (RelativeLayout) convertView
+                    .findViewById(R.id.current_job_buttons_rl);
 
             convertView.setTag(holder);
 
@@ -92,22 +103,63 @@ public class MyJobsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        //holder.id.setText(mMyJobsModelArrayList.get(position).get_id());
+        LoadJobsDTO jobsDTO = mMyJobsModelArrayList.get(position);
+        holder.mobile.setText(jobsDTO.getMobile_no());
+        holder.txt_color.setText(jobsDTO.getVehicle_Color());
+        holder.txt_make.setText(jobsDTO.getVehicle_Make());
+        holder.venue.setText(jobsDTO.getVenueName());
+        holder.model.setText(jobsDTO.getVehicle_Model());
+        holder.customer.setText(jobsDTO.getCustomerName());
+        holder.plateNumber.setText(jobsDTO.getPlate_No());
+        holder.startTime.setText(jobsDTO.getJobStartTime());
 
-        holder.confirm_job_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (myJobsFragment instanceof CurrentJobsFragment) {
+            holder.confirm_job_btn.setVisibility(View.GONE);
+            if (jobsDTO.getJob_Status().equalsIgnoreCase("lock")) {
+                holder.currentjobbuttonLayout.setVisibility(View.VISIBLE);
+                holder.startBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                //myJobsFragment.confirmJob(mMyJobsModelArrayList.get(position).get_id());
+                    }
+                });
+
+                holder.releaseBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+            } else {
+                holder.currentjobbuttonLayout.setVisibility(View.GONE);
             }
-        });
+        } else {
+            holder.confirm_job_btn.setVisibility(View.VISIBLE);
+            holder.currentjobbuttonLayout.setVisibility(View.GONE);
+            holder.confirm_job_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (myJobsFragment instanceof MyJobsFragment) {
+                        ((MyJobsFragment) myJobsFragment)
+                                .confirmJob(mMyJobsModelArrayList.get(position));
+                    }
+                }
+            });
+        }
 
         return convertView;
     }
 
 
     public class ViewHolder {
-        TextView confirm_job_btn, id;
-        RelativeLayout new_rl;
+        TextView confirm_job_btn, mobile, plateNumber;
+        RelativeLayout currentjobbuttonLayout;
+        TextView txt_color;
+        TextView txt_make;
+        TextView startTime;
+        TextView venue;
+        TextView model;
+        TextView customer;
+        Button startBtn, releaseBtn;
     }
 }

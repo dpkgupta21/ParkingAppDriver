@@ -27,4 +27,10 @@ public interface GlobalKeys {
     String JOB_ID = "jobId";
     String VALLET_ID = "valletId";
     String CONFIRM_JOB_REQUEST_KEY = "confirm_job";
+
+    String CURRENT_JOB_API = "job/currentjobs";
+    String CURRENT_JOB_REQUEST_KEY = "current_job";
+
+    String START_JOB_API = "job/startjob";
+    String START_JOB_REQUEST_KEY = "start_job";
 }
