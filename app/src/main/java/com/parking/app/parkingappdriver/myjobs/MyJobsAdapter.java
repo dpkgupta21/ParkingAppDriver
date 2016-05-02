@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.model.LoadJobsDTO;
 import com.parking.app.parkingappdriver.model.MyJobsDTO;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class MyJobsAdapter extends BaseAdapter {
     Activity mActivity;
     LayoutInflater mLayoutInflater;
 
-    ArrayList<MyJobsDTO> mMyJobsModelArrayList;
+    ArrayList<LoadJobsDTO> mMyJobsModelArrayList;
     private MyJobsFragment myJobsFragment;
 
 
@@ -44,7 +45,7 @@ public class MyJobsAdapter extends BaseAdapter {
      * Add all user data on GUI
      */
     public void addDataOnList(
-            ArrayList<MyJobsDTO> myJobsModelArrayList) {
+            ArrayList<LoadJobsDTO> myJobsModelArrayList) {
 
         this.mMyJobsModelArrayList.clear();
         this.mMyJobsModelArrayList = myJobsModelArrayList;
@@ -91,13 +92,13 @@ public class MyJobsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.id.setText(mMyJobsModelArrayList.get(position).get_id());
+        //holder.id.setText(mMyJobsModelArrayList.get(position).get_id());
 
         holder.confirm_job_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                myJobsFragment.confirmJob(mMyJobsModelArrayList.get(position).get_id());
+                //myJobsFragment.confirmJob(mMyJobsModelArrayList.get(position).get_id());
             }
         });
 

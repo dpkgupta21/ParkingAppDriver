@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.model.LoadJobsDTO;
 import com.parking.app.parkingappdriver.model.MyJobsDTO;
 import com.parking.app.parkingappdriver.webservices.handler.ConfirmJobAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.MyJobsAPIHandler;
@@ -67,13 +68,13 @@ public class MyJobsFragment extends Fragment implements View.OnClickListener {
 
                 String response = (String) arguments[0];
                 Gson gson = new Gson();
-                Type listType = new TypeToken<ArrayList<MyJobsDTO>>() {
+                Type listType = new TypeToken<ArrayList<LoadJobsDTO>>() {
                 }.getType();
                 if (myJobsDTOArrayList != null) {
                     myJobsDTOArrayList.clear();
                 }
                 myJobsDTOArrayList = gson.fromJson(response, listType);
-                myJobsAdapter.addDataOnList(myJobsDTOArrayList);
+                //myJobsAdapter.addDataOnList(myJobsDTOArrayList);
                 myJobsAdapter.notifyDataSetChanged();
 
             }

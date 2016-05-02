@@ -61,7 +61,8 @@ public class MyJobsAPIHandler {
     public void postAPICall() {
 
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest((AppConstants.APP_WEBSERVICE_API_URL + GlobalKeys.LOAD_JOBS_API)
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest((AppConstants.APP_WEBSERVICE_API_URL
+                + GlobalKeys.LOAD_JOBS_API)
                 .trim(), new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray jsonArray) {
