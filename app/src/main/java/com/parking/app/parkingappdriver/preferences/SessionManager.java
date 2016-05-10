@@ -83,4 +83,15 @@ public class SessionManager {
         return pref.getString(PreferenceHelper.KEY_AUTHTOKEN, "auth");
 
     }
+
+    public void setVallet_Id(String id) {
+        editor.putString(PreferenceHelper.VALLET_ID, id);
+        editor.commit();
+    }
+
+    public String getVallet_Id() {
+        return pref.getString(PreferenceHelper.VALLET_ID, "");
+    }
+
+
 }

@@ -201,6 +201,25 @@
                 android:textColor="@color/white" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/current_job_end_button_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_four"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btn_end_job"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/green_round_corner_btn_selector_btn"
+                android:text="Release job"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <View

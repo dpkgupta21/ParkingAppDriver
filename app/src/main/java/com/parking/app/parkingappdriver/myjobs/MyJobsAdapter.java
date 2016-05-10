@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.currentjobs.CurrentJobsFragment;
 import com.parking.app.parkingappdriver.model.LoadJobsDTO;
+import com.parking.app.parkingappdriver.webservices.handler.EndJobAPIHandler;
+import com.parking.app.parkingappdriver.webservices.handler.ReleaseAPIHandler;
+import com.parking.app.parkingappdriver.webservices.handler.StartJobAPIHandler;
+import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
 
 import java.util.ArrayList;
 
@@ -96,6 +100,8 @@ public class MyJobsAdapter extends BaseAdapter {
             holder.releaseBtn = (Button) convertView.findViewById(R.id.btn_release_job);
             holder.currentjobbuttonLayout = (RelativeLayout) convertView
                     .findViewById(R.id.current_job_buttons_rl);
+            holder.endButtonLayout = (RelativeLayout) convertView
+                    .findViewById(R.id.current_job_end_button_rl);
 
             convertView.setTag(holder);
 
@@ -103,7 +109,7 @@ public class MyJobsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        LoadJobsDTO jobsDTO = mMyJobsModelArrayList.get(position);
+        final LoadJobsDTO jobsDTO = mMyJobsModelArrayList.get(position);
         holder.mobile.setText(jobsDTO.getMobile_no());
         holder.txt_color.setText(jobsDTO.getVehicle_Color());
         holder.txt_make.setText(jobsDTO.getVehicle_Make());
@@ -117,17 +123,29 @@ public class MyJobsAdapter extends BaseAdapter {
             holder.confirm_job_btn.setVisibility(View.GONE);
             if (jobsDTO.getJob_Status().equalsIgnoreCase("lock")) {
                 holder.currentjobbuttonLayout.setVisibility(View.VISIBLE);
+                final RelativeLayout relativeLayout = holder.currentjobbuttonLayout;
+                final RelativeLayout endButtonLayout = holder.endButtonLayout;
                 holder.startBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        relativeLayout.setVisibility(View.GONE);
+                        endButtonLayout.setVisibility(View.VISIBLE);
+                        Button endBtn = (Button) endButtonLayout.findViewById(R.id.btn_end_job);
+                        endBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                new EndJobAPIHandler(mActivity, jobsDTO, manageEndJobAPIHandler());
+                            }
+                        });
 
+                        new StartJobAPIHandler(mActivity, manageStartAPIHandler(), jobsDTO);
                     }
                 });
 
                 holder.releaseBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        new ReleaseAPIHandler(mActivity, jobsDTO, manageReleaseAPIHandler());
                     }
                 });
             } else {
@@ -150,10 +168,59 @@ public class MyJobsAdapter extends BaseAdapter {
         return convertView;
     }
 
+    private WebAPIResponseListener manageEndJobAPIHandler() {
+        WebAPIResponseListener responseListener = new WebAPIResponseListener() {
+            @Override
+            public void onSuccessOfResponse(Object... arguments) {
+
+            }
+
+            @Override
+            public void onFailOfResponse(Object... arguments) {
+
+            }
+        };
+
+        return responseListener;
+    }
+
+    private WebAPIResponseListener manageReleaseAPIHandler() {
+        WebAPIResponseListener responseListener = new WebAPIResponseListener() {
+            @Override
+            public void onSuccessOfResponse(Object... arguments) {
+
+            }
+
+            @Override
+            public void onFailOfResponse(Object... arguments) {
+
+            }
+        };
+
+        return responseListener;
+    }
+
+    private WebAPIResponseListener manageStartAPIHandler() {
+        WebAPIResponseListener responseListener = new WebAPIResponseListener() {
+            @Override
+            public void onSuccessOfResponse(Object... arguments) {
+
+            }
+
+            @Override
+            public void onFailOfResponse(Object... arguments) {
+
+            }
+        };
+
+        return responseListener;
+    }
+
 
     public class ViewHolder {
         TextView confirm_job_btn, mobile, plateNumber;
         RelativeLayout currentjobbuttonLayout;
+        RelativeLayout endButtonLayout;
         TextView txt_color;
         TextView txt_make;
         TextView startTime;

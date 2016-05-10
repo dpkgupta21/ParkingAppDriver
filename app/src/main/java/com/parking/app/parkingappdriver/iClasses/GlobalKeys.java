@@ -33,4 +33,13 @@ public interface GlobalKeys {
 
     String START_JOB_API = "job/startjob";
     String START_JOB_REQUEST_KEY = "start_job";
+
+    String DRIVER_CONFIG = "driver/getconfig";
+    String DRIVER_CONFIG_REQUEST_KEY = "driver_config";
+
+    String RELEASE_JOB_API = "job/releasejob";
+    String RELEASE_API_REQUEST_KEY = "release_job";
+
+    String END_JOB_API = "job/endjob";
+    String END_JOB_API_REQUEST_KEY = "end_job";
 }

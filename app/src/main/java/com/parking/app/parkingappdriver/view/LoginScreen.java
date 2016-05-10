@@ -8,11 +8,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import com.google.gson.Gson;
 import com.parking.app.parkingappdriver.R;
-import com.parking.app.parkingappdriver.navigationDrawer.DriverNavigationDrawerActivity;
 import com.parking.app.parkingappdriver.iClasses.GlobalKeys;
+import com.parking.app.parkingappdriver.model.DriverConfigDTO;
+import com.parking.app.parkingappdriver.navigationDrawer.DriverNavigationDrawerActivity;
 import com.parking.app.parkingappdriver.preferences.SessionManager;
 import com.parking.app.parkingappdriver.utils.AppUtils;
+import com.parking.app.parkingappdriver.webservices.handler.DriverConfigAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.LoginAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
 
@@ -74,7 +77,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                     mLoginAPIHandler = new LoginAPIHandler(this, email, pwd, new WebAPIResponseListener() {
                         @Override
                         public void onSuccessOfResponse(Object... arguments) {
-
+                            AppUtils.hideProgressDialog();
                             try {
                                 JSONObject mJsonObject = (JSONObject) arguments[0];
                                 if (mJsonObject != null) {
@@ -84,9 +87,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                                         String auth = mJsonObject.getString(GlobalKeys.AUTHTOKEN);
                                         AppUtils.showLog(TAG, "email: " + email + " " + auth);
                                         SessionManager.getInstance(LoginScreen.this).createLoginSession(email, pwd, auth);
-                                        Intent intent = new Intent(LoginScreen.this, DriverNavigationDrawerActivity.class);
-                                        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                                        finish();
+
+                                        callDriverConfigWS();
 
                                     } else {
                                         AppUtils.showToast(LoginScreen.this, "Login Failed");
@@ -114,5 +116,34 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 break;
         }
 
+    }
+
+    private void callDriverConfigWS() {
+        new DriverConfigAPIHandler(LoginScreen.this, new WebAPIResponseListener() {
+            @Override
+            public void onSuccessOfResponse(Object... arguments) {
+                try {
+                    JSONObject mJsonObject = (JSONObject) arguments[0];
+                    if (mJsonObject != null) {
+                        DriverConfigDTO configDTO = new Gson().fromJson(mJsonObject.toString(),
+                                DriverConfigDTO.class);
+
+                        SessionManager.getInstance(LoginScreen.this)
+                                .setVallet_Id(configDTO.get_id());
+
+                        Intent intent = new Intent(LoginScreen.this, DriverNavigationDrawerActivity.class);
+                        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        finish();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailOfResponse(Object... arguments) {
+                AppUtils.showToast(LoginScreen.this, "Login Failed");
+            }
+        });
     }
 }
