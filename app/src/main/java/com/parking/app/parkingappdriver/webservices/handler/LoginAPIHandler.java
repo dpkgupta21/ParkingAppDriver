@@ -124,7 +124,7 @@ public class LoginAPIHandler {
         }
         // set request time-out
         mJsonRequest.setRetryPolicy(new DefaultRetryPolicy(
-                AppConstants.ONE_SECOND * 20, 0,
+                AppConstants.ONE_SECOND * 30, 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 

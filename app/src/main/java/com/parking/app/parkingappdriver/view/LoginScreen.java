@@ -86,7 +86,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                                         email = mJsonObject.getString(GlobalKeys.EMAIL);
                                         String auth = mJsonObject.getString(GlobalKeys.AUTHTOKEN);
                                         AppUtils.showLog(TAG, "email: " + email + " " + auth);
-                                        SessionManager.getInstance(LoginScreen.this).createLoginSession(email, pwd, auth);
+                                        SessionManager.getInstance(LoginScreen.this).
+                                                createLoginSession(email, pwd, auth);
 
                                         callDriverConfigWS();
 
@@ -119,7 +120,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     private void callDriverConfigWS() {
-        new DriverConfigAPIHandler(LoginScreen.this, new WebAPIResponseListener() {
+        new DriverConfigAPIHandler(this, new WebAPIResponseListener() {
             @Override
             public void onSuccessOfResponse(Object... arguments) {
                 try {

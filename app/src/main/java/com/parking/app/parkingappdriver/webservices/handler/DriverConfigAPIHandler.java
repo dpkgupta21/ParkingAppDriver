@@ -11,6 +11,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.parking.app.parkingappdriver.application.ParkingAppController;
 import com.parking.app.parkingappdriver.iClasses.GlobalKeys;
 import com.parking.app.parkingappdriver.preferences.SessionManager;
@@ -51,52 +52,89 @@ public class DriverConfigAPIHandler {
             String url = (AppConstants.APP_WEBSERVICE_API_URL + GlobalKeys.DRIVER_CONFIG).trim()
                     + "?email=" + SessionManager.getInstance(mActivity).getEmail();
 
-            Request<JSONObject> jsonRequest = new Request<JSONObject>(
-                    Request.Method.GET, url,
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            WebserviceAPIErrorHandler.getInstance()
-                                    .VolleyErrorHandler(volleyError, mActivity);
-                            AppUtils.hideProgressDialog();
-                            responseListener.onFailOfResponse(volleyError);
-                        }
-                    }
-            ) {
+//            Request<JSONObject> jsonRequest = new Request<JSONObject>(
+//                    Request.Method.GET, url,
+//                    new Response.ErrorListener() {
+//                        @Override
+//                        public void onErrorResponse(VolleyError volleyError) {
+//                            WebserviceAPIErrorHandler.getInstance()
+//                                    .VolleyErrorHandler(volleyError, mActivity);
+//                            AppUtils.hideProgressDialog();
+//                            responseListener.onFailOfResponse(volleyError);
+//                        }
+//                    }
+//            ) {
+//
+//                @Override
+//                public Map<String, String> getHeaders() throws AuthFailureError {
+//                    Map<String, String> params = new HashMap<>();
+//                    params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
+//                            GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
+//                    params.put(GlobalKeys.AUTHTOKEN, authToken);
+//                    return params;
+//                }
+//
+//                @Override
+//                protected Response<JSONObject> parseNetworkResponse(NetworkResponse networkResponse) {
+//                    try {
+//                        String je = new String(networkResponse.data, HttpHeaderParser
+//                                .parseCharset(networkResponse.headers));
+//                        return Response.success(new JSONObject(je), HttpHeaderParser
+//                                .parseCacheHeaders(networkResponse));
+//                    } catch (UnsupportedEncodingException var3) {
+//                        return Response.error(new ParseError(var3));
+//                    } catch (JSONException var4) {
+//                        return Response.error(new ParseError(var4));
+//                    }
+//                }
+//
+//                @Override
+//                protected void deliverResponse(JSONObject jsonObject) {
+//                    AppUtils.showInfoLog(TAG, "Response :"
+//                            + jsonObject);
+//                    responseListener.onSuccessOfResponse(jsonObject.toString());
+//                    AppUtils.hideProgressDialog();
+//                }
+//            };
 
+            JsonObjectRequest mJsonRequest = new JsonObjectRequest(
+                    Request.Method.GET,
+                    url, null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            AppUtils.showInfoLog(TAG, "Response :"
+                                    + response);
+
+                            //parseLoginAPIResponse(response.toString());
+                            responseListener.onSuccessOfResponse(response);
+                            AppUtils.hideProgressDialog();
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    WebserviceAPIErrorHandler.getInstance()
+                            .VolleyErrorHandler(error, mActivity);
+                    AppUtils.hideProgressDialog();
+                    responseListener.onFailOfResponse(error);
+                }
+            }) {
+                /*
+                 * /* (non-Javadoc)
+                 *
+                 * @see com.android.volley.Request#getHeaders()
+                 */
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
+                    Map<String, String> params = new HashMap<String, String>();
                     params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
                             GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
                     params.put(GlobalKeys.AUTHTOKEN, authToken);
                     return params;
                 }
 
-                @Override
-                protected Response<JSONObject> parseNetworkResponse(NetworkResponse networkResponse) {
-                    try {
-                        String je = new String(networkResponse.data, HttpHeaderParser
-                                .parseCharset(networkResponse.headers));
-                        return Response.success(new JSONObject(je), HttpHeaderParser
-                                .parseCacheHeaders(networkResponse));
-                    } catch (UnsupportedEncodingException var3) {
-                        return Response.error(new ParseError(var3));
-                    } catch (JSONException var4) {
-                        return Response.error(new ParseError(var4));
-                    }
-                }
-
-                @Override
-                protected void deliverResponse(JSONObject jsonObject) {
-                    AppUtils.showInfoLog(TAG, "Response :"
-                            + jsonObject);
-                    responseListener.onSuccessOfResponse(jsonObject.toString());
-                    AppUtils.hideProgressDialog();
-                }
             };
-
-
 //            JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET,
 //                    url,
 //                    null,
@@ -133,11 +171,11 @@ public class DriverConfigAPIHandler {
             // Adding request to request queue
             if (ParkingAppController.getInstance() != null) {
                 ParkingAppController.getInstance().addToRequestQueue(
-                        jsonRequest, GlobalKeys.DRIVER_CONFIG_REQUEST_KEY);
+                        mJsonRequest, GlobalKeys.DRIVER_CONFIG_REQUEST_KEY);
             }
             // set request time-out
-            jsonRequest.setRetryPolicy(new DefaultRetryPolicy(
-                    AppConstants.ONE_SECOND * 20, 0,
+            mJsonRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    AppConstants.ONE_SECOND * 30, 0,
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         } catch (Exception e) {
             e.printStackTrace();
