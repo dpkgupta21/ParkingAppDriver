@@ -32,7 +32,7 @@ import java.util.Map;
  */
 public class DriverConfigAPIHandler {
     private Activity mActivity;
-    private String TAG = StartJobAPIHandler.class.getSimpleName();
+    private String TAG = DriverConfigAPIHandler.class.getSimpleName();
     private WebAPIResponseListener responseListener;
     private String authToken = "";
 
@@ -51,51 +51,6 @@ public class DriverConfigAPIHandler {
         try {
             String url = (AppConstants.APP_WEBSERVICE_API_URL + GlobalKeys.DRIVER_CONFIG).trim()
                     + "?email=" + SessionManager.getInstance(mActivity).getEmail();
-
-//            Request<JSONObject> jsonRequest = new Request<JSONObject>(
-//                    Request.Method.GET, url,
-//                    new Response.ErrorListener() {
-//                        @Override
-//                        public void onErrorResponse(VolleyError volleyError) {
-//                            WebserviceAPIErrorHandler.getInstance()
-//                                    .VolleyErrorHandler(volleyError, mActivity);
-//                            AppUtils.hideProgressDialog();
-//                            responseListener.onFailOfResponse(volleyError);
-//                        }
-//                    }
-//            ) {
-//
-//                @Override
-//                public Map<String, String> getHeaders() throws AuthFailureError {
-//                    Map<String, String> params = new HashMap<>();
-//                    params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
-//                            GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
-//                    params.put(GlobalKeys.AUTHTOKEN, authToken);
-//                    return params;
-//                }
-//
-//                @Override
-//                protected Response<JSONObject> parseNetworkResponse(NetworkResponse networkResponse) {
-//                    try {
-//                        String je = new String(networkResponse.data, HttpHeaderParser
-//                                .parseCharset(networkResponse.headers));
-//                        return Response.success(new JSONObject(je), HttpHeaderParser
-//                                .parseCacheHeaders(networkResponse));
-//                    } catch (UnsupportedEncodingException var3) {
-//                        return Response.error(new ParseError(var3));
-//                    } catch (JSONException var4) {
-//                        return Response.error(new ParseError(var4));
-//                    }
-//                }
-//
-//                @Override
-//                protected void deliverResponse(JSONObject jsonObject) {
-//                    AppUtils.showInfoLog(TAG, "Response :"
-//                            + jsonObject);
-//                    responseListener.onSuccessOfResponse(jsonObject.toString());
-//                    AppUtils.hideProgressDialog();
-//                }
-//            };
 
             JsonObjectRequest mJsonRequest = new JsonObjectRequest(
                     Request.Method.GET,
@@ -135,38 +90,7 @@ public class DriverConfigAPIHandler {
                 }
 
             };
-//            JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET,
-//                    url,
-//                    null,
-//                    new Response.Listener<JSONObject>() {
-//                        @Override
-//                        public void onResponse(JSONObject jsonObject) {
-//                            AppUtils.showInfoLog(TAG, "Response :"
-//                                    + jsonObject);
-//                            responseListener.onSuccessOfResponse(jsonObject.toString());
-//                            AppUtils.hideProgressDialog();
-//                        }
-//                    },
-//                    new Response.ErrorListener() {
-//                        @Override
-//                        public void onErrorResponse(VolleyError volleyError) {
-//                            WebserviceAPIErrorHandler.getInstance()
-//                                    .VolleyErrorHandler(volleyError, mActivity);
-//                            AppUtils.hideProgressDialog();
-//                            responseListener.onFailOfResponse(volleyError);
-//                        }
-//                    }
-//            ) {
-//                @Override
-//                public Map<String, String> getHeaders() throws AuthFailureError {
-//                    Map<String, String> params = new HashMap<>();
-//                    params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
-//                            GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
-//                    params.put(GlobalKeys.AUTHTOKEN, authToken);
-//                    return params;
-//                }
-//
-//            };
+
 
             // Adding request to request queue
             if (ParkingAppController.getInstance() != null) {

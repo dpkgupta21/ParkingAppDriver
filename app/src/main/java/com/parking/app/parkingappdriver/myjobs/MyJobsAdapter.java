@@ -1,7 +1,9 @@
 package com.parking.app.parkingappdriver.myjobs;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,11 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.currentjobs.CurrentJobsFragment;
 import com.parking.app.parkingappdriver.model.LoadJobsDTO;
+import com.parking.app.parkingappdriver.navigationDrawer.DriverNavigationDrawerActivity;
 import com.parking.app.parkingappdriver.webservices.handler.EndJobAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.ReleaseAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.StartJobAPIHandler;
@@ -119,9 +123,18 @@ public class MyJobsAdapter extends BaseAdapter {
         holder.plateNumber.setText(jobsDTO.getPlate_No());
         holder.startTime.setText(jobsDTO.getJobStartTime());
 
+        Button endBtn = (Button) holder.endButtonLayout.findViewById(R.id.btn_end_job);
+        endBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new EndJobAPIHandler(mActivity, jobsDTO, manageAPIHandler());
+            }
+        });
+
         if (myJobsFragment instanceof CurrentJobsFragment) {
             holder.confirm_job_btn.setVisibility(View.GONE);
             if (jobsDTO.getJob_Status().equalsIgnoreCase("lock")) {
+                holder.endButtonLayout.setVisibility(View.GONE);
                 holder.currentjobbuttonLayout.setVisibility(View.VISIBLE);
                 final RelativeLayout relativeLayout = holder.currentjobbuttonLayout;
                 final RelativeLayout endButtonLayout = holder.endButtonLayout;
@@ -130,26 +143,23 @@ public class MyJobsAdapter extends BaseAdapter {
                     public void onClick(View v) {
                         relativeLayout.setVisibility(View.GONE);
                         endButtonLayout.setVisibility(View.VISIBLE);
-                        Button endBtn = (Button) endButtonLayout.findViewById(R.id.btn_end_job);
-                        endBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                new EndJobAPIHandler(mActivity, jobsDTO, manageEndJobAPIHandler());
-                            }
-                        });
 
-                        new StartJobAPIHandler(mActivity, manageStartAPIHandler(), jobsDTO);
+                        new StartJobAPIHandler(mActivity, manageAPIHandler(), jobsDTO);
                     }
                 });
 
                 holder.releaseBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        new ReleaseAPIHandler(mActivity, jobsDTO, manageReleaseAPIHandler());
+                        new ReleaseAPIHandler(mActivity, jobsDTO, manageAPIHandler());
                     }
                 });
+            } else if (jobsDTO.getJob_Status().equalsIgnoreCase("INPROGRESS")) {
+                holder.currentjobbuttonLayout.setVisibility(View.GONE);
+                holder.endButtonLayout.setVisibility(View.VISIBLE);
             } else {
                 holder.currentjobbuttonLayout.setVisibility(View.GONE);
+                holder.endButtonLayout.setVisibility(View.GONE);
             }
         } else {
             holder.confirm_job_btn.setVisibility(View.VISIBLE);
@@ -168,48 +178,20 @@ public class MyJobsAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private WebAPIResponseListener manageEndJobAPIHandler() {
+
+    private WebAPIResponseListener manageAPIHandler() {
         WebAPIResponseListener responseListener = new WebAPIResponseListener() {
             @Override
             public void onSuccessOfResponse(Object... arguments) {
-
+                Intent intent = new Intent(mActivity, DriverNavigationDrawerActivity.class);
+                intent.putExtra("fragmentNumber", 1);
+                mActivity.startActivity(intent);
             }
 
             @Override
             public void onFailOfResponse(Object... arguments) {
-
-            }
-        };
-
-        return responseListener;
-    }
-
-    private WebAPIResponseListener manageReleaseAPIHandler() {
-        WebAPIResponseListener responseListener = new WebAPIResponseListener() {
-            @Override
-            public void onSuccessOfResponse(Object... arguments) {
-
-            }
-
-            @Override
-            public void onFailOfResponse(Object... arguments) {
-
-            }
-        };
-
-        return responseListener;
-    }
-
-    private WebAPIResponseListener manageStartAPIHandler() {
-        WebAPIResponseListener responseListener = new WebAPIResponseListener() {
-            @Override
-            public void onSuccessOfResponse(Object... arguments) {
-
-            }
-
-            @Override
-            public void onFailOfResponse(Object... arguments) {
-
+                VolleyError error = (VolleyError) arguments[0];
+                Log.i(MyJobsAdapter.class.getSimpleName(), "Job operation error " + error.toString());
             }
         };
 

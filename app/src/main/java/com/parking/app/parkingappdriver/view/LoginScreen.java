@@ -91,6 +91,11 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
                                         callDriverConfigWS();
 
+//                                        Intent intent = new Intent(LoginScreen.this,
+//                                                DriverNavigationDrawerActivity.class);
+//                                        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+//                                        finish();
+
                                     } else {
                                         AppUtils.showToast(LoginScreen.this, "Login Failed");
                                     }
@@ -131,6 +136,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
                         SessionManager.getInstance(LoginScreen.this)
                                 .setVallet_Id(configDTO.get_id());
+                        SessionManager.getInstance(LoginScreen.this)
+                                .setValletNumber(configDTO.getEmployeeNumber());
 
                         Intent intent = new Intent(LoginScreen.this, DriverNavigationDrawerActivity.class);
                         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));

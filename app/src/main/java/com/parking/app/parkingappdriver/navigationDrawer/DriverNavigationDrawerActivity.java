@@ -41,7 +41,8 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
         initViews();
         assignClickOnView();
         assignClickonNavigationMenu();
-        displayView(0);
+
+        displayView(getIntent().getIntExtra("fragmentNumber", 0));
 
 
     }

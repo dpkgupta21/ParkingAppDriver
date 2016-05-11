@@ -174,31 +174,39 @@
 
         <RelativeLayout
             android:id="@+id/current_job_buttons_rl"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_four"
             android:layout_centerHorizontal="true"
             android:visibility="gone">
 
-            <Button
-                android:id="@+id/btn_start_job"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/green_round_corner_btn_selector_btn"
-                android:text="Start job"
-                android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:weightSum="1">
 
-            <Button
-                android:id="@+id/btn_release_job"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_20dp"
-                android:layout_toRightOf="@id/btn_start_job"
-                android:background="@drawable/green_round_corner_btn_selector_btn"
-                android:text="Release job"
-                android:textAllCaps="false"
-                android:textColor="@color/white" />
+                <Button
+                    android:id="@+id/btn_start_job"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/green_round_corner_btn_selector_btn"
+                    android:text="Start job"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btn_release_job"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    android:layout_toRightOf="@id/btn_start_job"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/green_round_corner_btn_selector_btn"
+                    android:text="Release job"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+            </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
@@ -214,7 +222,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/green_round_corner_btn_selector_btn"
-                android:text="Release job"
+                android:text="End job"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 

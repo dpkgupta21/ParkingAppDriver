@@ -93,5 +93,14 @@ public class SessionManager {
         return pref.getString(PreferenceHelper.VALLET_ID, "");
     }
 
+    public void setValletNumber(String valletNumber) {
+        editor.putString(PreferenceHelper.VALLET_NUMBER, valletNumber);
+        editor.commit();
+    }
+
+    public String getValletNumber() {
+        return pref.getString(PreferenceHelper.VALLET_NUMBER, "");
+    }
+
 
 }

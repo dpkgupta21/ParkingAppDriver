@@ -51,7 +51,8 @@ public class CurrentJobsAPIHandler {
 
     private void postAPICall() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest((AppConstants.APP_WEBSERVICE_API_URL
-                + GlobalKeys.CURRENT_JOB_API).trim() + "?valletNumber=10000",
+                + GlobalKeys.CURRENT_JOB_API).trim() + "?valletNumber="
+                + SessionManager.getInstance(mActivity).getValletNumber(),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray jsonArray) {

@@ -3,6 +3,7 @@ package com.parking.app.parkingappdriver.webservices.handler;
 import android.app.Activity;
 import android.content.pm.PackageInstaller;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -18,6 +19,9 @@ import com.parking.app.parkingappdriver.webservices.control.WebserviceAPIErrorHa
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
 
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Deepak Singh on 10-May-16.
@@ -68,7 +72,16 @@ public class ReleaseAPIHandler {
                             responseListener.onFailOfResponse(volleyError);
                         }
                     }
-            );
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
+                            GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
+                    params.put(GlobalKeys.AUTHTOKEN, authToken);
+                    return params;
+                }
+            };
 
             // Adding request to request queue
             if (ParkingAppController.getInstance() != null) {
