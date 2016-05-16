@@ -1,105 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_screen"
-    tools:context=".view.View.LoginScreen">
+    android:background="@drawable/login_screen">
+
 
     <RelativeLayout
+        android:id="@+id/center_rl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="@dimen/margin_30dp"
         android:layout_marginRight="@dimen/margin_30dp">
 
-
-        <RelativeLayout
-            android:id="@+id/center_rl"
+        <EditText
+            android:id="@+id/email_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
+            android:background="@null"
+            android:gravity="center"
+            android:hint="@string/enter_email"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/margin_15dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_faded"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/text_size_20sp"
 
-            <EditText
-                android:id="@+id/email_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:gravity="center"
-                android:text="luc3@test.com"
-                android:hint="@string/enter_email"
-                android:inputType="textEmailAddress"
-                android:padding="@dimen/margin_15dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white_faded"
-                android:textCursorDrawable="@null"
-                android:textSize="@dimen/text_size_20sp"
+            android:textStyle="normal" />
 
-                android:textStyle="normal" />
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/horizontal_line_height"
+            android:layout_below="@+id/email_et"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:background="@color/white_faded" />
 
-            <View
-                android:id="@+id/line"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/horizontal_line_height"
-                android:layout_below="@+id/email_et"
-                android:layout_marginTop="@dimen/margin_5dp"
-                android:background="@color/white_faded" />
-
-            <EditText
-                android:id="@+id/pwd_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/line"
-                android:background="@null"
-                android:gravity="center"
-                android:text="test123"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:padding="@dimen/margin_15dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white_faded"
-                android:textCursorDrawable="@null"
-                android:textSize="@dimen/text_size_20sp"
-                android:textStyle="normal" />
-
-
-            />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/forgot_pwd_rl"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/pwd_et"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/center_rl"
-            android:padding="@dimen/margin_10dp">
+            android:layout_below="@+id/line"
+            android:background="@null"
+            android:gravity="center"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="@dimen/margin_15dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_faded"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="normal" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:text="@string/forgot_pwd"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_16sp"
-                android:textStyle="normal" />
-        </RelativeLayout>
 
-        <RelativeLayout
+        <Button
             android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/forgot_pwd_rl"
+            android:layout_below="@+id/pwd_et"
             android:layout_marginTop="@dimen/margin_20dp"
             android:background="@drawable/green_round_corner_btn_selector_btn"
             android:gravity="center"
-            android:padding="@dimen/margin_10dp">
+            android:padding="@dimen/margin_10dp"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_20sp" />
-        </RelativeLayout>
     </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/register"

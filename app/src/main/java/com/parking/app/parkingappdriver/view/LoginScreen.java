@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
@@ -26,7 +27,8 @@ import org.json.JSONObject;
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
 
 
-    private RelativeLayout login_button, register;
+    private Button login_button;
+    private RelativeLayout register;
     private EditText email_et, pwd_et;
     private LoginAPIHandler mLoginAPIHandler;
     private String TAG = LoginScreen.class.getSimpleName();
@@ -45,7 +47,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
     private void initViews() {
 
-        login_button = (RelativeLayout) findViewById(R.id.login_button);
+        login_button = (Button) findViewById(R.id.login_button);
         register = (RelativeLayout) findViewById(R.id.register);
         email_et = (EditText) findViewById(R.id.email_et);
         pwd_et = (EditText) findViewById(R.id.pwd_et);
