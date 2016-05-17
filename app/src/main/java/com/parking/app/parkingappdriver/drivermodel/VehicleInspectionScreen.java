@@ -18,21 +18,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.activity.BaseActivity;
 import com.parking.app.parkingappdriver.captureImage.CapturePicture;
 import com.parking.app.parkingappdriver.captureImage.ShowingSnapshotScreen;
 
 
-public class VehicleInspectionScreen extends AppCompatActivity implements View.OnClickListener {
+public class VehicleInspectionScreen extends BaseActivity {
 
     private Toolbar mToolbar;
     private TextView toolbar_title;
-    private RelativeLayout take_vehicle_button;
     private static Activity mActivity;
 
-    private TextView rt_frnt_dr_tv, lt_frnt_dr_tv, rt_bck_dr_tv, lt_back_dr_tv, frnt_bmpr_tv, back_bmpr_tv, view_all_pics;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vehicle_inspection_screen);
         initViews();
@@ -40,14 +38,14 @@ public class VehicleInspectionScreen extends AppCompatActivity implements View.O
     }
 
     private void assignClicks() {
-        take_vehicle_button.setOnClickListener(this);
-        rt_frnt_dr_tv.setOnClickListener(this);
-        lt_frnt_dr_tv.setOnClickListener(this);
-        rt_bck_dr_tv.setOnClickListener(this);
-        lt_back_dr_tv.setOnClickListener(this);
-        frnt_bmpr_tv.setOnClickListener(this);
-        back_bmpr_tv.setOnClickListener(this);
-        view_all_pics.setOnClickListener(this);
+        setClick(R.id.rt_frnt_dr_tv);
+        setClick(R.id.lt_frnt_dr_tv);
+        setClick(R.id.rt_bck_dr_tv);
+        setClick(R.id.lt_back_dr_tv);
+        setClick(R.id.frnt_bmpr_tv);
+        setClick(R.id.back_bmpr_tv);
+        setClick(R.id.view_all_pics);
+        setClick(R.id.take_vehicle_button);
     }
 
 
@@ -60,30 +58,16 @@ public class VehicleInspectionScreen extends AppCompatActivity implements View.O
         getSupportActionBar().setTitle(getResources().getString(R.string.vehicle_inspection));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mToolbar.setNavigationIcon(R.drawable.back_button);
-        take_vehicle_button = (RelativeLayout) findViewById(R.id.take_vehicle_button);
-
-
-        rt_frnt_dr_tv = (TextView) findViewById(R.id.rt_frnt_dr_tv);
-        lt_frnt_dr_tv = (TextView) findViewById(R.id.lt_frnt_dr_tv);
-        rt_bck_dr_tv = (TextView) findViewById(R.id.rt_bck_dr_tv);
-        lt_back_dr_tv = (TextView) findViewById(R.id.lt_back_dr_tv);
-        frnt_bmpr_tv = (TextView) findViewById(R.id.frnt_bmpr_tv);
-        back_bmpr_tv = (TextView) findViewById(R.id.back_bmpr_tv);
-        view_all_pics = (TextView) findViewById(R.id.view_all_pics);
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
         int id = item.getItemId();
         switch (id) {
-
             case android.R.id.home:
                 finish();
                 break;
-
         }
         return super.onOptionsItemSelected(item);
 
@@ -91,8 +75,7 @@ public class VehicleInspectionScreen extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
-
-        Intent captureImageIntent = new Intent(this, CapturePicture.class);
+        Intent captureImageIntent = new Intent(mActivity, CapturePicture.class);
 
         switch (v.getId()) {
             case R.id.take_vehicle_button:
@@ -101,36 +84,36 @@ public class VehicleInspectionScreen extends AppCompatActivity implements View.O
 
             case R.id.rt_frnt_dr_tv:
                 captureImageIntent.putExtra("imagepath", "Right Front Door");
-
                 startActivityForResult(captureImageIntent, 0);
                 break;
+
             case R.id.lt_frnt_dr_tv:
                 captureImageIntent.putExtra("imagepath", "Left Front Door");
-
                 startActivityForResult(captureImageIntent, 1);
                 break;
+
             case R.id.rt_bck_dr_tv:
                 captureImageIntent.putExtra("imagepath", "Right Back Door");
-
                 startActivityForResult(captureImageIntent, 2);
                 break;
+
             case R.id.lt_back_dr_tv:
                 captureImageIntent.putExtra("imagepath", "Left Back Door");
-
                 startActivityForResult(captureImageIntent, 3);
                 break;
+
             case R.id.frnt_bmpr_tv:
                 captureImageIntent.putExtra("imagepath", "Front Bumper");
-
                 startActivityForResult(captureImageIntent, 4);
                 break;
+
             case R.id.back_bmpr_tv:
                 captureImageIntent.putExtra("imagepath", "Back Bumper");
                 startActivityForResult(captureImageIntent, 5);
                 break;
 
             case R.id.view_all_pics:
-                startActivity(new Intent(VehicleInspectionScreen.this, ShowingSnapshotScreen.class));
+                startActivity(new Intent(mActivity, ShowingSnapshotScreen.class));
                 break;
         }
     }
@@ -150,7 +133,7 @@ public class VehicleInspectionScreen extends AppCompatActivity implements View.O
 
 
     public void showMessageChooseDialog() {
-        final Dialog mDialog = new Dialog(this);
+        final Dialog mDialog = new Dialog(mActivity);
         // hide to default title for Dialog
         mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -169,12 +152,15 @@ public class VehicleInspectionScreen extends AppCompatActivity implements View.O
         // Retrieve views from the inflated dialog layout and update
         // their
         // values
-        TextView messageText = (TextView) mDialog
-                .findViewById(R.id.messageText);
-        TextView buttonMsgText = (TextView) mDialog
-                .findViewById(R.id.button_text);
-        messageText.setText(R.string.job_completed);
-        buttonMsgText.setText(R.string.done);
+//        TextView messageText = (TextView) mDialog
+//                .findViewById(R.id.messageText);
+//        TextView buttonMsgText = (TextView) mDialog
+//                .findViewById(R.id.button_text);
+        setViewText(view, R.id.messageText, mActivity.getString(R.string.job_completed));
+        setViewText(view, R.id.button_text, mActivity.getString(R.string.done));
+
+       // messageText.setText(R.string.job_completed);
+        //buttonMsgText.setText(R.string.done);
 
         RelativeLayout closeButtonView = (RelativeLayout) mDialog
                 .findViewById(R.id.closeButtonView);
@@ -187,6 +173,7 @@ public class VehicleInspectionScreen extends AppCompatActivity implements View.O
 
             }
         });
+
         try {
             mDialog.show();
 

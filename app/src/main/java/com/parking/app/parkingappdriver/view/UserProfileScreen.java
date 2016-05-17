@@ -1,21 +1,18 @@
 package com.parking.app.parkingappdriver.view;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.activity.BaseActivity;
 
 
-public class UserProfileScreen extends AppCompatActivity {
-
-
-    Toolbar mToolbar;
+public class UserProfileScreen extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        Window window = getWindow();
 //        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -29,7 +26,7 @@ public class UserProfileScreen extends AppCompatActivity {
      * initialise the view/widgets of the UI.
      */
     private void initView() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.user_profile));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -49,11 +46,7 @@ public class UserProfileScreen extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
-        int id = item.getItemId();
-        switch (id) {
-
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;

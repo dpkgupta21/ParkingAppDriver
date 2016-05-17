@@ -1,16 +1,14 @@
 package com.parking.app.parkingappdriver.view;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.activity.BaseActivity;
 import com.parking.app.parkingappdriver.iClasses.GlobalKeys;
 import com.parking.app.parkingappdriver.model.DriverConfigDTO;
 import com.parking.app.parkingappdriver.navigationDrawer.DriverNavigationDrawerActivity;
@@ -24,39 +22,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
+public class LoginScreen extends BaseActivity {
 
-
-    private Button login_button;
-    private RelativeLayout register;
-    private EditText email_et, pwd_et;
-    private LoginAPIHandler mLoginAPIHandler;
     private String TAG = LoginScreen.class.getSimpleName();
     private String email, pwd;
+    private Activity mActivity;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
-
-        initViews();
+        mActivity = LoginScreen.this;
         assignClick();
     }
 
-
-    private void initViews() {
-
-        login_button = (Button) findViewById(R.id.login_button);
-        register = (RelativeLayout) findViewById(R.id.register);
-        email_et = (EditText) findViewById(R.id.email_et);
-        pwd_et = (EditText) findViewById(R.id.pwd_et);
-    }
-
     private void assignClick() {
-
-        login_button.setOnClickListener(this);
-        register.setOnClickListener(this);
+        setClick(R.id.login_button);
+        setClick(R.id.register);
     }
 
     @Override
@@ -68,27 +51,29 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 //                startActivity(new Intent(LoginScreen.this, SignupScreen.class));
                 break;
             case R.id.login_button:
-                email = email_et.getText().toString().trim();
-                pwd = pwd_et.getText().toString().trim();
+                email = getEditTextText(R.id.email_et).trim();
+                pwd = getEditTextText(R.id.pwd_et).trim();
                 if (email.isEmpty()) {
-                    Snackbar.make(v, getString(R.string.please_enter_email), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(v, getString(R.string.please_enter_email),
+                            Snackbar.LENGTH_LONG).show();
                 } else if (pwd.isEmpty()) {
                     Snackbar.make(v, getString(R.string.please_enter_pwd), Snackbar.LENGTH_LONG).show();
 
                 } else {
-                    mLoginAPIHandler = new LoginAPIHandler(this, email, pwd, new WebAPIResponseListener() {
+                    new LoginAPIHandler(mActivity, email, pwd, new WebAPIResponseListener() {
                         @Override
                         public void onSuccessOfResponse(Object... arguments) {
                             AppUtils.hideProgressDialog();
                             try {
                                 JSONObject mJsonObject = (JSONObject) arguments[0];
                                 if (mJsonObject != null) {
-                                    if (mJsonObject.has(GlobalKeys.AUTHTOKEN) && mJsonObject.has(GlobalKeys.EMAIL)) {
+                                    if (mJsonObject.has(GlobalKeys.AUTHTOKEN)
+                                            && mJsonObject.has(GlobalKeys.EMAIL)) {
 
                                         email = mJsonObject.getString(GlobalKeys.EMAIL);
                                         String auth = mJsonObject.getString(GlobalKeys.AUTHTOKEN);
                                         AppUtils.showLog(TAG, "email: " + email + " " + auth);
-                                        SessionManager.getInstance(LoginScreen.this).
+                                        SessionManager.getInstance(mActivity).
                                                 createLoginSession(email, pwd, auth);
 
                                         callDriverConfigWS();
@@ -99,10 +84,10 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 //                                        finish();
 
                                     } else {
-                                        AppUtils.showToast(LoginScreen.this, "Login Failed");
+                                        AppUtils.showToast(mActivity, "Login Failed");
                                     }
                                 } else {
-                                    AppUtils.showToast(LoginScreen.this, "Login Failed");
+                                    AppUtils.showToast(mActivity, "Login Failed");
 
                                 }
 
@@ -114,7 +99,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
                         @Override
                         public void onFailOfResponse(Object... arguments) {
-                            AppUtils.showToast(LoginScreen.this, "Login Failed");
+                            AppUtils.showToast(mActivity, "Login Failed");
 
                         }
                     });
@@ -127,7 +112,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     private void callDriverConfigWS() {
-        new DriverConfigAPIHandler(this, new WebAPIResponseListener() {
+        new DriverConfigAPIHandler(mActivity, new WebAPIResponseListener() {
             @Override
             public void onSuccessOfResponse(Object... arguments) {
                 try {
@@ -136,12 +121,12 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         DriverConfigDTO configDTO = new Gson().fromJson(mJsonObject.toString(),
                                 DriverConfigDTO.class);
 
-                        SessionManager.getInstance(LoginScreen.this)
+                        SessionManager.getInstance(mActivity)
                                 .setVallet_Id(configDTO.get_id());
-                        SessionManager.getInstance(LoginScreen.this)
+                        SessionManager.getInstance(mActivity)
                                 .setValletNumber(configDTO.getEmployeeNumber());
 
-                        Intent intent = new Intent(LoginScreen.this, DriverNavigationDrawerActivity.class);
+                        Intent intent = new Intent(mActivity, DriverNavigationDrawerActivity.class);
                         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();
                     }
@@ -152,7 +137,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onFailOfResponse(Object... arguments) {
-                AppUtils.showToast(LoginScreen.this, "Login Failed");
+                AppUtils.showToast(mActivity, "Login Failed");
             }
         });
     }

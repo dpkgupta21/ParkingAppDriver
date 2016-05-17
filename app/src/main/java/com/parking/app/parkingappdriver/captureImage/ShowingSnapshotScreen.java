@@ -1,9 +1,9 @@
 package com.parking.app.parkingappdriver.captureImage;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.activity.BaseActivity;
 import com.parking.app.parkingappdriver.utils.AppConstants;
 
 import java.io.File;
@@ -31,7 +32,7 @@ import java.util.List;
  * Showing snapshot on GUI This class is used to show grid view on GUI to
  * display all images on GUI
  */
-public class ShowingSnapshotScreen extends AppCompatActivity {
+public class ShowingSnapshotScreen extends BaseActivity {
     /**
      * This String TAG is used to show TAG into logcat at debug time.
      */
@@ -44,19 +45,15 @@ public class ShowingSnapshotScreen extends AppCompatActivity {
      * Grid view object instance
      */
     private GridView snapShotGrid;
-    private TextView noImageFound;
-    /**
-     * Instance object of Grid view list Adapter
-     */
     private GridViewAdapter mGridViewAdapter;
-
     private Toolbar mToolbar;
-    private TextView toolbar_title;
+    private Activity mActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showing_gridview_gallery_screen);
+        mActivity = ShowingSnapshotScreen.this;
         initViews();
         manageGridAdapter();
         singleClickOnGridItem();
@@ -86,7 +83,7 @@ public class ShowingSnapshotScreen extends AppCompatActivity {
                         snapshotFiles.get(position).getAbsolutePath(),
                         bmOptions);
                 AppConstants.imageName = snapshotFiles.get(position).getName();
-                Intent mFullScreenIntent = new Intent(ShowingSnapshotScreen.this, ShowFullSnapShotOnGUI.class);
+                Intent mFullScreenIntent = new Intent(mActivity, ShowFullSnapShotOnGUI.class);
                 startActivity(mFullScreenIntent);
             }
         });
@@ -97,15 +94,13 @@ public class ShowingSnapshotScreen extends AppCompatActivity {
      */
     private void initViews() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar_title = (TextView) findViewById(R.id.toolbar_title);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Gallery");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mToolbar.setNavigationIcon(R.drawable.back_button);
         /* Assign id to grid view object */
         snapShotGrid = (GridView) findViewById(R.id.snapshortGrid);
-        noImageFound = (TextView) findViewById(R.id.noImageFound);
-        noImageFound.setVisibility(View.GONE);
+        setViewVisibility(R.id.noImageFound, View.GONE);
         snapshotFiles = getDirectoryFiles(new File(
                 AppConstants.SNAPSHOT_DIRECTORY_PATH));
         Log.d(TAG, snapshotFiles.size() + "");
@@ -119,10 +114,10 @@ public class ShowingSnapshotScreen extends AppCompatActivity {
         if (snapshotFiles != null && !snapshotFiles.isEmpty()) {
             mGridViewAdapter = new GridViewAdapter(this,
                     R.layout.snapshot_item_view, snapshotFiles);
-            noImageFound.setVisibility(View.GONE);
+            setViewVisibility(R.id.noImageFound, View.GONE);
             snapShotGrid.setVisibility(View.VISIBLE);
         } else {
-            noImageFound.setVisibility(View.VISIBLE);
+            setViewVisibility(R.id.noImageFound, View.VISIBLE);
             snapShotGrid.setVisibility(View.GONE);
         }
         // Binds the Adapter to the Gridview
@@ -165,7 +160,7 @@ public class ShowingSnapshotScreen extends AppCompatActivity {
                         }
                         // Close CAB
                         mode.finish();
-                        Toast.makeText(ShowingSnapshotScreen.this, "Images deleted Successfully!!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mActivity, "Images deleted Successfully!!", Toast.LENGTH_LONG).show();
                         mToolbar.setVisibility(View.VISIBLE);
 
                         return true;
@@ -234,8 +229,6 @@ public class ShowingSnapshotScreen extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
         int id = item.getItemId();
         switch (id) {
 

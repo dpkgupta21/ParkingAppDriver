@@ -1,10 +1,7 @@
 package com.parking.app.parkingappdriver.currentjobs;
 
 import android.app.Activity;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +10,21 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.fragments.BaseFragment;
 import com.parking.app.parkingappdriver.model.LoadJobsDTO;
 import com.parking.app.parkingappdriver.myjobs.MyJobsAdapter;
 import com.parking.app.parkingappdriver.webservices.handler.CurrentJobsAPIHandler;
-import com.parking.app.parkingappdriver.webservices.handler.MyJobsAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 
-public class CurrentJobsFragment extends Fragment {
+public class CurrentJobsFragment extends BaseFragment {
 
     private View view;
     private static Activity mActivity;
     private ListView listView;
-    private static CurrentJobsAPIHandler currentJobsAPIHandler;
     private static ArrayList<LoadJobsDTO> jobsList;
     private static MyJobsAdapter myJobsAdapter;
 
@@ -52,8 +48,9 @@ public class CurrentJobsFragment extends Fragment {
 
         jobsList = new ArrayList<>();
 
-        currentJobsAPIHandler = new CurrentJobsAPIHandler(mActivity, manageResponseListner());
-        myJobsAdapter = new MyJobsAdapter(getActivity(), this);
+        //calling current job web service.
+        new CurrentJobsAPIHandler(mActivity, manageResponseListner());
+        myJobsAdapter = new MyJobsAdapter(mActivity, this);
 
         listView.setAdapter(myJobsAdapter);
         return view;
@@ -61,7 +58,6 @@ public class CurrentJobsFragment extends Fragment {
 
     private void initViews() {
         listView = (ListView) view.findViewById(R.id.jobs_listview);
-
     }
 
     private static WebAPIResponseListener manageResponseListner() {

@@ -1,5 +1,6 @@
 package com.parking.app.parkingappdriver.appIntroduction;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,74 +16,59 @@ import android.widget.TextView;
 
 import com.nineoldandroids.view.ViewHelper;
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.activity.BaseActivity;
 import com.parking.app.parkingappdriver.view.LoginScreen;
 
 
-public class WelcomeScreen extends AppCompatActivity {
+public class WelcomeScreen extends BaseActivity {
 
     static final int TOTAL_PAGES = 5;
 
     ViewPager pager;
-    PagerAdapter pagerAdapter;
-    LinearLayout circles;
-    TextView explore_btn;
-    ImageView btnSkip;
-    boolean isOpaque = true;
+    private Activity mActivity;
+    private LinearLayout circles;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_layout);
-        explore_btn = (TextView) findViewById(R.id.explore_btn);
-        btnSkip = ImageView.class.cast(findViewById(R.id.btn_skip));
-        btnSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finishIntroduction();
-            }
-        });
-        explore_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finishIntroduction();
-            }
-        });
+        mActivity = WelcomeScreen.this;
+
+        setClick(R.id.explore_btn);
+        setClick(R.id.btn_skip);
+
+        setUpViewPager();
 
 
+        buildCircles();
+    }
+
+    private void setUpViewPager() {
         pager = (ViewPager) findViewById(R.id.pager);
-        pagerAdapter = new ScreenSlideAdapter(getSupportFragmentManager());
+        PagerAdapter pagerAdapter = new ScreenSlideAdapter(getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
         pager.setPageTransformer(true, new CrossfadePageTransformer());
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-
             }
 
             @Override
             public void onPageSelected(int position) {
                 setIndicator(position);
                 if (position == TOTAL_PAGES - 1) {
-                    btnSkip.setVisibility(View.GONE);
-                    explore_btn.setVisibility(View.VISIBLE);
-
-
+                    setViewVisibility(R.id.btn_skip, View.GONE);
+                    setViewVisibility(R.id.explore_btn, View.VISIBLE);
                 } else {
-                    btnSkip.setVisibility(View.VISIBLE);
-                    explore_btn.setVisibility(View.INVISIBLE);
-
-
+                    setViewVisibility(R.id.btn_skip, View.VISIBLE);
+                    setViewVisibility(R.id.explore_btn, View.INVISIBLE);
                 }
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
-
-        buildCircles();
     }
 
     @Override
@@ -95,13 +80,13 @@ public class WelcomeScreen extends AppCompatActivity {
     }
 
     private void buildCircles() {
-        circles = LinearLayout.class.cast(findViewById(R.id.circles));
+        circles = (LinearLayout) findViewById(R.id.circles);
 
         float scale = getResources().getDisplayMetrics().density;
         int padding = (int) (5 * scale + 0.5f);
 
         for (int i = 0; i < TOTAL_PAGES; i++) {
-            ImageView circle = new ImageView(this);
+            ImageView circle = new ImageView(mActivity);
             circle.setImageResource(R.drawable.pagenation_selected);
             circle.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             circle.setAdjustViewBounds(true);
@@ -127,7 +112,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
     private void finishIntroduction() {
         finish();
-        Intent intent = new Intent(this, LoginScreen.class);
+        Intent intent = new Intent(mActivity, LoginScreen.class);
         startActivity(intent);
         overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
     }
@@ -180,6 +165,18 @@ public class WelcomeScreen extends AppCompatActivity {
         @Override
         public int getCount() {
             return TOTAL_PAGES;
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.explore_btn:
+                finishIntroduction();
+                break;
+            case R.id.btn_skip:
+                finishIntroduction();
+                break;
         }
     }
 

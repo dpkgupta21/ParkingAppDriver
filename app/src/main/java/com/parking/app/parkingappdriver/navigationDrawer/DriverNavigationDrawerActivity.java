@@ -18,7 +18,6 @@ import android.view.View;
 
 import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.currentjobs.CurrentJobsFragment;
-import com.parking.app.parkingappdriver.drivermodel.StartJobFragment;
 import com.parking.app.parkingappdriver.myjobs.MyJobsFragment;
 import com.parking.app.parkingappdriver.notification.NotificationFragment;
 import com.parking.app.parkingappdriver.view.UserProfileScreen;
@@ -26,10 +25,8 @@ import com.parking.app.parkingappdriver.view.UserProfileScreen;
 
 public class DriverNavigationDrawerActivity extends AppCompatActivity {
 
-    private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-    private ActionBarDrawerToggle mDrawerToggle;
     private int mCurrentSelectedPosition;
     private View headerView;
     public static Activity mActivity;
@@ -52,13 +49,14 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
 
         mActivity = this;
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.tool_bar);
 
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         setSupportActionBar(mToolbar);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(mActivity, mDrawerLayout,
+                mToolbar, R.string.drawer_open, R.string.drawer_close);
         headerView = mNavigationView.inflateHeaderView(R.layout.drawer_header);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
@@ -74,7 +72,7 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mDrawerLayout.closeDrawer(GravityCompat.START);
 
-                Intent user_profile_intent = new Intent(DriverNavigationDrawerActivity.this, UserProfileScreen.class);
+                Intent user_profile_intent = new Intent(mActivity, UserProfileScreen.class);
                 startActivity(user_profile_intent);
             }
         });

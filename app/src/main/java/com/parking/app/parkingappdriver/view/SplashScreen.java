@@ -3,17 +3,17 @@ package com.parking.app.parkingappdriver.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.activity.BaseActivity;
 import com.parking.app.parkingappdriver.appIntroduction.WelcomeScreen;
 import com.parking.app.parkingappdriver.utils.AppConstants;
 
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreen extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 

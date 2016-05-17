@@ -1,25 +1,24 @@
 package com.parking.app.parkingappdriver.captureImage;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.activity.BaseActivity;
 import com.parking.app.parkingappdriver.utils.AppConstants;
 
 
 /**
  * This class is used to Show full screen image on GUI
  */
-public class ShowFullSnapShotOnGUI extends AppCompatActivity {
+public class ShowFullSnapShotOnGUI extends BaseActivity {
 
     private ImageView fullScreenSnap;
-    private String TAG = ShowFullSnapShotOnGUI.class.getSimpleName();
     private Toolbar mToolbar;
-    private TextView toolbar_title;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,6 @@ public class ShowFullSnapShotOnGUI extends AppCompatActivity {
         /* Intent get data handler */
         fullScreenSnap = (ImageView) findViewById(R.id.fullScreenSnap);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar_title = (TextView) findViewById(R.id.toolbar_title);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(AppConstants.imageName);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -46,15 +44,11 @@ public class ShowFullSnapShotOnGUI extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
         int id = item.getItemId();
         switch (id) {
-
             case android.R.id.home:
                 finish();
                 break;
-
         }
         return super.onOptionsItemSelected(item);
 

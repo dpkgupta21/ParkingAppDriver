@@ -2,18 +2,16 @@ package com.parking.app.parkingappdriver.drivermodel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.fragments.BaseFragment;
 
 
-public class StartJobFragment extends Fragment implements View.OnClickListener {
+public class StartJobFragment extends BaseFragment {
 
-    private RelativeLayout start_job_button;
     private View view;
 
     @Override
@@ -28,21 +26,13 @@ public class StartJobFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initViews();
         assignClicks();
     }
 
 
     private void assignClicks() {
-        start_job_button.setOnClickListener(this);
+        setClick(R.id.start_job_button, view);
     }
-
-
-    private void initViews() {
-
-        start_job_button = (RelativeLayout) view.findViewById(R.id.start_job_button);
-    }
-
 
     @Override
     public void onClick(View v) {

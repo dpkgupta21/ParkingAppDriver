@@ -2,8 +2,6 @@ package com.parking.app.parkingappdriver.myjobs;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +10,7 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.fragments.BaseFragment;
 import com.parking.app.parkingappdriver.model.LoadJobsDTO;
 import com.parking.app.parkingappdriver.webservices.handler.ConfirmJobAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.MyJobsAPIHandler;
@@ -21,14 +20,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 
-public class MyJobsFragment extends Fragment implements View.OnClickListener {
+public class MyJobsFragment extends BaseFragment {
 
-    private Toolbar mToolbar;
     private View view;
     private static Activity mActivity;
     private ListView listView;
-    private static MyJobsAPIHandler myJobsAPIHandler;
-    private static ConfirmJobAPIHandler confirmJobAPIHandler;
 
     private static ArrayList<LoadJobsDTO> myJobsDTOArrayList;
     private static MyJobsAdapter myJobsAdapter;
@@ -48,10 +44,10 @@ public class MyJobsFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         mActivity = getActivity();
         initViews();
-        assignClicks();
+
         myJobsDTOArrayList = new ArrayList<LoadJobsDTO>();
 
-        myJobsAPIHandler = new MyJobsAPIHandler(mActivity, manageResponseListner());
+        new MyJobsAPIHandler(mActivity, manageResponseListner());
 
         myJobsAdapter = new MyJobsAdapter(getActivity(), this);
 
@@ -86,30 +82,17 @@ public class MyJobsFragment extends Fragment implements View.OnClickListener {
         return webAPIResponseListener;
     }
 
-
-    private void assignClicks() {
-
-    }
-
     private void initViews() {
         listView = (ListView) view.findViewById(R.id.jobs_listview);
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-        }
-    }
-
-
     public static void confirmJob(LoadJobsDTO jobsDTO) {
-        confirmJobAPIHandler = new ConfirmJobAPIHandler(mActivity, jobsDTO.getJobId(),
+        new ConfirmJobAPIHandler(mActivity, jobsDTO.getJobId(),
                 "5721bd345de9114b647d6d5c", new WebAPIResponseListener() {
             @Override
             public void onSuccessOfResponse(Object... arguments) {
-                myJobsAPIHandler = new MyJobsAPIHandler(mActivity, manageResponseListner());
+                new MyJobsAPIHandler(mActivity, manageResponseListner());
             }
 
             @Override

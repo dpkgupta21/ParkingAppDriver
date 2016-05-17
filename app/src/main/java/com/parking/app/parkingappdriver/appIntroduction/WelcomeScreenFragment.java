@@ -1,12 +1,13 @@
 package com.parking.app.parkingappdriver.appIntroduction;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class WelcomeScreenFragment extends Fragment {
+import com.parking.app.parkingappdriver.fragments.BaseFragment;
+
+public class WelcomeScreenFragment extends BaseFragment {
  
     final static String LAYOUT_ID = "layoutId";
  
