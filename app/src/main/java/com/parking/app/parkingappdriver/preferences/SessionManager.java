@@ -41,13 +41,14 @@ public class SessionManager {
     /**
      * Create login session
      */
-    public void createLoginSession(String email, String password, String auth_token) {
+    public void createLoginSession(String email, String password, String auth_token, String userId) {
         // Storing login value as TRUE
         editor.putBoolean(PreferenceHelper.IS_LOGIN, true);
         // Storing email id in pref
         editor.putString(PreferenceHelper.KEY_EMAIL_ID, email);
         editor.putString(PreferenceHelper.KEY_PWD, password);
         editor.putString(PreferenceHelper.KEY_AUTHTOKEN, auth_token);
+        editor.putString(PreferenceHelper.KEY_USER_ID, userId);
 
         // commit changes
         editor.commit();
@@ -102,5 +103,14 @@ public class SessionManager {
         return pref.getString(PreferenceHelper.VALLET_NUMBER, "");
     }
 
+
+    public void setUserId(String userId) {
+        editor.putString(PreferenceHelper.KEY_USER_ID, userId);
+        editor.commit();
+    }
+
+    public String getUserId() {
+        return pref.getString(PreferenceHelper.KEY_USER_ID, "");
+    }
 
 }

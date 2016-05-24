@@ -16,4 +16,5 @@ public interface PreferenceHelper {
     String KEY_PWD = "password";
     String VALLET_ID = "valled_id";
     String VALLET_NUMBER = "valled_number";
+    String KEY_USER_ID = "user_id";
 }

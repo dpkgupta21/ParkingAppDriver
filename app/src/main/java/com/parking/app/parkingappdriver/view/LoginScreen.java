@@ -72,9 +72,10 @@ public class LoginScreen extends BaseActivity {
 
                                         email = mJsonObject.getString(GlobalKeys.EMAIL);
                                         String auth = mJsonObject.getString(GlobalKeys.AUTHTOKEN);
+                                        String userId = mJsonObject.getString(GlobalKeys.USERID);
                                         AppUtils.showLog(TAG, "email: " + email + " " + auth);
                                         SessionManager.getInstance(mActivity).
-                                                createLoginSession(email, pwd, auth);
+                                                createLoginSession(email, pwd, auth, userId);
 
                                         callDriverConfigWS();
 

@@ -52,7 +52,7 @@ public class ConfirmJobAPIHandler {
                 .showProgressDialog(mActivity, "Wait...", false);
         this.mActivity = mActivity;
         this.jobId = jobId;
-        this.valletId = valletId;
+        this.valletId =  SessionManager.getInstance(mActivity).getVallet_Id();
         this.mResponseListener = webAPIResponseListener;
         postAPICall();
 
@@ -104,9 +104,12 @@ public class ConfirmJobAPIHandler {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
+                params.put(GlobalKeys.HEADER_KEY_ACCEPT,
+                        GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
                 params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
                         GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
                 params.put(GlobalKeys.AUTHTOKEN, SessionManager.getInstance(mActivity).getAuthToken());
+                params.put(GlobalKeys.USERID, SessionManager.getInstance(mActivity).getUserId());
                 return params;
             }
 
@@ -118,7 +121,7 @@ public class ConfirmJobAPIHandler {
         }
         // set request time-out
         mJsonRequest.setRetryPolicy(new DefaultRetryPolicy(
-                AppConstants.ONE_SECOND * 20, 0,
+                AppConstants.ONE_SECOND * 30, 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 

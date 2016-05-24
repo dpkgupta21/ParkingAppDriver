@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.fragments.BaseFragment;
 import com.parking.app.parkingappdriver.model.LoadJobsDTO;
+import com.parking.app.parkingappdriver.preferences.SessionManager;
 import com.parking.app.parkingappdriver.webservices.handler.ConfirmJobAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.MyJobsAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
@@ -88,8 +89,10 @@ public class MyJobsFragment extends BaseFragment {
     }
 
     public static void confirmJob(LoadJobsDTO jobsDTO) {
+        String valletId = SessionManager.getInstance(mActivity)
+                .getVallet_Id();
         new ConfirmJobAPIHandler(mActivity, jobsDTO.getJobId(),
-                "5721bd345de9114b647d6d5c", new WebAPIResponseListener() {
+                valletId, new WebAPIResponseListener() {
             @Override
             public void onSuccessOfResponse(Object... arguments) {
                 new MyJobsAPIHandler(mActivity, manageResponseListner());

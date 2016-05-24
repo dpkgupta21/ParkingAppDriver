@@ -39,7 +39,8 @@ public class MyJobsAPIHandler {
     private WebAPIResponseListener mResponseListener;
 
 
-    String authToken = "";
+    private String authToken = "";
+    private String userid = "";
 
     /**
      * @param mActivity
@@ -51,6 +52,7 @@ public class MyJobsAPIHandler {
         this.mActivity = mActivity;
         this.mResponseListener = webAPIResponseListener;
         authToken = SessionManager.getInstance(mActivity).getAuthToken();
+        userid= SessionManager.getInstance(mActivity).getUserId();
         postAPICall();
 
     }
@@ -92,6 +94,9 @@ public class MyJobsAPIHandler {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
                         GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
+                params.put(GlobalKeys.HEADER_KEY_ACCEPT,
+                        GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
+                params.put(GlobalKeys.USERID, userid);
                 params.put(GlobalKeys.AUTHTOKEN, authToken);
                 return params;
             }
@@ -104,7 +109,7 @@ public class MyJobsAPIHandler {
         }
         // set request time-out
         jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
-                AppConstants.ONE_SECOND * 20, 0,
+                AppConstants.ONE_SECOND * 30, 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 
