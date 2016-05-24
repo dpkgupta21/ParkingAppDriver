@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.parking.app.parkingappdriver.application.ParkingAppController;
 import com.parking.app.parkingappdriver.iClasses.GlobalKeys;
+import com.parking.app.parkingappdriver.preferences.SessionManager;
 import com.parking.app.parkingappdriver.utils.AppConstants;
 import com.parking.app.parkingappdriver.utils.AppUtils;
 import com.parking.app.parkingappdriver.webservices.control.WebserviceAPIErrorHandler;
@@ -112,6 +113,7 @@ public class LogoutAPIHandler {
                 params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
                         GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
                 params.put(GlobalKeys.AUTHTOKEN, auth_token);
+                params.put(GlobalKeys.USERID, SessionManager.getInstance(mActivity).getUserId());
                 return params;
             }
 

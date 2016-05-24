@@ -78,6 +78,7 @@ public class CurrentJobsAPIHandler {
                 params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
                         GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
                 params.put(GlobalKeys.AUTHTOKEN, authToken);
+                params.put(GlobalKeys.USERID, SessionManager.getInstance(mActivity).getUserId());
                 return params;
             }
         };

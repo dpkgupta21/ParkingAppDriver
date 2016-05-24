@@ -35,12 +35,14 @@ public class DriverConfigAPIHandler {
     private String TAG = DriverConfigAPIHandler.class.getSimpleName();
     private WebAPIResponseListener responseListener;
     private String authToken = "";
+    private String userId = "";
 
     public DriverConfigAPIHandler(Activity activity, WebAPIResponseListener responseListener) {
         AppUtils.showProgressDialog(mActivity, "Configuring driver...", false);
         this.mActivity = activity;
         this.responseListener = responseListener;
         this.authToken = SessionManager.getInstance(mActivity).getAuthToken();
+        this.userId = SessionManager.getInstance(mActivity).getUserId();
 
         Log.d("AuthToken",this.authToken);
 
@@ -86,6 +88,7 @@ public class DriverConfigAPIHandler {
                     params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
                             GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
                     params.put(GlobalKeys.AUTHTOKEN, authToken);
+                    params.put(GlobalKeys.USERID, SessionManager.getInstance(mActivity).getUserId());
                     return params;
                 }
 
