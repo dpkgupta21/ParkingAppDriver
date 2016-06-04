@@ -56,7 +56,7 @@
                         android:background="@null"
                         android:hint="@string/select_make"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
 
@@ -86,7 +86,7 @@
                         android:inputType="text"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -113,7 +113,7 @@
                         android:background="@null"
                         android:hint="@string/select_color"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <TextView
@@ -155,6 +155,6 @@
             android:layout_height="wrap_content"
             android:text="@string/next"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20sp" />
+            android:textSize="@dimen/text_size_16sp" />
     </RelativeLayout>
 </RelativeLayout>

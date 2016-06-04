@@ -54,7 +54,7 @@
                         android:layout_weight="1"
                         android:text="@string/num_of_order"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <TextView
@@ -71,7 +71,7 @@
                         android:text="1"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -97,7 +97,7 @@
                         android:layout_weight="1"
                         android:text="@string/cost_of_reservation"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <TextView
@@ -113,7 +113,7 @@
                         android:text="$100"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -140,7 +140,7 @@
                         android:layout_weight="1"
                         android:text="@string/cost_of_service"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <TextView
@@ -156,7 +156,7 @@
                         android:text="$60"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -182,7 +182,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="@string/discount"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <EditText
@@ -196,7 +196,7 @@
                         android:maxLength="10"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
 
@@ -204,10 +204,10 @@
                         android:id="@+id/apply_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_15dp"
+                        android:layout_marginLeft="@dimen/margin_20dp"
                         android:text="@string/apply"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <TextView
@@ -249,7 +249,7 @@
                         android:layout_weight="1"
                         android:text="@string/oil_change"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <TextView
@@ -265,7 +265,7 @@
                         android:text="$15"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -291,7 +291,7 @@
                         android:layout_weight="1"
                         android:text="@string/tax"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <TextView
@@ -306,7 +306,7 @@
                         android:text="$2"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -332,7 +332,7 @@
                         android:layout_weight="1"
                         android:text="@string/total_cost"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <TextView
@@ -347,7 +347,7 @@
                         android:text="$176"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -387,7 +387,7 @@
             android:layout_height="wrap_content"
             android:text="@string/confrim_order"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20sp" />
+            android:textSize="@dimen/text_size_16sp" />
     </RelativeLayout>
 
 </RelativeLayout>

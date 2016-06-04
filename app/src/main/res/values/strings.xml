@@ -120,6 +120,7 @@
     <string name="frnt_bmpr">Front Bumper</string>
     <string name="back_bmpr">Back Bumper</string>
     <string name="take_vehicle">Take Vehicle</string>
+    <string name="capture">Capture</string>
     <string name="vehicle_inspection">Vehicle Inspection</string>
     <string name="cust_comnts">Customer Comments</string>
     <string name="cust_signoff_param">Customer Signoff Parameters</string>
@@ -130,6 +131,7 @@
     <string name="no_services">No Services</string>
     <string name="submit">Submit</string>
     <string name="no_image_found">No Image Found</string>
+    <string name="take_a_picture">Take picture</string>
     <string name="delete">Delete</string>
     <string name="network_slow_error">Slow internet connection</string>
     <string name="no_network">Please check your internet connection</string>

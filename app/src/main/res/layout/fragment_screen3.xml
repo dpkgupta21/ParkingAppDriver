@@ -33,7 +33,7 @@
         android:paddingRight="24dp"
         android:text="@string/screen3_title"
         android:textColor="#ffffff"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/screen_desc"

@@ -39,7 +39,8 @@ public class StartJobFragment extends BaseFragment {
 
         switch (v.getId()) {
             case R.id.start_job_button:
-                startActivity(new Intent(getActivity(), CustomerComments.class));
+                startActivity(new Intent(getActivity(), VehicleInspectionScreen.class));
+               // startActivity(new Intent(getActivity(), CustomerComments.class));
                 break;
         }
     }

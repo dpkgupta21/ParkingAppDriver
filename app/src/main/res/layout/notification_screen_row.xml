@@ -193,7 +193,7 @@
                 android:paddingRight="@dimen/margin_40dp"
                 android:text="@string/accept_job"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_20sp" />
+                android:textSize="@dimen/text_size_16sp" />
         </RelativeLayout>
     </RelativeLayout>
 

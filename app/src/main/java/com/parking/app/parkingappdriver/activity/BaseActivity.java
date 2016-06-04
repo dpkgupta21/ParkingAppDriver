@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class BaseActivity extends AppCompatActivity implements OnClickListener,
@@ -187,6 +188,11 @@ public class BaseActivity extends AppCompatActivity implements OnClickListener,
             text = btn.getText().toString().trim();
         }
         return text;
+    }
+
+    public boolean isRadioChecked(int id) {
+        RadioButton rb = (RadioButton) findViewById(id);
+        return rb.isChecked();
     }
 
     public boolean isCheckboxChecked(int id) {

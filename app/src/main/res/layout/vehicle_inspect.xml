@@ -16,19 +16,20 @@
             layout="@layout/toolbar" />
     </LinearLayout>
 
+
     <GridView
         android:id="@+id/snapshortGrid"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/toolbar_ll"
-        android:columnWidth="160dp"
+        android:columnWidth="115dp"
         android:gravity="center"
-        android:horizontalSpacing="5dp"
-        android:numColumns="auto_fit"
-        android:padding="5dp"
+        android:numColumns="3"
+        android:horizontalSpacing="@dimen/margin_2dp"
+        android:padding="@dimen/margin_2dp"
         android:smoothScrollbar="true"
         android:stretchMode="spacingWidthUniform"
-        android:verticalSpacing="5dp"></GridView>
+        android:verticalSpacing="@dimen/margin_5dp"></GridView>
 
     <TextView
         android:id="@+id/noImageFound"
@@ -42,6 +43,22 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <RelativeLayout
+        android:id="@+id/take_vehicle_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:background="@drawable/green_round_corner_btn_selector_btn"
+        android:gravity="center"
+        android:padding="@dimen/margin_10dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/take_a_picture"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16sp" />
+    </RelativeLayout>
 
 </RelativeLayout>

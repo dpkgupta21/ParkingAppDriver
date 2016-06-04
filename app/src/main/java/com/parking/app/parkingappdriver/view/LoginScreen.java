@@ -9,6 +9,8 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.activity.BaseActivity;
+import com.parking.app.parkingappdriver.drivermodel.CustomerComments;
+import com.parking.app.parkingappdriver.drivermodel.VehicleInspectionScreen;
 import com.parking.app.parkingappdriver.iClasses.GlobalKeys;
 import com.parking.app.parkingappdriver.model.DriverConfigDTO;
 import com.parking.app.parkingappdriver.navigationDrawer.DriverNavigationDrawerActivity;
@@ -49,6 +51,8 @@ public class LoginScreen extends BaseActivity {
 
             case R.id.register:
 //                startActivity(new Intent(LoginScreen.this, SignupScreen.class));
+
+                //startActivityForResult(new Intent(mActivity, CapturePicture.class), 1000);
                 break;
             case R.id.login_button:
                 email = getEditTextText(R.id.email_et).trim();
@@ -72,12 +76,12 @@ public class LoginScreen extends BaseActivity {
 
                                         email = mJsonObject.getString(GlobalKeys.EMAIL);
                                         String auth = mJsonObject.getString(GlobalKeys.AUTHTOKEN);
-                                        String userId = mJsonObject.getString(GlobalKeys.USERID);
+                                        String userId = mJsonObject.getString("userId");
                                         AppUtils.showLog(TAG, "email: " + email + " " + auth);
                                         SessionManager.getInstance(mActivity).
                                                 createLoginSession(email, pwd, auth, userId);
 
-                                        callDriverConfigWS();
+                                        //callDriverConfigWS();
 
 //                                        Intent intent = new Intent(LoginScreen.this,
 //                                                DriverNavigationDrawerActivity.class);
@@ -141,5 +145,15 @@ public class LoginScreen extends BaseActivity {
                 AppUtils.showToast(mActivity, "Login Failed");
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000) {
+            if (resultCode == RESULT_OK) {
+                startActivity(new Intent(mActivity, CustomerComments.class));
+            }
+        }
     }
 }

@@ -46,11 +46,11 @@
                         android:id="@+id/view_all_pics"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/margin_20dp"
                         android:layout_alignParentLeft="true"
-                        android:padding="@dimen/margin_10dp"
                         android:layout_marginLeft="@dimen/margin_10dp"
-                        android:text="View All Pics"
+                        android:layout_marginRight="@dimen/margin_20dp"
+                        android:padding="@dimen/margin_10dp"
+                        android:text="Vehicle parts"
                         android:textColor="@color/light_green_darken"
                         android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
@@ -105,17 +105,20 @@
 
 
                     <RadioGroup
+                        android:id="@+id/rf_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/rf_clear"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/margin_50dp" />
 
                         <RadioButton
+                            android:id="@+id/rf_dent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right" />
@@ -154,17 +157,20 @@
 
 
                     <RadioGroup
+                        android:id="@+id/lf_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/lf_clear"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/margin_50dp" />
 
                         <RadioButton
+                            android:id="@+id/lf_dent"
                             android:layout_width="wrap_content"
 
                             android:layout_height="wrap_content" />
@@ -204,17 +210,20 @@
 
 
                     <RadioGroup
+                        android:id="@+id/rb_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/rb_clear"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/margin_50dp" />
 
                         <RadioButton
+                            android:id="@+id/rb_dent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </RadioGroup>
@@ -251,17 +260,20 @@
 
 
                     <RadioGroup
+                        android:id="@+id/lb_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/lb_clear"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/margin_50dp" />
 
                         <RadioButton
+                            android:id="@+id/lb_dent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </RadioGroup>
@@ -300,17 +312,20 @@
 
 
                     <RadioGroup
+                        android:id="@+id/fb_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/fb_clear"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/margin_50dp" />
 
                         <RadioButton
+                            android:id="@+id/fb_dent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </RadioGroup>
@@ -348,17 +363,20 @@
 
 
                     <RadioGroup
+                        android:id="@+id/bb_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/bb_clear"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/margin_50dp" />
 
                         <RadioButton
+                            android:id="@+id/bb_dent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </RadioGroup>
@@ -372,38 +390,38 @@
                     android:layout_marginRight="@dimen/margin_20dp"
                     android:background="@color/grey" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
 
 
-                    <TextView
-                        android:id="@+id/customer_comments"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_10dp"
-                        android:layout_marginRight="@dimen/margin_10dp"
-                        android:padding="@dimen/margin_10dp"
-                        android:text="@string/cust_comnts"
-                        android:textColor="@color/light_green_darken"
-                        android:textSize="@dimen/text_size_16sp"
-                        android:textStyle="normal" />
+                <!--<TextView-->
+                <!--android:id="@+id/customer_comments"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/margin_10dp"-->
+                <!--android:layout_marginRight="@dimen/margin_10dp"-->
+                <!--android:padding="@dimen/margin_10dp"-->
+                <!--android:text="@string/cust_comnts"-->
+                <!--android:textColor="@color/light_green_darken"-->
+                <!--android:textSize="@dimen/text_size_16sp"-->
+                <!--android:textStyle="normal" />-->
 
 
-                    <TextView
-                        android:id="@+id/customer_comments_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/customer_comments"
-                        android:layout_marginLeft="@dimen/margin_10dp"
-                        android:paddingLeft="@dimen/margin_10dp"
-                        android:paddingRight="@dimen/margin_20dp"
-                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16sp"
-                        android:textStyle="normal" />
+                <!--<TextView-->
+                <!--android:id="@+id/customer_comments_tv"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/customer_comments"-->
+                <!--android:layout_marginLeft="@dimen/margin_10dp"-->
+                <!--android:paddingLeft="@dimen/margin_10dp"-->
+                <!--android:paddingRight="@dimen/margin_20dp"-->
+                <!--android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="@dimen/text_size_16sp"-->
+                <!--android:textStyle="normal" />-->
 
-                </RelativeLayout>
+                <!--</RelativeLayout>-->
 
             </LinearLayout>
 
@@ -427,9 +445,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/take_vehicle"
+            android:text="@string/capture"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20sp" />
+            android:textSize="@dimen/text_size_16sp" />
     </RelativeLayout>
 
 </RelativeLayout>

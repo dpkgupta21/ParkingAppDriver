@@ -47,7 +47,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="@string/pick_up"
                         android:textColor="@color/light_black"
-                        android:textSize="@dimen/text_size_18sp" />
+                        android:textSize="@dimen/text_size_16sp" />
 
                     <TextView
                         android:id="@+id/drop"
@@ -56,7 +56,7 @@
                         android:layout_alignParentRight="true"
                         android:text="@string/drop_off"
                         android:textColor="@color/light_black"
-                        android:textSize="@dimen/text_size_18sp" />
+                        android:textSize="@dimen/text_size_16sp" />
 
                     <TextView
                         android:id="@+id/pick_tv"
@@ -69,7 +69,7 @@
                         android:drawablePadding="@dimen/margin_10dp"
                         android:text="10/20/2015"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp" />
+                        android:textSize="@dimen/text_size_16sp" />
 
                     <TextView
                         android:id="@+id/drop_tv"
@@ -82,7 +82,7 @@
                         android:drawablePadding="@dimen/margin_10dp"
                         android:text="10/30/2015"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp" />
+                        android:textSize="@dimen/text_size_16sp" />
                 </RelativeLayout>
 
                 <View
@@ -104,7 +104,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="@string/vehicle_details"
                         android:textColor="@color/light_black"
-                        android:textSize="@dimen/text_size_22sp"
+                        android:textSize="@dimen/text_size_18sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -130,7 +130,7 @@
                         android:layout_weight="1"
                         android:text="@string/make_year"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <EditText
@@ -142,11 +142,10 @@
                         android:background="@null"
                         android:gravity="right"
                         android:hint="@string/make_year"
-
                         android:inputType="text"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -172,7 +171,7 @@
                         android:layout_weight="1"
                         android:text="@string/reservation_number"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <EditText
@@ -187,7 +186,7 @@
                         android:inputType="text"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -225,7 +224,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="@string/service"
                         android:textColor="@color/light_black"
-                        android:textSize="@dimen/text_size_22sp"
+                        android:textSize="@dimen/text_size_18sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -245,7 +244,7 @@
                         android:gravity="right"
                         android:text="@string/edit"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </RelativeLayout>
 
@@ -283,7 +282,7 @@
             android:layout_height="wrap_content"
             android:text="@string/save"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20sp" />
+            android:textSize="@dimen/text_size_16sp" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/place_order"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_20sp" />
+                android:textSize="@dimen/text_size_16sp" />
         </RelativeLayout>
     </RelativeLayout>
 

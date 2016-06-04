@@ -37,20 +37,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:padding="@dimen/margin_20dp">
 
                 <EditText
+                    android:id="@+id/comment_edt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="@string/cust_comnts"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
+                    android:maxLines="5"
+                    android:singleLine="false"
                     android:textColor="@color/black"
                     android:textCursorDrawable="@null"
-                    android:textSize="@dimen/text_size_18sp"
+                    android:textSize="@dimen/text_size_16sp"
                     android:textStyle="normal" />
 
 
@@ -66,20 +68,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:padding="@dimen/margin_20dp">
 
                 <EditText
+                    android:id="@+id/customer_signoff_edt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@null"
                     android:hint="@string/cust_signoff_param"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
+                    android:maxLines="5"
+                    android:singleLine="false"
                     android:textColor="@color/black"
                     android:textCursorDrawable="@null"
-                    android:textSize="@dimen/text_size_18sp"
+                    android:textSize="@dimen/text_size_16sp"
                     android:textStyle="normal" />
 
 
@@ -102,50 +105,12 @@
         android:layout_alignParentBottom="true">
 
 
-        <LinearLayout
-            android:id="@+id/add_services_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="@dimen/margin_20dp"
-            android:weightSum="2">
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:hint="@string/add_more_fields"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:textCursorDrawable="@null"
-                android:textSize="@dimen/text_size_18sp"
-                android:textStyle="normal" />
-
-            <RelativeLayout
-                android:id="@+id/plus_button"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_add_fields" />
-            </RelativeLayout>
-
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/horizontal_line_height"
-            android:layout_below="@+id/add_services_ll"
-            android:background="@color/grey" />
+        <!--<View-->
+            <!--android:id="@+id/view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/horizontal_line_height"-->
+            <!--android:layout_below="@+id/add_services_ll"-->
+            <!--android:background="@color/grey" />-->
 
         <RelativeLayout
             android:id="@+id/take_vehicle_button"
@@ -165,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/take_vehicle"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_20sp" />
+                android:textSize="@dimen/text_size_16sp" />
         </RelativeLayout>
     </RelativeLayout>
 

@@ -36,7 +36,7 @@
                 android:layout_alignParentLeft="true"
                 android:text="@string/card_number"
                 android:textColor="@color/light_black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
 
             <EditText
@@ -50,7 +50,7 @@
                 android:inputType="text"
                 android:textColor="@color/black"
                 android:textCursorDrawable="@null"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
         </LinearLayout>
 
@@ -75,7 +75,7 @@
                 android:layout_alignParentLeft="true"
                 android:text="@string/card_holder_name"
                 android:textColor="@color/light_black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
 
             <EditText
@@ -89,7 +89,7 @@
                 android:inputType="text"
                 android:textColor="@color/black"
                 android:textCursorDrawable="@null"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
         </LinearLayout>
 
@@ -114,7 +114,7 @@
                 android:layout_alignParentLeft="true"
                 android:text="@string/expiry"
                 android:textColor="@color/light_black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
 
             <LinearLayout
@@ -166,7 +166,7 @@
                 android:layout_alignParentLeft="true"
                 android:text="@string/cvv"
                 android:textColor="@color/light_black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
 
             <EditText
@@ -180,7 +180,7 @@
                 android:inputType="text"
                 android:textColor="@color/black"
                 android:textCursorDrawable="@null"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
         </LinearLayout>
 

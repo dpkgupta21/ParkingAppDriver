@@ -26,7 +26,7 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white_faded"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/text_size_20sp"
+            android:textSize="@dimen/text_size_16sp"
 
             android:textStyle="normal" />
 
@@ -52,7 +52,7 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white_faded"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/text_size_20sp"
+            android:textSize="@dimen/text_size_16sp"
             android:textStyle="normal" />
 
 
@@ -67,7 +67,7 @@
             android:padding="@dimen/margin_10dp"
             android:text="@string/login"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20sp" />
+            android:textSize="@dimen/text_size_16sp" />
 
     </RelativeLayout>
 
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:text="@string/no_acnt"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20sp" />
+            android:textSize="@dimen/text_size_16sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -95,7 +95,7 @@
             android:layout_toRightOf="@+id/no_acnt_tv"
             android:text="@string/register"
             android:textColor="@color/light_green_darken"
-            android:textSize="@dimen/text_size_20sp" />
+            android:textSize="@dimen/text_size_16sp" />
     </RelativeLayout>
 
 </RelativeLayout>

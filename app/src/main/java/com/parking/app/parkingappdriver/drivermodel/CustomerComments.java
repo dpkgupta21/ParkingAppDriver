@@ -1,6 +1,5 @@
 package com.parking.app.parkingappdriver.drivermodel;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -8,9 +7,12 @@ import android.view.View;
 
 import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.activity.BaseActivity;
+import com.parking.app.parkingappdriver.model.VehicleInspectDTO;
 
 
 public class CustomerComments extends BaseActivity {
+
+    private VehicleInspectDTO inspectDTO;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,8 @@ public class CustomerComments extends BaseActivity {
         getSupportActionBar().setTitle(getResources().getString(R.string.cust_comnts));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mToolbar.setNavigationIcon(R.drawable.back_button);
+
+        inspectDTO = (VehicleInspectDTO) getIntent().getSerializableExtra("InspectDTO");
     }
 
     @Override
@@ -55,7 +59,8 @@ public class CustomerComments extends BaseActivity {
 
         switch (v.getId()) {
             case R.id.take_vehicle_button:
-                startActivity(new Intent(this, VehicleInspectionScreen.class));
+                inspectDTO.setComments(getEditTextText(R.id.comment_edt));
+                inspectDTO.setCustomersignoff(getEditTextText(R.id.customer_signoff_edt));
                 break;
         }
     }

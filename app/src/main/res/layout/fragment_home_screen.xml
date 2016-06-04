@@ -31,7 +31,7 @@
                     android:padding="@dimen/margin_20dp"
                     android:text="@string/drop_off"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_22sp" />
+                    android:textSize="@dimen/text_size_18sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -56,7 +56,7 @@
                             android:drawablePadding="@dimen/margin_10dp"
                             android:text="@string/drop_date"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_18sp" />
+                            android:textSize="@dimen/text_size_16sp" />
 
                         <View
                             android:id="@+id/drop_date_view"
@@ -74,7 +74,7 @@
                             android:layout_marginTop="@dimen/margin_10dp"
                             android:text="10 /27 /2015"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_22sp"
+                            android:textSize="@dimen/text_size_18sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
 
@@ -102,7 +102,7 @@
                             android:drawablePadding="@dimen/margin_10dp"
                             android:text="@string/drop_time"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_18sp" />
+                            android:textSize="@dimen/text_size_16sp" />
 
                         <View
                             android:id="@+id/drop_time_view"
@@ -121,7 +121,7 @@
                             android:layout_marginTop="@dimen/margin_10dp"
                             android:text="12:30"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_22sp"
+                            android:textSize="@dimen/text_size_18sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -133,7 +133,7 @@
                             android:layout_toRightOf="@+id/drop_time_tv"
                             android:text="PM"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_16sp"
+                            android:textSize="@dimen/text_size_14sp"
                             android:textStyle="normal" />
                     </RelativeLayout>
                 </LinearLayout>
@@ -156,7 +156,7 @@
                     android:padding="@dimen/margin_20dp"
                     android:text="@string/pick_up"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_22sp" />
+                    android:textSize="@dimen/text_size_18sp" />
 
                 <LinearLayout
                     android:id="@+id/pick_ll"
@@ -183,7 +183,7 @@
                             android:drawablePadding="@dimen/margin_10dp"
                             android:text="@string/pick_date"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_18sp" />
+                            android:textSize="@dimen/text_size_16sp" />
 
                         <View
                             android:id="@+id/pick_date_view"
@@ -202,7 +202,7 @@
                             android:text="10 /27 /2015"
                             android:textColor="@color/white"
 
-                            android:textSize="@dimen/text_size_22sp"
+                            android:textSize="@dimen/text_size_18sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
 
@@ -229,7 +229,7 @@
                             android:drawablePadding="@dimen/margin_10dp"
                             android:text="@string/pick_time"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_18sp" />
+                            android:textSize="@dimen/text_size_16sp" />
 
                         <View
                             android:id="@+id/pick_time_view"
@@ -248,7 +248,7 @@
                             android:text="12:30"
                             android:textColor="@color/white"
 
-                            android:textSize="@dimen/text_size_22sp"
+                            android:textSize="@dimen/text_size_18sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -260,7 +260,7 @@
                             android:layout_toRightOf="@+id/pick_time_tv"
                             android:text="PM"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_16sp"
+                            android:textSize="@dimen/text_size_14sp"
                             android:textStyle="normal" />
                     </RelativeLayout>
 
@@ -291,6 +291,6 @@
             android:layout_height="wrap_content"
             android:text="@string/book_now"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20sp" />
+            android:textSize="@dimen/text_size_16sp" />
     </RelativeLayout>
 </RelativeLayout>

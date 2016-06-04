@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".usermodel.home.AddServicesScreen">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/toolbar_ll"
@@ -42,7 +40,7 @@
                 android:layout_weight="1"
                 android:text="Car Wash"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
 
             <TextView
@@ -54,7 +52,7 @@
                 android:gravity="right"
                 android:text="$20"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
 
         </LinearLayout>
@@ -82,7 +80,7 @@
                 android:layout_weight="1"
                 android:text="Oil Change"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
 
             <TextView
@@ -94,7 +92,7 @@
                 android:gravity="right"
                 android:text="$20"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
 
         </LinearLayout>
@@ -122,7 +120,7 @@
                 android:layout_weight="1"
                 android:text="Re-Fill Petrol"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
 
             <TextView
@@ -134,7 +132,7 @@
                 android:gravity="right"
                 android:text="$20"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
         </LinearLayout>
 
@@ -166,6 +164,6 @@
             android:layout_height="wrap_content"
             android:text="@string/submit"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20sp" />
+            android:textSize="@dimen/text_size_16sp" />
     </RelativeLayout>
 </RelativeLayout>

@@ -37,7 +37,7 @@
                         android:singleLine="true"
                         android:text="@string/pick_up"
                         android:textColor="@color/light_black"
-                        android:textSize="@dimen/text_size_18sp" />
+                        android:textSize="@dimen/text_size_16sp" />
 
                     <TextView
                         android:id="@+id/drop"
@@ -48,7 +48,7 @@
                         android:singleLine="true"
                         android:text="@string/drop_off"
                         android:textColor="@color/light_black"
-                        android:textSize="@dimen/text_size_18sp" />
+                        android:textSize="@dimen/text_size_16sp" />
 
                     <TextView
                         android:id="@+id/pick_tv"
@@ -63,7 +63,7 @@
                         android:text="10/20/2015"
 
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp" />
+                        android:textSize="@dimen/text_size_16sp" />
 
                     <TextView
                         android:id="@+id/drop_tv"
@@ -78,7 +78,7 @@
                         android:singleLine="true"
                         android:text="10/30/2015"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp" />
+                        android:textSize="@dimen/text_size_16sp" />
                 </RelativeLayout>
 
                 <View
@@ -102,7 +102,7 @@
 
                         android:text="@string/customer_details"
                         android:textColor="@color/light_black"
-                        android:textSize="@dimen/text_size_22sp"
+                        android:textSize="@dimen/text_size_18sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -130,7 +130,7 @@
                         android:text="@string/name"
                         android:textColor="@color/black"
 
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <EditText
@@ -147,7 +147,7 @@
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -174,7 +174,7 @@
                         android:text="@string/phone_no"
                         android:textColor="@color/black"
 
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <EditText
@@ -191,7 +191,7 @@
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -218,7 +218,7 @@
                         android:singleLine="true"
                         android:text="@string/make_year"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <EditText
@@ -234,7 +234,7 @@
 
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -261,7 +261,7 @@
                         android:text="@string/make_model"
                         android:textColor="@color/black"
 
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <EditText
@@ -277,7 +277,7 @@
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -304,7 +304,7 @@
 
                         android:text="@string/color"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <EditText
@@ -320,7 +320,7 @@
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -347,7 +347,7 @@
 
                         android:text="@string/reservation_number"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <EditText
@@ -363,7 +363,7 @@
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -390,7 +390,7 @@
                         android:text="@string/vehicle_num_plate"
                         android:textColor="@color/black"
 
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
 
                     <EditText
@@ -405,7 +405,7 @@
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textCursorDrawable="@null"
-                        android:textSize="@dimen/text_size_18sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -439,7 +439,7 @@
             android:layout_height="wrap_content"
             android:text="@string/start_job"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20sp" />
+            android:textSize="@dimen/text_size_16sp" />
     </RelativeLayout>
 
 </RelativeLayout>

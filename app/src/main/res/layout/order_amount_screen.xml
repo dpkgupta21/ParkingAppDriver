@@ -37,7 +37,7 @@
                 android:layout_alignParentLeft="true"
                 android:text="Oct 02 To Oct 06,2015"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
 
             <RelativeLayout
@@ -59,7 +59,7 @@
                     android:gravity="center"
                     android:text="$51"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_20sp"
+                    android:textSize="@dimen/text_size_16sp"
                     android:textStyle="normal" />
 
             </RelativeLayout>
@@ -70,7 +70,7 @@
                 android:gravity="right"
                 android:text="$40"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/text_size_20sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
         </LinearLayout>
 
@@ -93,7 +93,7 @@
                 android:layout_alignParentLeft="true"
                 android:text="Oct 15 To Oct 20,2015"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
 
             <RelativeLayout
@@ -115,7 +115,7 @@
                     android:gravity="center"
                     android:text="$65"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_20sp"
+                    android:textSize="@dimen/text_size_16sp"
                     android:textStyle="normal" />
 
             </RelativeLayout>
@@ -126,7 +126,7 @@
                 android:gravity="right"
                 android:text="$55"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/text_size_20sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
         </LinearLayout>
 
@@ -154,6 +154,6 @@
             android:layout_height="wrap_content"
             android:text="@string/make_payment"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20sp" />
+            android:textSize="@dimen/text_size_16sp" />
     </RelativeLayout>
 </RelativeLayout>

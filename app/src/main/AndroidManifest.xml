@@ -48,6 +48,7 @@
         <activity android:name=".navigationDrawer.DriverNavigationDrawerActivity" />
         <activity android:name=".drivermodel.VehicleInspectionScreen" />
         <activity android:name=".drivermodel.CustomerComments" />
+        <activity android:name=".drivermodel.VehicleInspect"/>
 
     </application>
 

@@ -40,7 +40,7 @@
                 android:singleLine="true"
                 android:text="0000 000 000 "
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_10sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="normal" />
         </LinearLayout>
 
@@ -170,7 +170,8 @@
             android:background="@drawable/green_round_corner_btn_selector_btn"
             android:padding="@dimen/margin_10dp"
             android:text="@string/confirm_job"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16sp" />
 
         <RelativeLayout
             android:id="@+id/current_job_buttons_rl"
@@ -193,7 +194,8 @@
                     android:background="@drawable/green_round_corner_btn_selector_btn"
                     android:text="Start job"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_16sp" />
 
                 <Button
                     android:id="@+id/btn_release_job"
@@ -205,7 +207,8 @@
                     android:background="@drawable/green_round_corner_btn_selector_btn"
                     android:text="Release job"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_16sp" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -224,7 +227,8 @@
                 android:background="@drawable/green_round_corner_btn_selector_btn"
                 android:text="End job"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16sp" />
 
         </RelativeLayout>
 

@@ -60,10 +60,13 @@ public class CapturePicture extends AppCompatActivity implements View.OnClickLis
 
     private void initViews() {
 
-
-        if (getIntent().getExtras().getString("imagepath") != null) {
-            filename = getIntent().getExtras().getString("imagepath");
-            Log.d(TAG, filename + " filename");
+        if (getIntent().getExtras() != null) {
+            if (getIntent().getExtras().getString("imagepath") != null) {
+                filename = getIntent().getExtras().getString("imagepath");
+                Log.d(TAG, filename + " filename");
+            }
+        } else {
+            filename = System.currentTimeMillis() + "";
         }
 
 
