@@ -11,10 +11,12 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.currentjobs.CurrentJobsFragment;
+import com.parking.app.parkingappdriver.drivermodel.VehicleInspectionScreen;
 import com.parking.app.parkingappdriver.model.LoadJobsDTO;
 import com.parking.app.parkingappdriver.navigationDrawer.DriverNavigationDrawerActivity;
 import com.parking.app.parkingappdriver.webservices.handler.EndJobAPIHandler;
@@ -127,7 +129,7 @@ public class MyJobsAdapter extends BaseAdapter {
         endBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new EndJobAPIHandler(mActivity, jobsDTO, manageAPIHandler());
+                new EndJobAPIHandler(mActivity, jobsDTO, manageAPIHandler("end job"));
             }
         });
 
@@ -144,14 +146,14 @@ public class MyJobsAdapter extends BaseAdapter {
                         relativeLayout.setVisibility(View.GONE);
                         endButtonLayout.setVisibility(View.VISIBLE);
 
-                        new StartJobAPIHandler(mActivity, manageAPIHandler(), jobsDTO);
+                        new StartJobAPIHandler(mActivity, manageAPIHandler("start job"), jobsDTO);
                     }
                 });
 
                 holder.releaseBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        new ReleaseAPIHandler(mActivity, jobsDTO, manageAPIHandler());
+                        new ReleaseAPIHandler(mActivity, jobsDTO, manageAPIHandler("release job"));
                     }
                 });
             } else if (jobsDTO.getJob_Status().equalsIgnoreCase("INPROGRESS")) {
@@ -179,18 +181,23 @@ public class MyJobsAdapter extends BaseAdapter {
     }
 
 
-    private WebAPIResponseListener manageAPIHandler() {
+    private WebAPIResponseListener manageAPIHandler(final String jobOp) {
         WebAPIResponseListener responseListener = new WebAPIResponseListener() {
             @Override
             public void onSuccessOfResponse(Object... arguments) {
-                Intent intent = new Intent(mActivity, DriverNavigationDrawerActivity.class);
-                intent.putExtra("fragmentNumber", 1);
-                mActivity.startActivity(intent);
+                if (jobOp.equalsIgnoreCase("start job")) {
+                    mActivity.startActivity(new Intent(mActivity, VehicleInspectionScreen.class));
+                } else {
+                    Intent intent = new Intent(mActivity, DriverNavigationDrawerActivity.class);
+                    intent.putExtra("fragmentNumber", 1);
+                    mActivity.startActivity(intent);
+                }
             }
 
             @Override
             public void onFailOfResponse(Object... arguments) {
                 VolleyError error = (VolleyError) arguments[0];
+                Toast.makeText(mActivity, "Operation failed.", Toast.LENGTH_SHORT).show();
                 Log.i(MyJobsAdapter.class.getSimpleName(), "Job operation error " + error.toString());
             }
         };
