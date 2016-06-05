@@ -18,7 +18,7 @@ public final class CommonUtilities {
      */
     public static final String TAG = "PARKING GCM";
 
-    public static final String DISPLAY_MESSAGE_ACTION = "app.parking.com.parkingapp.DISPLAY_MESSAGE";
+    public static final String DISPLAY_MESSAGE_ACTION = "com.parking.app.parkingappdriver";
 
     public static final String EXTRA_MESSAGE = "hello";
 

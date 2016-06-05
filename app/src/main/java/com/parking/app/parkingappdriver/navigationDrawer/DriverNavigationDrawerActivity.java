@@ -239,8 +239,7 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
         // Get GCM registration id
         final String regId = GCMRegistrar
                 .getRegistrationId(mActivity);
-        SessionManager.getInstance(mActivity)
-                .setPushNotificationID(regId);
+        SessionManager.getInstance(mActivity).setPushNotificationID(regId);
         Log.i("info", "RegId :" + regId);
         // Check if regid already presents
         if (regId.equals("")) {

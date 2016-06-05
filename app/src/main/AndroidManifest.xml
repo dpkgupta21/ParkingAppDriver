@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.parking.app.parkingappdriver">
 
@@ -7,7 +8,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature android:name="android.hardware.camera" />
-
 
 
     <!-- For push Notification Permission -->
@@ -20,7 +20,7 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.parking.app.parkingappdriver.permission.C2D_MESSAGE" />
-
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
 
     <application
@@ -64,7 +64,7 @@
         <activity android:name=".navigationDrawer.DriverNavigationDrawerActivity" />
         <activity android:name=".drivermodel.VehicleInspectionScreen" />
         <activity android:name=".drivermodel.CustomerComments" />
-        <activity android:name=".drivermodel.VehicleInspect"/>
+        <activity android:name=".drivermodel.VehicleInspect" />
 
         <!-- Start Push Notification -->
         <receiver
