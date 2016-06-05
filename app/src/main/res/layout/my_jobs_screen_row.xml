@@ -167,7 +167,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_four"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/green_round_corner_btn_selector_btn"
+            android:background="@color/colorPrimary"
             android:padding="@dimen/margin_10dp"
             android:text="@string/confirm_job"
             android:textColor="@color/white"

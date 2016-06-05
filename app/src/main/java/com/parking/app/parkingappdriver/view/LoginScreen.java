@@ -15,7 +15,6 @@ import com.parking.app.parkingappdriver.model.DriverConfigDTO;
 import com.parking.app.parkingappdriver.navigationDrawer.DriverNavigationDrawerActivity;
 import com.parking.app.parkingappdriver.preferences.SessionManager;
 import com.parking.app.parkingappdriver.utils.AppUtils;
-import com.parking.app.parkingappdriver.webservices.handler.AddTokenPushAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.DriverDetailsAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.LoginAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
@@ -50,7 +49,7 @@ public class LoginScreen extends BaseActivity {
         switch (v.getId()) {
 
             case R.id.register:
-//                startActivity(new Intent(LoginScreen.this, SignupScreen.class));
+               //startActivity(new Intent(LoginScreen.this, VehicleInspectionScreen.class));
 
                 //startActivityForResult(new Intent(mActivity, CapturePicture.class), 1000);
                 break;
@@ -75,6 +74,7 @@ public class LoginScreen extends BaseActivity {
                                             && mJsonObject.has(GlobalKeys.EMAIL)) {
 
                                         email = mJsonObject.getString(GlobalKeys.EMAIL);
+                                        String name = mJsonObject.getString(GlobalKeys.NAME);
                                         String auth = mJsonObject.getString(GlobalKeys.AUTHTOKEN);
                                         String userId = mJsonObject.getString("userId");
                                         AppUtils.showLog(TAG, "email: " + email + " " + auth);
@@ -82,7 +82,7 @@ public class LoginScreen extends BaseActivity {
                                                 createLoginSession(email, pwd, auth, userId);
 
                                         //callAddTokenWS();
-                                        callDriverConfigWS();
+                                        callDriverConfigWS(name);
 
 //                                        Intent intent = new Intent(LoginScreen.this,
 //                                                DriverNavigationDrawerActivity.class);
@@ -119,7 +119,7 @@ public class LoginScreen extends BaseActivity {
 
 
 
-    private void callDriverConfigWS() {
+    private void callDriverConfigWS(final String name) {
         new DriverDetailsAPIHandler(mActivity, new WebAPIResponseListener() {
             @Override
             public void onSuccessOfResponse(Object... arguments) {
@@ -135,6 +135,7 @@ public class LoginScreen extends BaseActivity {
                                 .setValletNumber(configDTO.getEmployeeNumber());
 
                         Intent intent = new Intent(mActivity, DriverNavigationDrawerActivity.class);
+                        intent.putExtra("userName", name);
                         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();
                     }

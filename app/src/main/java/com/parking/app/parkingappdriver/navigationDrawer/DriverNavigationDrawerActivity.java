@@ -20,6 +20,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.TextView;
 
 import com.google.android.gcm.GCMRegistrar;
 import com.parking.app.parkingappdriver.R;
@@ -35,6 +37,8 @@ import com.parking.app.parkingappdriver.view.UserProfileScreen;
 import com.parking.app.parkingappdriver.webservices.handler.AddTokenPushAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.LogoutAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
+
+import java.sql.Driver;
 
 import static com.parking.app.parkingappdriver.CommonUtilities.DISPLAY_MESSAGE_ACTION;
 import static com.parking.app.parkingappdriver.CommonUtilities.EXTRA_MESSAGE;
@@ -101,6 +105,10 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(mActivity, mDrawerLayout,
                 mToolbar, R.string.drawer_open, R.string.drawer_close);
         headerView = mNavigationView.inflateHeaderView(R.layout.drawer_header);
+        TextView userName = (TextView) headerView.findViewById(R.id.txt_name);
+        TextView userEmail = (TextView) headerView.findViewById(R.id.txt_age_city);
+        userName.setText(mActivity.getIntent().getStringExtra("userName"));
+        userEmail.setText(SessionManager.getInstance(mActivity).getEmail());
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 
