@@ -108,6 +108,8 @@ public class MyJobsAdapter extends BaseAdapter {
                     .findViewById(R.id.current_job_buttons_rl);
             holder.endButtonLayout = (RelativeLayout) convertView
                     .findViewById(R.id.current_job_end_button_rl);
+            // TODO Vehicle inspection button remove
+            holder.vehicleInspectionBtn = (Button) convertView.findViewById(R.id.btn_vehicle_inspection_job);
 
             convertView.setTag(holder);
 
@@ -138,6 +140,8 @@ public class MyJobsAdapter extends BaseAdapter {
             if (jobsDTO.getJob_Status().equalsIgnoreCase("lock")) {
                 holder.endButtonLayout.setVisibility(View.GONE);
                 holder.currentjobbuttonLayout.setVisibility(View.VISIBLE);
+                // TODO Vehicle inspection button remove
+                holder.vehicleInspectionBtn.setVisibility(View.VISIBLE);
                 final RelativeLayout relativeLayout = holder.currentjobbuttonLayout;
                 final RelativeLayout endButtonLayout = holder.endButtonLayout;
                 holder.startBtn.setOnClickListener(new View.OnClickListener() {
@@ -146,6 +150,15 @@ public class MyJobsAdapter extends BaseAdapter {
 
                         new StartJobAPIHandler(mActivity,
                                 manageStartJobAPIHandler(relativeLayout, endButtonLayout), jobsDTO);
+                    }
+                });
+
+                holder.vehicleInspectionBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(mActivity, VehicleInspectionScreen.class);
+                        mActivity.startActivity(intent);
                     }
                 });
 
@@ -235,5 +248,7 @@ public class MyJobsAdapter extends BaseAdapter {
         TextView model;
         TextView customer;
         Button startBtn, releaseBtn;
+        // TODO Vehicle inspection button remove
+        Button vehicleInspectionBtn;
     }
 }

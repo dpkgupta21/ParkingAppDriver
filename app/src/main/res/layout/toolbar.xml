@@ -15,7 +15,7 @@
         android:layout_gravity="center"
         android:text="fhghghgh"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_size_22sp"
+        android:textSize="@dimen/text_size_20sp"
         android:textStyle="bold"
         android:visibility="gone" />
 
@@ -32,10 +32,9 @@
             android:id="@+id/toolbar_right_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="Skip"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_18sp"
+            android:textSize="@dimen/text_size_15sp"
             android:textStyle="normal"
             android:visibility="visible" />
     </RelativeLayout>

@@ -59,13 +59,11 @@ public class VehicleInspect extends BaseActivity {
         singleClickOnGridItem();
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
 
     }
-
 
     /**
      * Single Click on grid Item for showing full screen mode
@@ -96,7 +94,7 @@ public class VehicleInspect extends BaseActivity {
         setClick(R.id.take_vehicle_button);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Gallery");
+        getSupportActionBar().setTitle("Vehicle Inspection");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mToolbar.setNavigationIcon(R.drawable.back_button);
 

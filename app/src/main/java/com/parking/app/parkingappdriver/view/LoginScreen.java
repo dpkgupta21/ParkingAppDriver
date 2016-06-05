@@ -41,6 +41,7 @@ public class LoginScreen extends BaseActivity {
 
     private void assignClick() {
         setClick(R.id.login_button);
+        setClick(R.id.txt_forget_pwd);
     }
 
     @Override
@@ -48,6 +49,9 @@ public class LoginScreen extends BaseActivity {
 
         switch (v.getId()) {
 
+            case R.id.txt_forget_pwd:
+                startActivity(new Intent(LoginScreen.this, ForgetPasswordScreen.class));
+                break;
 
             case R.id.login_button:
                 email = getEditTextText(R.id.email_et).trim();
@@ -75,10 +79,10 @@ public class LoginScreen extends BaseActivity {
                                         String userId = mJsonObject.getString("userId");
                                         AppUtils.showLog(TAG, "email: " + email + " " + auth);
                                         SessionManager.getInstance(mActivity).
-                                                createLoginSession(email, pwd, auth, userId);
+                                                createLoginSession(email, pwd, auth, name, userId);
 
                                         //callAddTokenWS();
-                                        callDriverConfigWS(name);
+                                        callDriverConfigWS();
 
 //                                        Intent intent = new Intent(LoginScreen.this,
 //                                                DriverNavigationDrawerActivity.class);
@@ -115,7 +119,7 @@ public class LoginScreen extends BaseActivity {
 
 
 
-    private void callDriverConfigWS(final String name) {
+    private void callDriverConfigWS() {
         new DriverDetailsAPIHandler(mActivity, new WebAPIResponseListener() {
             @Override
             public void onSuccessOfResponse(Object... arguments) {
@@ -131,7 +135,6 @@ public class LoginScreen extends BaseActivity {
                                 .setValletNumber(configDTO.getEmployeeNumber());
 
                         Intent intent = new Intent(mActivity, DriverNavigationDrawerActivity.class);
-                        intent.putExtra("userName", name);
                         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();
                     }

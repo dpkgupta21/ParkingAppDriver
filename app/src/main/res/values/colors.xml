@@ -24,9 +24,10 @@
 
     <color name="red_dark">#f24c36</color>
     <color name="red_light">#f47b6b</color>
-
+    <color name="payment_dialog_bg">#7dbaab</color>
     <color name="orange_dark">#f28029</color>
     <color name="orange_light">#f29854</color>
+    <color name="search_btn_color">#4F8176</color>
 
     <string-array name="color_bg">
         <item>#000000</item>

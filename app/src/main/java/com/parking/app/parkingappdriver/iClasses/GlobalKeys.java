@@ -10,7 +10,7 @@ public interface GlobalKeys {
     String LOGIN_API = "users/login";
     String LOGOUT_API = "users/logout";
     String SIGNUP_API = "users/signup";
-
+    String FORGOT_PASSWORD_API="users/forgetpassword";
     String HEADER_KEY_ACCEPT = "Accept";
     String HEADER_KEY_CONTENT_TYPE = "Content-Type";
     String HEADER_VALUE_CONTENT_TYPE = "application/json";

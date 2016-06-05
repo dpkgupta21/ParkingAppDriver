@@ -2,8 +2,10 @@ package com.parking.app.parkingappdriver.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,6 +13,9 @@ import android.net.Uri;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.math.BigInteger;
@@ -557,4 +562,77 @@ public class AppUtils {
         return sdf.format(date);
 
     }
+
+    public static AlertDialog showDialog(Context ctx, String title, String msg) {
+
+        return showDialog(ctx, title, msg,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.dismiss();
+                    }
+                });
+
+    }
+
+
+    public static AlertDialog showDialog(Context ctx, String title, String msg,
+                                         DialogInterface.OnClickListener listener) {
+
+        return showDialog(ctx, title, msg, "Ok", null, listener, null);
+    }
+
+
+    public static AlertDialog showDialog(Context ctx, String title, String msg,
+                                         String btn1, String btn2, DialogInterface.OnClickListener listener) {
+
+        return showDialog(ctx, title, msg, btn1, btn2, listener,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+    }
+
+
+    public static AlertDialog showDialog(Context ctx, String title, String msg,
+                                         String btn1, String btn2,
+                                         DialogInterface.OnClickListener listener1,
+                                         DialogInterface.OnClickListener listener2) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+        builder.setTitle(title);
+        builder.setMessage(msg).setCancelable(false)
+                .setPositiveButton(btn1, listener1);
+        if (btn2 != null)
+            builder.setNegativeButton(btn2, listener2);
+
+        AlertDialog alert = builder.create();
+        alert.show();
+        return alert;
+
+    }
+
+    public static String getWebServiceErrorCode(JSONObject json) {
+        try {
+            return json.getString("errorCode");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String getWebServiceErrorMsg(JSONObject json) {
+        try {
+            return json.getString("errMsg");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

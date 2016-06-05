@@ -52,6 +52,7 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
 
+        <activity android:name=".view.ForgetPasswordScreen" />
         <activity
             android:name=".appIntroduction.WelcomeScreen"
             android:theme="@style/AppTheme"

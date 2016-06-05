@@ -107,7 +107,7 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
         headerView = mNavigationView.inflateHeaderView(R.layout.drawer_header);
         TextView userName = (TextView) headerView.findViewById(R.id.txt_name);
         TextView userEmail = (TextView) headerView.findViewById(R.id.txt_age_city);
-        userName.setText(mActivity.getIntent().getStringExtra("userName"));
+        userName.setText(SessionManager.getInstance(mActivity).getUserName());
         userEmail.setText(SessionManager.getInstance(mActivity).getEmail());
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 

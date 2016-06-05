@@ -41,13 +41,15 @@ public class SessionManager {
     /**
      * Create login session
      */
-    public void createLoginSession(String email, String password, String auth_token, String userId) {
+    public void createLoginSession(String email, String password, String auth_token,
+                                   String user_name, String userId) {
         // Storing login value as TRUE
         editor.putBoolean(PreferenceHelper.IS_LOGIN, true);
         // Storing email id in pref
         editor.putString(PreferenceHelper.KEY_EMAIL_ID, email);
         editor.putString(PreferenceHelper.KEY_PWD, password);
         editor.putString(PreferenceHelper.KEY_AUTHTOKEN, auth_token);
+        editor.putString(PreferenceHelper.KEY_USER_NAME, user_name);
         editor.putString(PreferenceHelper.KEY_USER_ID, userId);
 
         // commit changes
@@ -104,11 +106,6 @@ public class SessionManager {
     }
 
 
-    public void setUserId(String userId) {
-        editor.putString(PreferenceHelper.KEY_USER_ID, userId);
-        editor.commit();
-    }
-
     public void setPushNotificationID(String pushNotificationID) {
         editor.putString(PreferenceHelper.PUSH_NOTIFICATION_ID, pushNotificationID);
         editor.commit();
@@ -120,6 +117,22 @@ public class SessionManager {
 
     public String getUserId() {
         return pref.getString(PreferenceHelper.KEY_USER_ID, "");
+    }
+
+
+    public void setUserId(String userId) {
+        editor.putString(PreferenceHelper.KEY_USER_ID, userId);
+        editor.commit();
+    }
+
+    public String getUserName() {
+        return pref.getString(PreferenceHelper.KEY_USER_NAME, "");
+    }
+
+
+    public void setUserName(String userName) {
+        editor.putString(PreferenceHelper.KEY_USER_NAME, userName);
+        editor.commit();
     }
 
 }

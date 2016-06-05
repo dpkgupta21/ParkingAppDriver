@@ -445,7 +445,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/capture"
+            android:text="@string/next"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_16sp" />
     </RelativeLayout>
