@@ -3,6 +3,7 @@
     <string name="enter_email">Enter your Email</string>
     <string name="password">Password</string>
     <string name="forgot_pwd">Forgot Password?</string>
+    <string name="forgot_pwd_lbl">Forgot Password?</string>
     <string name="login">Login</string>
     <string name="no_acnt">No account?</string>
     <string name="register">Register</string>

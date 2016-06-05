@@ -15,6 +15,7 @@ import com.parking.app.parkingappdriver.model.DriverConfigDTO;
 import com.parking.app.parkingappdriver.navigationDrawer.DriverNavigationDrawerActivity;
 import com.parking.app.parkingappdriver.preferences.SessionManager;
 import com.parking.app.parkingappdriver.utils.AppUtils;
+import com.parking.app.parkingappdriver.webservices.handler.AddTokenPushAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.DriverDetailsAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.LoginAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
@@ -40,7 +41,6 @@ public class LoginScreen extends BaseActivity {
 
     private void assignClick() {
         setClick(R.id.login_button);
-        setClick(R.id.register);
     }
 
     @Override
@@ -48,11 +48,7 @@ public class LoginScreen extends BaseActivity {
 
         switch (v.getId()) {
 
-            case R.id.register:
-               //startActivity(new Intent(LoginScreen.this, VehicleInspectionScreen.class));
 
-                //startActivityForResult(new Intent(mActivity, CapturePicture.class), 1000);
-                break;
             case R.id.login_button:
                 email = getEditTextText(R.id.email_et).trim();
                 pwd = getEditTextText(R.id.pwd_et).trim();

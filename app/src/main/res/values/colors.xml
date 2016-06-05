@@ -16,6 +16,7 @@
     <color name="dark_grey">#5041453C</color>
     <color name="blue">#6DB8DD</color>
     <color name="dark_blue">#56B8DD</color>
+    <color name="transparent_black">#60000000</color>
 
     <color name="text_selected">#888</color>
     <color name="transparent_bg">#fff</color>
