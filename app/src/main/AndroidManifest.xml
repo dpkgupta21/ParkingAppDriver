@@ -7,6 +7,22 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature android:name="android.hardware.camera" />
+
+
+
+    <!-- For push Notification Permission -->
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <permission
+        android:name="com.parking.app.parkingappdriver.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.parking.app.parkingappdriver.permission.C2D_MESSAGE" />
+
+
+
     <application
         android:name=".application.ParkingAppController"
         android:allowBackup="true"
@@ -49,6 +65,26 @@
         <activity android:name=".drivermodel.VehicleInspectionScreen" />
         <activity android:name=".drivermodel.CustomerComments" />
         <activity android:name=".drivermodel.VehicleInspect"/>
+
+        <!-- Start Push Notification -->
+        <receiver
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+
+                <!-- Receives the actual messages. -->
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <!-- Receives the registration id. -->
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.parking.app.parkingappdriver" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".GCMIntentService" />
+
+        <!-- End Push Notification -->
+
 
     </application>
 

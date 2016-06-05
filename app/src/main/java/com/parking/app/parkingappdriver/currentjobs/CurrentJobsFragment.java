@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.parking.app.parkingappdriver.R;
@@ -15,7 +14,6 @@ import com.parking.app.parkingappdriver.model.LoadJobsDTO;
 import com.parking.app.parkingappdriver.myjobs.MyJobsAdapter;
 import com.parking.app.parkingappdriver.webservices.handler.CurrentJobsAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -23,7 +21,7 @@ import java.util.ArrayList;
 public class CurrentJobsFragment extends BaseFragment {
 
     private View view;
-    private static Activity mActivity;
+    private Activity mActivity;
     private ListView listView;
     private static ArrayList<LoadJobsDTO> jobsList;
     private static MyJobsAdapter myJobsAdapter;

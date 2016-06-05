@@ -117,22 +117,7 @@ public class LoginScreen extends BaseActivity {
 
     }
 
-    private void callAddTokenWS() {
-        new AddTokenPushAPIHandler(mActivity, SessionManager.getInstance(mActivity)
-                .getPushNotificationID(), "deviceID", GlobalKeys.ANDROID,
-                new WebAPIResponseListener() {
-                    @Override
-                    public void onSuccessOfResponse(Object... arguments) {
-                        callDriverConfigWS();
-                    }
 
-                    @Override
-                    public void onFailOfResponse(Object... arguments) {
-                        AppUtils.showToast(mActivity, "Login Failed");
-                    }
-                }
-        );
-    }
 
     private void callDriverConfigWS() {
         new DriverDetailsAPIHandler(mActivity, new WebAPIResponseListener() {
