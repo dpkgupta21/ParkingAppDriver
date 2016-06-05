@@ -10,13 +10,12 @@ import com.google.gson.Gson;
 import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.activity.BaseActivity;
 import com.parking.app.parkingappdriver.drivermodel.CustomerComments;
-import com.parking.app.parkingappdriver.drivermodel.VehicleInspectionScreen;
 import com.parking.app.parkingappdriver.iClasses.GlobalKeys;
 import com.parking.app.parkingappdriver.model.DriverConfigDTO;
 import com.parking.app.parkingappdriver.navigationDrawer.DriverNavigationDrawerActivity;
 import com.parking.app.parkingappdriver.preferences.SessionManager;
 import com.parking.app.parkingappdriver.utils.AppUtils;
-import com.parking.app.parkingappdriver.webservices.handler.DriverConfigAPIHandler;
+import com.parking.app.parkingappdriver.webservices.handler.DriverDetailsAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.LoginAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
 
@@ -81,7 +80,7 @@ public class LoginScreen extends BaseActivity {
                                         SessionManager.getInstance(mActivity).
                                                 createLoginSession(email, pwd, auth, userId);
 
-                                        //callDriverConfigWS();
+                                        callDriverConfigWS();
 
 //                                        Intent intent = new Intent(LoginScreen.this,
 //                                                DriverNavigationDrawerActivity.class);
@@ -117,7 +116,7 @@ public class LoginScreen extends BaseActivity {
     }
 
     private void callDriverConfigWS() {
-        new DriverConfigAPIHandler(mActivity, new WebAPIResponseListener() {
+        new DriverDetailsAPIHandler(mActivity, new WebAPIResponseListener() {
             @Override
             public void onSuccessOfResponse(Object... arguments) {
                 try {

@@ -40,6 +40,9 @@ public interface GlobalKeys {
     String DRIVER_CONFIG = "driver/getconfig";
     String DRIVER_CONFIG_REQUEST_KEY = "driver_config";
 
+    String DRIVER_DETAILS = "driver/details";
+    String DRIVER_DETAILS_REQUEST_KEY = "driver_details";
+
     String RELEASE_JOB_API = "job/releasejob";
     String RELEASE_API_REQUEST_KEY = "release_job";
 

@@ -1,7 +1,6 @@
 package com.parking.app.parkingappdriver.webservices.handler;
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -20,41 +19,29 @@ import com.parking.app.parkingappdriver.utils.AppUtils;
 import com.parking.app.parkingappdriver.webservices.control.WebserviceAPIErrorHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class DriverConfigAPIHandler {
+public class DriverDetailsAPIHandler {
     private Activity mActivity;
-    private String TAG = DriverConfigAPIHandler.class.getSimpleName();
+    private String TAG = DriverDetailsAPIHandler.class.getSimpleName();
     private WebAPIResponseListener responseListener;
-    private String authToken = "";
-    private String userId = "";
 
-    public DriverConfigAPIHandler(Activity activity, WebAPIResponseListener responseListener) {
-        AppUtils.showProgressDialog(mActivity, "Configuring driver...", false);
-        this.mActivity = activity;
+    public DriverDetailsAPIHandler(Activity mActivity, WebAPIResponseListener responseListener) {
+        this.mActivity = mActivity;
         this.responseListener = responseListener;
-        this.authToken = SessionManager.getInstance(mActivity).getAuthToken();
-        this.userId = SessionManager.getInstance(mActivity).getUserId();
-
-        Log.d("AuthToken",this.authToken);
 
         postAPICall();
     }
 
     private void postAPICall() {
         try {
-            String url = (AppConstants.APP_WEBSERVICE_API_URL + GlobalKeys.DRIVER_CONFIG).trim()
-                    + "?email=" + SessionManager.getInstance(mActivity).getEmail();
+            String url = (AppConstants.APP_WEBSERVICE_API_URL + GlobalKeys.DRIVER_DETAILS).trim();
 
-            JsonObjectRequest mJsonRequest = new JsonObjectRequest(
-                    Request.Method.GET,
-                    url, null,
+            JsonObjectRequest jsonRequest = new JsonObjectRequest(
+                    Request.Method.GET, url, null,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -64,42 +51,36 @@ public class DriverConfigAPIHandler {
                             //parseLoginAPIResponse(response.toString());
                             responseListener.onSuccessOfResponse(response);
                             AppUtils.hideProgressDialog();
-
                         }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    WebserviceAPIErrorHandler.getInstance()
-                            .VolleyErrorHandler(error, mActivity);
-                    AppUtils.hideProgressDialog();
-                    responseListener.onFailOfResponse(error);
-                }
-            }) {
-                /*
-                 * /* (non-Javadoc)
-                 *
-                 * @see com.android.volley.Request#getHeaders()
-                 */
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            WebserviceAPIErrorHandler.getInstance()
+                                    .VolleyErrorHandler(error, mActivity);
+                            AppUtils.hideProgressDialog();
+                            responseListener.onFailOfResponse(error);
+                        }
+                    }
+            ) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
                             GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
-                    params.put(GlobalKeys.AUTHTOKEN, authToken);
+                    params.put(GlobalKeys.AUTHTOKEN, SessionManager.getInstance(mActivity).getAuthToken());
                     params.put(GlobalKeys.USERID, SessionManager.getInstance(mActivity).getUserId());
                     return params;
                 }
-
             };
-
 
             // Adding request to request queue
             if (ParkingAppController.getInstance() != null) {
                 ParkingAppController.getInstance().addToRequestQueue(
-                        mJsonRequest, GlobalKeys.DRIVER_CONFIG_REQUEST_KEY);
+                        jsonRequest, GlobalKeys.DRIVER_DETAILS_REQUEST_KEY);
             }
             // set request time-out
-            mJsonRequest.setRetryPolicy(new DefaultRetryPolicy(
+            jsonRequest.setRetryPolicy(new DefaultRetryPolicy(
                     AppConstants.ONE_SECOND * 30, 0,
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         } catch (Exception e) {
