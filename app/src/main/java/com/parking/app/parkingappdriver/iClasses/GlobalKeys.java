@@ -23,6 +23,15 @@ public interface GlobalKeys {
     String FIRSTNAME = "firstname";
     String LASTNAME = "lastname";
 
+    String REG_TOKEN = "regToken";
+    String DEVICE_ID = "deviceId";
+    String DEVICE_TYPE = "deviceType";
+    String ANDROID = "android";
+
+
+    String ACCEPT_KEY_CONTENT_TYPE = "Accept";
+    String ADD_TOKEN_PUSH = "notification/addtoken";
+
     String LOAD_JOBS_API = "job/loadjobs";
     String PILLION_LOAD_JOB_REQUEST_KEY = "load_jobs";
 

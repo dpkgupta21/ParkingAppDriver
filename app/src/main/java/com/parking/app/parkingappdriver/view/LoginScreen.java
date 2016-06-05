@@ -15,6 +15,7 @@ import com.parking.app.parkingappdriver.model.DriverConfigDTO;
 import com.parking.app.parkingappdriver.navigationDrawer.DriverNavigationDrawerActivity;
 import com.parking.app.parkingappdriver.preferences.SessionManager;
 import com.parking.app.parkingappdriver.utils.AppUtils;
+import com.parking.app.parkingappdriver.webservices.handler.AddTokenPushAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.DriverDetailsAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.LoginAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
@@ -80,6 +81,7 @@ public class LoginScreen extends BaseActivity {
                                         SessionManager.getInstance(mActivity).
                                                 createLoginSession(email, pwd, auth, userId);
 
+                                        //callAddTokenWS();
                                         callDriverConfigWS();
 
 //                                        Intent intent = new Intent(LoginScreen.this,
@@ -113,6 +115,23 @@ public class LoginScreen extends BaseActivity {
                 break;
         }
 
+    }
+
+    private void callAddTokenWS() {
+        new AddTokenPushAPIHandler(mActivity, SessionManager.getInstance(mActivity)
+                .getPushNotificationID(), "deviceID", GlobalKeys.ANDROID,
+                new WebAPIResponseListener() {
+                    @Override
+                    public void onSuccessOfResponse(Object... arguments) {
+                        callDriverConfigWS();
+                    }
+
+                    @Override
+                    public void onFailOfResponse(Object... arguments) {
+                        AppUtils.showToast(mActivity, "Login Failed");
+                    }
+                }
+        );
     }
 
     private void callDriverConfigWS() {

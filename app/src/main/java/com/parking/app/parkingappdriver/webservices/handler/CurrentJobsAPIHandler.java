@@ -20,9 +20,6 @@ import org.json.JSONArray;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Deepak Singh on 02-May-16.
- */
 public class CurrentJobsAPIHandler {
 
     /**

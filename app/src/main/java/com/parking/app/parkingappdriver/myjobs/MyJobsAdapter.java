@@ -129,7 +129,7 @@ public class MyJobsAdapter extends BaseAdapter {
         endBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new EndJobAPIHandler(mActivity, jobsDTO, manageAPIHandler("end job"));
+                new EndJobAPIHandler(mActivity, jobsDTO, manageAPIHandler());
             }
         });
 
@@ -143,17 +143,16 @@ public class MyJobsAdapter extends BaseAdapter {
                 holder.startBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        relativeLayout.setVisibility(View.GONE);
-                        endButtonLayout.setVisibility(View.VISIBLE);
 
-                        new StartJobAPIHandler(mActivity, manageAPIHandler("start job"), jobsDTO);
+                        new StartJobAPIHandler(mActivity,
+                                manageStartJobAPIHandler(relativeLayout, endButtonLayout), jobsDTO);
                     }
                 });
 
                 holder.releaseBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        new ReleaseAPIHandler(mActivity, jobsDTO, manageAPIHandler("release job"));
+                        new ReleaseAPIHandler(mActivity, jobsDTO, manageAPIHandler());
                     }
                 });
             } else if (jobsDTO.getJob_Status().equalsIgnoreCase("INPROGRESS")) {
@@ -181,17 +180,14 @@ public class MyJobsAdapter extends BaseAdapter {
     }
 
 
-    private WebAPIResponseListener manageAPIHandler(final String jobOp) {
+    private WebAPIResponseListener manageAPIHandler() {
         WebAPIResponseListener responseListener = new WebAPIResponseListener() {
             @Override
             public void onSuccessOfResponse(Object... arguments) {
-                if (jobOp.equalsIgnoreCase("start job")) {
-                    mActivity.startActivity(new Intent(mActivity, VehicleInspectionScreen.class));
-                } else {
-                    Intent intent = new Intent(mActivity, DriverNavigationDrawerActivity.class);
-                    intent.putExtra("fragmentNumber", 1);
-                    mActivity.startActivity(intent);
-                }
+                Intent intent = new Intent(mActivity, DriverNavigationDrawerActivity.class);
+                intent.putExtra("fragmentNumber", 1);
+                mActivity.startActivity(intent);
+
             }
 
             @Override
@@ -205,6 +201,28 @@ public class MyJobsAdapter extends BaseAdapter {
         return responseListener;
     }
 
+    private WebAPIResponseListener manageStartJobAPIHandler(final RelativeLayout currentLayout,
+                                                            final RelativeLayout endBtnlayout) {
+        WebAPIResponseListener responseListener = new WebAPIResponseListener() {
+            @Override
+            public void onSuccessOfResponse(Object... arguments) {
+                currentLayout.setVisibility(View.GONE);
+                endBtnlayout.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(mActivity, VehicleInspectionScreen.class);
+                mActivity.startActivity(intent);
+
+            }
+
+            @Override
+            public void onFailOfResponse(Object... arguments) {
+                VolleyError error = (VolleyError) arguments[0];
+                Toast.makeText(mActivity, "Operation failed.", Toast.LENGTH_SHORT).show();
+                Log.i(MyJobsAdapter.class.getSimpleName(), "Job operation error " + error.toString());
+            }
+        };
+
+        return responseListener;
+    }
 
     public class ViewHolder {
         TextView confirm_job_btn, mobile, plateNumber;

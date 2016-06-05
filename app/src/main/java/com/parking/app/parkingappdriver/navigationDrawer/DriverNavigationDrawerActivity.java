@@ -20,7 +20,11 @@ import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.currentjobs.CurrentJobsFragment;
 import com.parking.app.parkingappdriver.myjobs.MyJobsFragment;
 import com.parking.app.parkingappdriver.notification.NotificationFragment;
+import com.parking.app.parkingappdriver.preferences.SessionManager;
+import com.parking.app.parkingappdriver.utils.AppUtils;
 import com.parking.app.parkingappdriver.view.UserProfileScreen;
+import com.parking.app.parkingappdriver.webservices.handler.LogoutAPIHandler;
+import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
 
 
 public class DriverNavigationDrawerActivity extends AppCompatActivity {
@@ -143,7 +147,10 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
                 break;
             case 4:
                 // fragment = new AlertFragment();
-                title = "Logout";
+                new LogoutAPIHandler(mActivity, SessionManager.getInstance(mActivity).getEmail(),
+                        SessionManager.getInstance(mActivity).getAuthToken(),
+                        manageLogoutAPIHandler()
+                );
                 break;
             default:
                 break;
@@ -159,6 +166,21 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
             // set the toolbar title
             getSupportActionBar().setTitle(title);
         }
+    }
+
+    private WebAPIResponseListener manageLogoutAPIHandler() {
+        WebAPIResponseListener responseListener = new WebAPIResponseListener() {
+            @Override
+            public void onSuccessOfResponse(Object... arguments) {
+                AppUtils.showToast(mActivity, "You have logged out.");
+            }
+
+            @Override
+            public void onFailOfResponse(Object... arguments) {
+                AppUtils.showToast(mActivity, "Logout Failed");
+            }
+        };
+        return responseListener;
     }
 
 

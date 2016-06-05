@@ -109,6 +109,15 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void setPushNotificationID(String pushNotificationID) {
+        editor.putString(PreferenceHelper.PUSH_NOTIFICATION_ID, pushNotificationID);
+        editor.commit();
+    }
+
+    public String getPushNotificationID() {
+        return pref.getString(PreferenceHelper.PUSH_NOTIFICATION_ID, "");
+    }
+
     public String getUserId() {
         return pref.getString(PreferenceHelper.KEY_USER_ID, "");
     }
