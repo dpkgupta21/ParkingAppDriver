@@ -12,11 +12,10 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gcm.GCMBaseIntentService;
-
-import java.util.Calendar;
-
 import com.parking.app.parkingappdriver.navigationDrawer.DriverNavigationDrawerActivity;
 import com.parking.app.parkingappdriver.preferences.SessionManager;
+
+import java.util.Calendar;
 
 import static com.parking.app.parkingappdriver.CommonUtilities.SENDER_ID;
 import static com.parking.app.parkingappdriver.CommonUtilities.displayMessage;
@@ -170,6 +169,7 @@ public class GCMIntentService extends GCMBaseIntentService {
             Intent notificationIntent = null;
             PendingIntent intent = null;
             builder.setContentText(message);
+            builder.setStyle(new NotificationCompat.BigTextStyle().bigText(message));
             notificationIntent = new Intent(context,
                     DriverNavigationDrawerActivity.class);
             notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
