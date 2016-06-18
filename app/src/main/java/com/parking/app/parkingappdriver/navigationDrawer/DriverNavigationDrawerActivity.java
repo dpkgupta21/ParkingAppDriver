@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,25 +21,27 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
 import com.google.android.gcm.GCMRegistrar;
 import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.WakeLocker;
 import com.parking.app.parkingappdriver.currentjobs.CurrentJobsFragment;
+import com.parking.app.parkingappdriver.customViews.CustomAlert;
+import com.parking.app.parkingappdriver.customViews.CustomProgressDialog;
 import com.parking.app.parkingappdriver.iClasses.GlobalKeys;
 import com.parking.app.parkingappdriver.myjobs.MyJobsFragment;
 import com.parking.app.parkingappdriver.notification.NotificationFragment;
-import com.parking.app.parkingappdriver.utils.AppUtils;
 import com.parking.app.parkingappdriver.preferences.SessionManager;
 import com.parking.app.parkingappdriver.utils.AppUtils;
+import com.parking.app.parkingappdriver.utils.WebserviceResponseConstants;
+import com.parking.app.parkingappdriver.view.LoginScreen;
 import com.parking.app.parkingappdriver.view.UserProfileScreen;
 import com.parking.app.parkingappdriver.webservices.handler.AddTokenPushAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.LogoutAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
 
-import java.sql.Driver;
+import org.json.JSONObject;
 
 import static com.parking.app.parkingappdriver.CommonUtilities.DISPLAY_MESSAGE_ACTION;
 import static com.parking.app.parkingappdriver.CommonUtilities.EXTRA_MESSAGE;
@@ -75,8 +78,11 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
 
 
     private void addTokenHandler() {
+        String deviceId = Settings.Secure.getString(mActivity.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+
         new AddTokenPushAPIHandler(mActivity, SessionManager.getInstance(mActivity)
-                .getPushNotificationID(), "deviceID", GlobalKeys.ANDROID,
+                .getPushNotificationID(), deviceId, GlobalKeys.ANDROID,
                 new WebAPIResponseListener() {
                     @Override
                     public void onSuccessOfResponse(Object... arguments) {
@@ -86,11 +92,88 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailOfResponse(Object... arguments) {
-                        AppUtils.showToast(mActivity, "Login Failed");
+                        try {
+                            CustomProgressDialog.hideProgressDialog();
+                            if (arguments != null) {
+                                String errorResponse = (String) arguments[0];
+                                JSONObject errorJsonObj = new JSONObject(errorResponse);
+                                if (AppUtils.getWebServiceErrorCode(errorJsonObj).
+                                        equalsIgnoreCase(WebserviceResponseConstants.
+                                                ERROR_TOKEN_EXPIRED)) {
+
+                                    new CustomAlert(mActivity, mActivity)
+                                            .singleButtonAlertDialog(
+                                                    AppUtils.getWebServiceErrorMsg(errorJsonObj),
+                                                    getString(R.string.ok),
+                                                    "singleBtnCallbackResponse", 1000);
+
+                                }
+                            }
+                        } catch (Exception e) {
+                            CustomProgressDialog.hideProgressDialog();
+                            e.printStackTrace();
+                        }
                     }
                 }
         );
     }
+
+    private WebAPIResponseListener onLogoutResponseListner() {
+
+        WebAPIResponseListener mWebAPIResponseListener;
+
+        mWebAPIResponseListener = new WebAPIResponseListener() {
+            @Override
+            public void onSuccessOfResponse(Object... arguments) {
+                CustomProgressDialog.hideProgressDialog();
+                try {
+                    SessionManager.getInstance(mActivity).clearSession();
+                    Intent intent = new Intent(mActivity, LoginScreen.class);
+                    startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    finish();
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            @Override
+            public void onFailOfResponse(Object... arguments) {
+                try {
+                    CustomProgressDialog.hideProgressDialog();
+                    if (arguments != null) {
+                        JSONObject errorJsonObj = (JSONObject) arguments[0];
+                        if (AppUtils.getWebServiceErrorCode(errorJsonObj).
+                                equalsIgnoreCase(WebserviceResponseConstants.ERROR_INVALID_TOKEN)
+                                || AppUtils.getWebServiceErrorCode(errorJsonObj).
+                                equalsIgnoreCase(WebserviceResponseConstants.ERROR_TOKEN_MISMATCH)) {
+
+                            SessionManager.getInstance(mActivity).clearSession();
+                            Intent intent = new Intent(mActivity, LoginScreen.class);
+                            startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+
+                            finish();
+                        }
+                    }
+                } catch (Exception e) {
+                    CustomProgressDialog.hideProgressDialog();
+                    AppUtils.showDialog(mActivity,
+                            getString(R.string.dialog_title_alert),
+                            getString(R.string.network_error_please_try_again));
+                    e.printStackTrace();
+                }
+
+
+            }
+        }
+
+        ;
+
+        return mWebAPIResponseListener;
+    }
+
 
     private void initViews() {
 
@@ -195,9 +278,11 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
                 break;
             case 4:
                 // fragment = new AlertFragment();
+
+
                 new LogoutAPIHandler(mActivity, SessionManager.getInstance(mActivity).getEmail(),
                         SessionManager.getInstance(mActivity).getAuthToken(),
-                        manageLogoutAPIHandler()
+                        onLogoutResponseListner()
                 );
                 break;
             default:
@@ -216,20 +301,6 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
         }
     }
 
-    private WebAPIResponseListener manageLogoutAPIHandler() {
-        WebAPIResponseListener responseListener = new WebAPIResponseListener() {
-            @Override
-            public void onSuccessOfResponse(Object... arguments) {
-                AppUtils.showToast(mActivity, "You have logged out.");
-            }
-
-            @Override
-            public void onFailOfResponse(Object... arguments) {
-                AppUtils.showToast(mActivity, "Logout Failed");
-            }
-        };
-        return responseListener;
-    }
 
 
     // For Push notification
@@ -318,6 +389,16 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
             AppUtils.showLog(TAG, "UnRegister Receiver Error " + e.getMessage());
         }
         super.onDestroy();
+    }
+
+
+    public void singleBtnCallbackResponse(Boolean flag, int code) {
+        if (flag) {
+            SessionManager.getInstance(mActivity).clearSession();
+            Intent intent = new Intent(mActivity, LoginScreen.class);
+            startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            finish();
+        }
     }
 
 }

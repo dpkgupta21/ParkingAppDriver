@@ -1,6 +1,7 @@
 package com.parking.app.parkingappdriver.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -9,6 +10,7 @@ import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.activity.BaseActivity;
 import com.parking.app.parkingappdriver.customViews.CustomProgressDialog;
 import com.parking.app.parkingappdriver.iClasses.GlobalKeys;
+import com.parking.app.parkingappdriver.preferences.SessionManager;
 import com.parking.app.parkingappdriver.utils.AppUtils;
 import com.parking.app.parkingappdriver.webservices.handler.ForgetPasswordAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
@@ -114,4 +116,13 @@ public class ForgetPasswordScreen extends BaseActivity implements View.OnClickLi
         return true;
     }
 
+
+    public void singleBtnCallbackResponse(Boolean flag, int code) {
+        if (flag) {
+            SessionManager.getInstance(mActivity).clearSession();
+            Intent intent = new Intent(mActivity, LoginScreen.class);
+            startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            finish();
+        }
+    }
 }

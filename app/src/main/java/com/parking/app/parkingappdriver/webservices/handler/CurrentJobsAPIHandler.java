@@ -65,7 +65,7 @@ public class CurrentJobsAPIHandler {
                 },
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError volleyError) {
+                    public void onErrorResponse(VolleyError error) {
                         JSONObject errorJsonObj = null;
                         try {
                             Response<JSONObject> errorResponse = Response.error(error);

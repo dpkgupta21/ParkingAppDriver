@@ -109,7 +109,7 @@ public class VehicleInspect extends BaseActivity {
         setViewVisibility(R.id.noImageFound, View.GONE);
         snapshotFiles = getDirectoryFiles(new File(
                 AppConstants.SNAPSHOT_DIRECTORY_PATH));
-        Log.d(TAG, snapshotFiles.size() + "");
+        //Log.d(TAG, snapshotFiles.size() + "");
     }
 
 
@@ -280,8 +280,13 @@ public class VehicleInspect extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000) {
             if (resultCode == RESULT_OK) {
-                snapshotFiles.clear();
-                imagesDTOs.clear();
+                if(snapshotFiles!=null && !snapshotFiles.isEmpty()) {
+                    snapshotFiles.clear();
+                }
+                if(imagesDTOs!=null && imagesDTOs.isEmpty()) {
+                    imagesDTOs.clear();
+                }
+
                 snapshotFiles = getDirectoryFiles(new File(
                         AppConstants.SNAPSHOT_DIRECTORY_PATH));
                 manageGridAdapter();

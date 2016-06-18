@@ -74,16 +74,16 @@ public class SessionManager {
     }
 
     public String getEmail() {
-        return pref.getString(PreferenceHelper.KEY_EMAIL_ID, " ");
+        return pref.getString(PreferenceHelper.KEY_EMAIL_ID, "");
 
     }
 
     public String getPwd() {
-        return pref.getString(PreferenceHelper.KEY_PWD, " ");
+        return pref.getString(PreferenceHelper.KEY_PWD, "");
     }
 
     public String getAuthToken() {
-        return pref.getString(PreferenceHelper.KEY_AUTHTOKEN, "auth");
+        return pref.getString(PreferenceHelper.KEY_AUTHTOKEN, "");
 
     }
 

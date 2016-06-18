@@ -10,4 +10,13 @@
         android:divider="@null"
         android:dividerHeight="0dp"></ListView>
 
+    <TextView
+        android:id="@+id/txt_no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No data"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20sp"
+        android:visibility="gone" />
 </RelativeLayout>

@@ -39,7 +39,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/edit" />
+            android:src="@android:drawable/ic_menu_rotate" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -54,7 +54,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/edit" />
+            android:src="@android:drawable/ic_menu_save" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/android" />
+            android:src="@drawable/ic_photo_camera_white_24dp" />
     </RelativeLayout>
 
 </RelativeLayout>

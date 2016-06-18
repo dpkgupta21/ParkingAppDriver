@@ -616,8 +616,13 @@ public class AppUtils {
 
     }
 
+
+
     public static String getWebServiceErrorCode(JSONObject json) {
         try {
+            if(json.has("message")){
+                json= json.getJSONObject("message");
+            }
             return json.getString("errorCode");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -627,6 +632,9 @@ public class AppUtils {
 
     public static String getWebServiceErrorMsg(JSONObject json) {
         try {
+            if(json.has("message")){
+                json= json.getJSONObject("message");
+            }
             return json.getString("errMsg");
         } catch (JSONException e) {
             e.printStackTrace();

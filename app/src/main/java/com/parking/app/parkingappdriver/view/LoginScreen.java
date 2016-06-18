@@ -107,7 +107,27 @@ public class LoginScreen extends BaseActivity {
 
                         @Override
                         public void onFailOfResponse(Object... arguments) {
-                            AppUtils.showToast(mActivity, "Login Failed");
+                            AppUtils.hideProgressDialog();
+                            try {
+
+                                if (arguments != null) {
+                                    JSONObject errorJsonObj = (JSONObject) arguments[0];
+
+                                    if (AppUtils.getWebServiceErrorCode(errorJsonObj).
+                                            equalsIgnoreCase
+                                                    (WebserviceResponseConstants.LOGIN_ERROR)) {
+
+                                        AppUtils.showDialog(mActivity,
+                                                getString(R.string.dialog_title_message),
+                                                AppUtils.getWebServiceErrorMsg(errorJsonObj));
+                                    }
+                                }
+                            } catch (Exception e) {
+                                CustomProgressDialog.hideProgressDialog();
+//                    Snackbar.make(v, getString(R.string.network_error_please_try_again),
+//                            Snackbar.LENGTH_LONG).show();
+                                e.printStackTrace();
+                            }
 
                         }
                     });
@@ -148,7 +168,7 @@ public class LoginScreen extends BaseActivity {
             @Override
             public void onFailOfResponse(Object... arguments) {
                 try {
-                    CustomProgressDialog.hideProgressDialog();
+                    AppUtils.hideProgressDialog();
 
                     if (arguments != null) {
                         JSONObject errorJsonObj = (JSONObject) arguments[0];
