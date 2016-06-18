@@ -19,8 +19,10 @@ import com.parking.app.parkingappdriver.utils.AppUtils;
 import com.parking.app.parkingappdriver.webservices.control.WebserviceAPIErrorHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,10 +58,26 @@ public class DriverDetailsAPIHandler {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            WebserviceAPIErrorHandler.getInstance()
-                                    .VolleyErrorHandler(error, mActivity);
-                            AppUtils.hideProgressDialog();
-                            responseListener.onFailOfResponse(error);
+                            JSONObject errorJsonObj = null;
+                            try {
+                                Response<JSONObject> errorResponse = Response.error(error);
+                                String errorString = new String(errorResponse.error.networkResponse.data,
+                                        HttpHeaderParser
+                                                .parseCharset(errorResponse.error.networkResponse.headers));
+                                errorJsonObj = new JSONObject(errorString);
+                                WebserviceAPIErrorHandler.getInstance()
+                                        .VolleyErrorHandler(error, mActivity);
+                                responseListener.onFailOfResponse(errorJsonObj);
+                            } catch (UnsupportedEncodingException e) {
+                                responseListener.onFailOfResponse(errorJsonObj);
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                responseListener.onFailOfResponse(errorJsonObj);
+                                e.printStackTrace();
+                            } catch (Exception e) {
+                                responseListener.onFailOfResponse(errorJsonObj);
+                                e.printStackTrace();
+                            }
                         }
                     }
             ) {

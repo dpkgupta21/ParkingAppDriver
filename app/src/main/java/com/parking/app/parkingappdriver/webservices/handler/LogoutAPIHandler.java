@@ -7,6 +7,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.parking.app.parkingappdriver.application.ParkingAppController;
 import com.parking.app.parkingappdriver.iClasses.GlobalKeys;
@@ -19,6 +20,7 @@ import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListen
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,10 +98,26 @@ public class LogoutAPIHandler {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                WebserviceAPIErrorHandler.getInstance()
-                        .VolleyErrorHandler(error, mActivity);
-                AppUtils.hideProgressDialog();
-                mResponseListener.onFailOfResponse(error);
+                JSONObject errorJsonObj = null;
+                try {
+                    Response<JSONObject> errorResponse = Response.error(error);
+                    String errorString = new String(errorResponse.error.networkResponse.data,
+                            HttpHeaderParser
+                                    .parseCharset(errorResponse.error.networkResponse.headers));
+                    errorJsonObj = new JSONObject(errorString);
+                    WebserviceAPIErrorHandler.getInstance()
+                            .VolleyErrorHandler(error, mActivity);
+                    mResponseListener.onFailOfResponse(errorJsonObj);
+                } catch (UnsupportedEncodingException e) {
+                    mResponseListener.onFailOfResponse(errorJsonObj);
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    mResponseListener.onFailOfResponse(errorJsonObj);
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    mResponseListener.onFailOfResponse(errorJsonObj);
+                    e.printStackTrace();
+                }
             }
         }) {
             /*

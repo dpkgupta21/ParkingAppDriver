@@ -198,6 +198,11 @@
     <string name="price">Price</string>
 
 
+    <!-- Common alert-->
+    <string name="network_error_please_try_again">Network Error! Please try again.</string>
+    <string name="dialog_title_message">Message</string>
+    <string name="dialog_title_alert">Alert</string>
+
 
 </resources>
 
