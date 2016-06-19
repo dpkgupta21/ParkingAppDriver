@@ -51,8 +51,6 @@ public class MyJobsAPIHandler {
      * @param webAPIResponseListener
      */
     public MyJobsAPIHandler(Activity mActivity, WebAPIResponseListener webAPIResponseListener) {
-        AppUtils
-                .showProgressDialog(mActivity, "Fetching Jobs...", false);
         this.mActivity = mActivity;
         this.mResponseListener = webAPIResponseListener;
         authToken = SessionManager.getInstance(mActivity).getAuthToken();
@@ -75,9 +73,6 @@ public class MyJobsAPIHandler {
                 AppUtils.showInfoLog(TAG, "Response :"
                         + jsonArray);
                 mResponseListener.onSuccessOfResponse(jsonArray.toString());
-                AppUtils.hideProgressDialog();
-
-
             }
         }, new Response.ErrorListener() {
             @Override

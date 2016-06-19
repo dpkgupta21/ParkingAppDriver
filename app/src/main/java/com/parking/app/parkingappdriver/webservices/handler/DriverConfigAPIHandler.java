@@ -36,7 +36,6 @@ public class DriverConfigAPIHandler {
     private String userId = "";
 
     public DriverConfigAPIHandler(Activity activity, WebAPIResponseListener responseListener) {
-        AppUtils.showProgressDialog(mActivity, "Configuring driver...", false);
         this.mActivity = activity;
         this.responseListener = responseListener;
         this.authToken = SessionManager.getInstance(mActivity).getAuthToken();
@@ -63,7 +62,6 @@ public class DriverConfigAPIHandler {
 
                             //parseLoginAPIResponse(response.toString());
                             responseListener.onSuccessOfResponse(response);
-                            AppUtils.hideProgressDialog();
 
                         }
                     }, new Response.ErrorListener() {

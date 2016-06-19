@@ -55,8 +55,6 @@ public class LogoutAPIHandler {
      */
     public LogoutAPIHandler(Activity mActivity, String email,
                             String auth, WebAPIResponseListener webAPIResponseListener) {
-        AppUtils
-                .showProgressDialog(mActivity, "Logout...", false);
         this.mActivity = mActivity;
         this.emailId = email;
         this.auth_token = auth;
@@ -92,8 +90,6 @@ public class LogoutAPIHandler {
 
                         parseLogoutAPIResponse(response.toString());
                         mResponseListener.onSuccessOfResponse(response);
-                        AppUtils.hideProgressDialog();
-
                     }
                 }, new Response.ErrorListener() {
             @Override

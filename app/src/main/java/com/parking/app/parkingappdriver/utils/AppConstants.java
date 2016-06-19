@@ -19,4 +19,9 @@ public class AppConstants {
     public static String imageName = "";
     public static String APP_WEBSERVICE_API_URL = "http://159.203.81.9:8000/api/";
 
+    // Job status
+
+    public static String IN_PROGRESS = "INPROGRESS";
+    public static String LOCK = "lock";
+
 }

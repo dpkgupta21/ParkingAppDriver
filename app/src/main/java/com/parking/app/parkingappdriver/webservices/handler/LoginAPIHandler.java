@@ -55,8 +55,6 @@ public class LoginAPIHandler {
      */
     public LoginAPIHandler(Activity mActivity, String email,
                            String password, WebAPIResponseListener webAPIResponseListener) {
-        AppUtils
-                .showProgressDialog(mActivity, "Login...", false);
         this.mActivity = mActivity;
         this.emailId = email;
         this.password = password;
@@ -93,7 +91,6 @@ public class LoginAPIHandler {
 
                         parseLoginAPIResponse(response.toString());
                         mResponseListener.onSuccessOfResponse(response);
-                        AppUtils.hideProgressDialog();
 
                     }
                 }, new Response.ErrorListener() {

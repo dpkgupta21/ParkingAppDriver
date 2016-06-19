@@ -6,11 +6,14 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -56,6 +59,9 @@ public class AppUtils {
     // $ # End of the line
     // ^[a-z0-9_-]{3,15}$
     private static final String USER_NAME_PATTERN = "^[a-z0-9_-]{2,20}$";
+
+    private static final String SERVER_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    public static final String DISPLAY_DATE_TIME_FORMAT = "dd MMM, yyyy HH:mm a";
 
     /**
      * Show debug Message into logcat
@@ -616,6 +622,40 @@ public class AppUtils {
 
     }
 
+
+    public static String getJobsDisplayDateTime(String dateString) {
+
+        DateFormat df = new SimpleDateFormat(SERVER_DATE_TIME_FORMAT);
+        DateFormat currentDf = new SimpleDateFormat(DISPLAY_DATE_TIME_FORMAT);
+        String newDateString = null;
+
+        try {
+            Date startDate = df.parse(dateString);
+            newDateString = currentDf.format(startDate);
+            System.out.println(newDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return newDateString;
+
+    }
+
+    public static int getScreenWidth(Context mContext) {
+        int columnWidth;
+        WindowManager wm = (WindowManager) mContext
+                .getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+
+        final Point point = new Point();
+        try {
+            display.getSize(point);
+        } catch (java.lang.NoSuchMethodError ignore) { // Older device
+            point.x = display.getWidth();
+            point.y = display.getHeight();
+        }
+        columnWidth = point.x;
+        return columnWidth;
+    }
 
 
     public static String getWebServiceErrorCode(JSONObject json) {

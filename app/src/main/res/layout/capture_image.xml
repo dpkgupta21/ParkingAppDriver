@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:padding="@dimen/margin_30dp"
+        android:padding="@dimen/margin_10dp"
         android:visibility="gone">
 
         <ImageView
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:padding="@dimen/margin_30dp"
+        android:padding="@dimen/margin_10dp"
         android:visibility="gone">
 
         <ImageView

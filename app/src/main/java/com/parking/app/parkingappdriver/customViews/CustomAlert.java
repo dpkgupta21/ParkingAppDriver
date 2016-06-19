@@ -14,7 +14,6 @@ import com.parking.app.parkingappdriver.R;
 import java.lang.reflect.Method;
 
 
-
 public class CustomAlert {
 
     private Context context;
@@ -23,7 +22,7 @@ public class CustomAlert {
 
     public CustomAlert(Context context, Object mObj) {
         this.context = context;
-        this.mObj=mObj;
+        this.mObj = mObj;
     }
 
     public CustomAlert(Context context) {
@@ -32,7 +31,7 @@ public class CustomAlert {
 
 
     public void singleContextButtonAlertDialog(String msg,
-                                        String positiveBtn, final String callbackFunc, final Integer requestCode) {
+                                               String positiveBtn, final String callbackFunc, final Integer requestCode) {
         try {
             LayoutInflater inflater = LayoutInflater.from(context);
             View view = inflater.inflate(R.layout.customdialog, null);
@@ -41,6 +40,7 @@ public class CustomAlert {
             alertDialogBuilder.setView(view);
             alertDialog = alertDialogBuilder.create();
             alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            alertDialog.setCancelable(false);
 
             TextView txt_msg = (TextView) view.findViewById(R.id.alertMsg);
             txt_msg.setText(msg);

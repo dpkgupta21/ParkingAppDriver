@@ -33,24 +33,21 @@ public class StartJobAPIHandler {
     private Activity mActivity;
     private String TAG = StartJobAPIHandler.class.getSimpleName();
     private WebAPIResponseListener responseListener;
-    private String authToken = "";
-    private LoadJobsDTO jobsDTO;
+    private String jobId;
 
-    public StartJobAPIHandler(Activity activity, WebAPIResponseListener responseListener,
-                              LoadJobsDTO jobsDTO) {
-        AppUtils.showProgressDialog(mActivity, "Starting Job...", false);
+    public StartJobAPIHandler(Activity activity,
+                              WebAPIResponseListener responseListener,
+                              String jobId) {
         this.mActivity = activity;
         this.responseListener = responseListener;
-        this.authToken = SessionManager.getInstance(mActivity).getAuthToken();
-        this.jobsDTO = jobsDTO;
-
+        this.jobId = jobId;
         postAPICall();
     }
 
     private void postAPICall() {
         try {
             JSONObject object = new JSONObject();
-            object.put("jobId", jobsDTO.getJobId());
+            object.put("jobId", jobId);
             object.put("valletId", SessionManager.getInstance(mActivity).getVallet_Id());
 
             JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST,
@@ -62,7 +59,6 @@ public class StartJobAPIHandler {
                             AppUtils.showInfoLog(TAG, "Response :"
                                     + jsonObject);
                             responseListener.onSuccessOfResponse(jsonObject.toString());
-                            AppUtils.hideProgressDialog();
                         }
                     },
                     new Response.ErrorListener() {
@@ -93,10 +89,11 @@ public class StartJobAPIHandler {
             ) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
+
                     Map<String, String> params = new HashMap<String, String>();
                     params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
                             GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
-                    params.put(GlobalKeys.AUTHTOKEN, authToken);
+                    params.put(GlobalKeys.AUTHTOKEN, SessionManager.getInstance(mActivity).getAuthToken());
                     params.put(GlobalKeys.USERID, SessionManager.getInstance(mActivity).getUserId());
                     return params;
                 }

@@ -11,7 +11,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.parking.app.parkingappdriver.application.ParkingAppController;
 import com.parking.app.parkingappdriver.iClasses.GlobalKeys;
-import com.parking.app.parkingappdriver.model.LoadJobsDTO;
+import com.parking.app.parkingappdriver.model.CurrentJobsDTO;
 import com.parking.app.parkingappdriver.preferences.SessionManager;
 import com.parking.app.parkingappdriver.utils.AppConstants;
 import com.parking.app.parkingappdriver.utils.AppUtils;
@@ -33,15 +33,14 @@ public class EndJobAPIHandler {
     private String authToken;
     private String TAG = EndJobAPIHandler.class.getSimpleName();
     private WebAPIResponseListener responseListener;
-    private LoadJobsDTO jobsDTO;
+    private String jobId;
 
-    public EndJobAPIHandler(Activity mActivity, LoadJobsDTO jobsDTO,
+    public EndJobAPIHandler(Activity mActivity, String jobId,
                             WebAPIResponseListener responseListener) {
-        AppUtils.showProgressDialog(mActivity, "Ending job...", false);
         this.mActivity = mActivity;
         this.responseListener = responseListener;
         this.authToken = SessionManager.getInstance(mActivity).getAuthToken();
-        this.jobsDTO = jobsDTO;
+        this.jobId = jobId;
 
         postAPICall();
     }
@@ -49,7 +48,7 @@ public class EndJobAPIHandler {
     private void postAPICall() {
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("jobId", jobsDTO.getJobId());
+            jsonObject.put("jobId", jobId);
             jsonObject.put("valletId", SessionManager.getInstance(mActivity).getVallet_Id());
 
             JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST,
@@ -61,7 +60,6 @@ public class EndJobAPIHandler {
                             AppUtils.showInfoLog(TAG, "Response :"
                                     + jsonObject);
                             responseListener.onSuccessOfResponse(jsonObject.toString());
-                            AppUtils.hideProgressDialog();
                         }
                     },
                     new Response.ErrorListener() {

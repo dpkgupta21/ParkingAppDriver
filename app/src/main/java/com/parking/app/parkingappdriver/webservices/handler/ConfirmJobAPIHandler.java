@@ -50,8 +50,6 @@ public class ConfirmJobAPIHandler {
      */
     public ConfirmJobAPIHandler(Activity mActivity, String jobId,
                                 String valletId, WebAPIResponseListener webAPIResponseListener) {
-        AppUtils
-                .showProgressDialog(mActivity, "Wait...", false);
         this.mActivity = mActivity;
         this.jobId = jobId;
         this.valletId =  SessionManager.getInstance(mActivity).getVallet_Id();
@@ -86,7 +84,6 @@ public class ConfirmJobAPIHandler {
                         AppUtils.showInfoLog(TAG, "Response :"
                                 + response);
                         mResponseListener.onSuccessOfResponse(response.toString());
-                        AppUtils.hideProgressDialog();
 
                     }
                 }, new Response.ErrorListener() {

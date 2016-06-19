@@ -17,7 +17,6 @@ import com.parking.app.parkingappdriver.navigationDrawer.DriverNavigationDrawerA
 import com.parking.app.parkingappdriver.preferences.SessionManager;
 import com.parking.app.parkingappdriver.utils.AppUtils;
 import com.parking.app.parkingappdriver.utils.WebserviceResponseConstants;
-import com.parking.app.parkingappdriver.webservices.handler.AddTokenPushAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.DriverDetailsAPIHandler;
 import com.parking.app.parkingappdriver.webservices.handler.LoginAPIHandler;
 import com.parking.app.parkingappdriver.webservices.ihelper.WebAPIResponseListener;
@@ -65,10 +64,12 @@ public class LoginScreen extends BaseActivity {
                     Snackbar.make(v, getString(R.string.please_enter_pwd), Snackbar.LENGTH_LONG).show();
 
                 } else {
+
+                    CustomProgressDialog.showProgDialog(mActivity, "Signing...");
                     new LoginAPIHandler(mActivity, email, pwd, new WebAPIResponseListener() {
                         @Override
                         public void onSuccessOfResponse(Object... arguments) {
-                            AppUtils.hideProgressDialog();
+
                             try {
                                 JSONObject mJsonObject = (JSONObject) arguments[0];
                                 if (mJsonObject != null) {
@@ -92,14 +93,24 @@ public class LoginScreen extends BaseActivity {
 //                                        finish();
 
                                     } else {
-                                        AppUtils.showToast(mActivity, "Login Failed");
+                                        CustomProgressDialog.hideProgressDialog();
+                                        AppUtils.showDialog(mActivity,
+                                                getString(R.string.dialog_title_message),
+                                                "Login Failed");
                                     }
                                 } else {
-                                    AppUtils.showToast(mActivity, "Login Failed");
+                                    CustomProgressDialog.hideProgressDialog();
+                                    AppUtils.showDialog(mActivity,
+                                            getString(R.string.dialog_title_message),
+                                            "Login Failed");
 
                                 }
 
                             } catch (JSONException e) {
+                                CustomProgressDialog.hideProgressDialog();
+                                AppUtils.showDialog(mActivity,
+                                        getString(R.string.dialog_title_message),
+                                        "Login Failed");
                                 e.printStackTrace();
                             }
                         }
@@ -107,7 +118,7 @@ public class LoginScreen extends BaseActivity {
 
                         @Override
                         public void onFailOfResponse(Object... arguments) {
-                            AppUtils.hideProgressDialog();
+                            CustomProgressDialog.hideProgressDialog();
                             try {
 
                                 if (arguments != null) {
@@ -140,12 +151,12 @@ public class LoginScreen extends BaseActivity {
     }
 
 
-
     private void callDriverConfigWS() {
         new DriverDetailsAPIHandler(mActivity, new WebAPIResponseListener() {
             @Override
             public void onSuccessOfResponse(Object... arguments) {
                 try {
+                    CustomProgressDialog.hideProgressDialog();
                     JSONObject mJsonObject = (JSONObject) arguments[0];
                     if (mJsonObject != null) {
                         DriverConfigDTO configDTO = new Gson().fromJson(mJsonObject.toString(),
@@ -168,8 +179,7 @@ public class LoginScreen extends BaseActivity {
             @Override
             public void onFailOfResponse(Object... arguments) {
                 try {
-                    AppUtils.hideProgressDialog();
-
+                    CustomProgressDialog.hideProgressDialog();
                     if (arguments != null) {
                         JSONObject errorJsonObj = (JSONObject) arguments[0];
 

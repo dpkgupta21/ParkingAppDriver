@@ -43,7 +43,7 @@ public class CurrentJobsAPIHandler {
     String authToken = "";
 
     public CurrentJobsAPIHandler(Activity mActivity, WebAPIResponseListener mResponseListener) {
-        AppUtils.showProgressDialog(mActivity, "Fetching Jobs...", false);
+
         this.mActivity = mActivity;
         this.mResponseListener = mResponseListener;
         authToken = SessionManager.getInstance(mActivity).getAuthToken();
@@ -60,7 +60,6 @@ public class CurrentJobsAPIHandler {
                         AppUtils.showInfoLog(TAG, "Response :"
                                 + jsonArray);
                         mResponseListener.onSuccessOfResponse(jsonArray.toString());
-                        AppUtils.hideProgressDialog();
                     }
                 },
                 new Response.ErrorListener() {

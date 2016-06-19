@@ -58,8 +58,8 @@ public class MyJobsFragment extends BaseFragment {
 
         myJobsDTOArrayList = new ArrayList<LoadJobsDTO>();
 
-        CustomProgressDialog.showProgDialog(mActivity, null);
-        new MyJobsAPIHandler(mActivity, manageResponseListner());
+        CustomProgressDialog.showProgDialog(mActivity, "Load Jobs...");
+        new MyJobsAPIHandler(mActivity, myJobsResponseListner());
 
         myJobsAdapter = new MyJobsAdapter(getActivity(), this);
 
@@ -67,7 +67,7 @@ public class MyJobsFragment extends BaseFragment {
 
     }
 
-    private WebAPIResponseListener manageResponseListner() {
+    public WebAPIResponseListener myJobsResponseListner() {
 
         WebAPIResponseListener webAPIResponseListener = new WebAPIResponseListener() {
             @Override
@@ -104,9 +104,14 @@ public class MyJobsFragment extends BaseFragment {
                                     AppUtils.getWebServiceErrorMsg(errorJsonObj), view);
 
                         } else if (AppUtils.getWebServiceErrorCode(errorJsonObj).
-                                equalsIgnoreCase(WebserviceResponseConstants.ERROR_TOKEN_EXPIRED)) {
+                                equalsIgnoreCase(WebserviceResponseConstants.ERROR_TOKEN_EXPIRED) ||
+                                AppUtils.getWebServiceErrorCode(errorJsonObj).
+                                        equalsIgnoreCase(WebserviceResponseConstants.ERROR_INVALID_TOKEN)
+                                ||
+                                AppUtils.getWebServiceErrorCode(errorJsonObj).
+                                        equalsIgnoreCase(WebserviceResponseConstants.ERROR_TOKEN_MISMATCH)) {
 
-                            new CustomAlert(mActivity, mActivity)
+                            new CustomAlert(mActivity, MyJobsFragment.this)
                                     .singleButtonAlertDialog(
                                             AppUtils.getWebServiceErrorMsg(errorJsonObj),
                                             getString(R.string.ok),
@@ -135,69 +140,69 @@ public class MyJobsFragment extends BaseFragment {
 
     }
 
-    public void confirmJob(LoadJobsDTO jobsDTO) {
-        String valletId = SessionManager.getInstance(mActivity)
-                .getVallet_Id();
-
-        new ConfirmJobAPIHandler(mActivity, jobsDTO.getJobId(),
-                valletId, new WebAPIResponseListener() {
-            @Override
-            public void onSuccessOfResponse(Object... arguments) {
-
-                String response = (String) arguments[0];
-                try {
-                    JSONObject jobj = new JSONObject(response);
-                    new CustomAlert(mActivity, mActivity)
-                            .singleButtonAlertDialog("This job " + jobj.getString("jobId") +
-                                            " has been confirmed." +
-                                            " Please see it in your current job.",
-                                    mActivity.getString(R.string.ok),
-                                    "singleBtnCallbackResponse", 1000);
-
-
-                } catch (Exception e) {
-
-                    CustomProgressDialog.hideProgressDialog();
-                    AppUtils.showDialog(mActivity,
-                            getString(R.string.dialog_title_alert),
-                            getString(R.string.network_error_please_try_again));
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailOfResponse(Object... arguments) {
-                try {
-                    CustomProgressDialog.hideProgressDialog();
-                    if (arguments != null) {
-                        JSONObject errorJsonObj = (JSONObject) arguments[0];
-                        if (AppUtils.getWebServiceErrorCode(errorJsonObj).
-                                equalsIgnoreCase(WebserviceResponseConstants.ERROR_TOKEN_EXPIRED)) {
-
-                            new CustomAlert(mActivity, mActivity)
-                                    .singleButtonAlertDialog(
-                                            AppUtils.getWebServiceErrorMsg(errorJsonObj),
-                                            getString(R.string.ok),
-                                            "singleBtnCallbackResponse",
-                                            CREATE_ORDER_TOKEN_EXPIRED_FAILURE);
-                        }
-                    } else {
-                        AppUtils.showDialog(mActivity,
-                                getString(R.string.dialog_title_alert),
-                                getString(R.string.network_error_please_try_again));
-                    }
-                } catch (Exception e) {
-                    CustomProgressDialog.hideProgressDialog();
-                    AppUtils.showDialog(mActivity,
-                            getString(R.string.dialog_title_alert),
-                            getString(R.string.network_error_please_try_again));
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-    }
+//    public void confirmJob(LoadJobsDTO jobsDTO) {
+//        String valletId = SessionManager.getInstance(mActivity)
+//                .getVallet_Id();
+//
+//        new ConfirmJobAPIHandler(mActivity, jobsDTO.getJobId(),
+//                valletId, new WebAPIResponseListener() {
+//            @Override
+//            public void onSuccessOfResponse(Object... arguments) {
+//
+//                String response = (String) arguments[0];
+//                try {
+//                    JSONObject jobj = new JSONObject(response);
+//                    new CustomAlert(mActivity, mActivity)
+//                            .singleButtonAlertDialog("This job " + jobj.getString("jobId") +
+//                                            " has been confirmed." +
+//                                            " Please see it in your current job.",
+//                                    mActivity.getString(R.string.ok),
+//                                    "singleBtnCallbackResponse", 1000);
+//
+//
+//                } catch (Exception e) {
+//
+//                    CustomProgressDialog.hideProgressDialog();
+//                    AppUtils.showDialog(mActivity,
+//                            getString(R.string.dialog_title_alert),
+//                            getString(R.string.network_error_please_try_again));
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailOfResponse(Object... arguments) {
+//                try {
+//                    CustomProgressDialog.hideProgressDialog();
+//                    if (arguments != null) {
+//                        JSONObject errorJsonObj = (JSONObject) arguments[0];
+//                        if (AppUtils.getWebServiceErrorCode(errorJsonObj).
+//                                equalsIgnoreCase(WebserviceResponseConstants.ERROR_TOKEN_EXPIRED)) {
+//
+//                            new CustomAlert(mActivity, mActivity)
+//                                    .singleButtonAlertDialog(
+//                                            AppUtils.getWebServiceErrorMsg(errorJsonObj),
+//                                            getString(R.string.ok),
+//                                            "singleBtnCallbackResponse",
+//                                            CREATE_ORDER_TOKEN_EXPIRED_FAILURE);
+//                        }
+//                    } else {
+//                        AppUtils.showDialog(mActivity,
+//                                getString(R.string.dialog_title_alert),
+//                                getString(R.string.network_error_please_try_again));
+//                    }
+//                } catch (Exception e) {
+//                    CustomProgressDialog.hideProgressDialog();
+//                    AppUtils.showDialog(mActivity,
+//                            getString(R.string.dialog_title_alert),
+//                            getString(R.string.network_error_please_try_again));
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        });
+//
+//    }
 
 
     public void singleBtnCallbackResponse(Boolean flag, int code) {
@@ -208,8 +213,6 @@ public class MyJobsFragment extends BaseFragment {
                 Intent intent = new Intent(mActivity, LoginScreen.class);
                 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 mActivity.finish();
-            } else if (code == 1000) {
-                new MyJobsAPIHandler(mActivity, manageResponseListner());
             }
         }
     }

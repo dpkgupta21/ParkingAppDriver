@@ -32,18 +32,15 @@ import java.util.Map;
 public class ReleaseAPIHandler {
 
     private Activity mActivity;
-    private String authToken;
     private String TAG = ReleaseAPIHandler.class.getSimpleName();
     private WebAPIResponseListener responseListener;
-    private LoadJobsDTO jobsDTO;
+    private String jobId;
 
-    public ReleaseAPIHandler(Activity mActivity, LoadJobsDTO jobsDTO,
+    public ReleaseAPIHandler(Activity mActivity, String jobId,
                              WebAPIResponseListener responseListener) {
-        AppUtils.showProgressDialog(mActivity, "Releasing job...", false);
         this.mActivity = mActivity;
         this.responseListener = responseListener;
-        this.authToken = SessionManager.getInstance(mActivity).getAuthToken();
-        this.jobsDTO = jobsDTO;
+        this.jobId = jobId;
 
         postAPICall();
     }
@@ -51,7 +48,7 @@ public class ReleaseAPIHandler {
     private void postAPICall() {
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("jobId",jobsDTO.getJobId());
+            jsonObject.put("jobId", jobId);
             jsonObject.put("valletId", SessionManager.getInstance(mActivity).getVallet_Id());
 
             JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST,
@@ -63,7 +60,6 @@ public class ReleaseAPIHandler {
                             AppUtils.showInfoLog(TAG, "Response :"
                                     + jsonObject);
                             responseListener.onSuccessOfResponse(jsonObject.toString());
-                            AppUtils.hideProgressDialog();
                         }
                     },
                     new Response.ErrorListener() {
@@ -97,8 +93,10 @@ public class ReleaseAPIHandler {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put(GlobalKeys.HEADER_KEY_CONTENT_TYPE,
                             GlobalKeys.HEADER_VALUE_CONTENT_TYPE);
-                    params.put(GlobalKeys.AUTHTOKEN, authToken);
-                    params.put(GlobalKeys.USERID, SessionManager.getInstance(mActivity).getUserId());
+                    params.put(GlobalKeys.AUTHTOKEN,
+                            SessionManager.getInstance(mActivity).getAuthToken());
+                    params.put(GlobalKeys.USERID,
+                            SessionManager.getInstance(mActivity).getUserId());
                     return params;
                 }
             };

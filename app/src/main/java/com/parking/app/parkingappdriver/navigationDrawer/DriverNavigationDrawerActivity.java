@@ -71,6 +71,8 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
                 .getPushNotificationID();
         if (pushRegistrationId == null || pushRegistrationId.equalsIgnoreCase("")) {
             registrationPushNotification();
+        }else {
+            addTokenHandler();
         }
 
 
@@ -148,7 +150,9 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
                         if (AppUtils.getWebServiceErrorCode(errorJsonObj).
                                 equalsIgnoreCase(WebserviceResponseConstants.ERROR_INVALID_TOKEN)
                                 || AppUtils.getWebServiceErrorCode(errorJsonObj).
-                                equalsIgnoreCase(WebserviceResponseConstants.ERROR_TOKEN_MISMATCH)) {
+                                equalsIgnoreCase(WebserviceResponseConstants.ERROR_TOKEN_MISMATCH)
+                                || AppUtils.getWebServiceErrorCode(errorJsonObj).
+                                equalsIgnoreCase(WebserviceResponseConstants.ERROR_TOKEN_EXPIRED)) {
 
                             SessionManager.getInstance(mActivity).clearSession();
                             Intent intent = new Intent(mActivity, LoginScreen.class);
@@ -223,7 +227,6 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 switch (item.getItemId()) {
                     case R.id.nav_item_my_jobs:
-                        addTokenHandler();
                         displayView(0);
                         mCurrentSelectedPosition = 0;
                         return true;
@@ -302,7 +305,6 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
     }
 
 
-
     // For Push notification
     private void registrationPushNotification() {
         // Make sure the device has the proper dependencies.
@@ -326,6 +328,9 @@ public class DriverNavigationDrawerActivity extends AppCompatActivity {
             // Registration is not present, register now with GCM
             GCMRegistrar.register(mActivity, SENDER_ID);
         } else {
+
+            // Call Add token webservice
+            addTokenHandler();
             // Device is already registered on GCM
             if (GCMRegistrar
                     .isRegisteredOnServer(mActivity)) {
