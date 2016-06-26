@@ -1,12 +1,9 @@
 package com.parking.app.parkingappdriver.captureImage;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.parking.app.parkingappdriver.R;
 import com.parking.app.parkingappdriver.activity.BaseActivity;
 import com.parking.app.parkingappdriver.utils.AppConstants;

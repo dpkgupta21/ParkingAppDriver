@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.parking.app.parkingappdriver.R;
+import com.parking.app.parkingappdriver.drivermodel.VehicleInspect;
 
 import java.io.File;
 import java.util.List;
-
 
 
 public class GridViewAdapter extends ArrayAdapter<File> {
@@ -23,16 +24,20 @@ public class GridViewAdapter extends ArrayAdapter<File> {
     // Declare Variables
     Context context;
     LayoutInflater inflater;
-    List<File> snapshortFiles;
+    List<File> snapshotFiles;
     private SparseBooleanArray mSelectedItemsIds;
 
     public GridViewAdapter(Context context, int resource,
-                           List<File> snapshortFiles) {
-        super(context, resource, snapshortFiles);
+                           List<File> snapshotFiles) {
+        super(context, resource, snapshotFiles);
         mSelectedItemsIds = new SparseBooleanArray();
         this.context = context;
-        this.snapshortFiles = snapshortFiles;
+        this.snapshotFiles = snapshotFiles;
         inflater = LayoutInflater.from(context);
+    }
+
+    public void setSnapshotFiles(List<File> snapshotFiles) {
+        this.snapshotFiles = snapshotFiles;
     }
 
     private class ViewHolder {
@@ -52,11 +57,15 @@ public class GridViewAdapter extends ArrayAdapter<File> {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+//        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+//        Bitmap bitmap = BitmapFactory.decodeFile(snapshotFiles.get(position)
+//                .getAbsolutePath(), bmOptions);
+        //Bitmap bitmap = getImageResized(contentUri);
 
-        Bitmap bitmap = BitmapFactory.decodeFile(snapshortFiles.get(position)
-                .getAbsolutePath(), bmOptions);
 
+        //exportBitmapAsFile(bitmap, _file.getPath());
+        Uri contentUri = Uri.fromFile(snapshotFiles.get(position));
+        Bitmap bitmap = ((VehicleInspect) context).getImageResized(contentUri);
         // Capture position and set to the ImageView
         holder.snapshortImage.setImageBitmap(bitmap);
         // holder.selectedView.setVisibility(View.GONE);
@@ -65,13 +74,13 @@ public class GridViewAdapter extends ArrayAdapter<File> {
 
     @Override
     public void remove(File object) {
-        snapshortFiles.remove(object);
+        snapshotFiles.remove(object);
         notifyDataSetChanged();
     }
 
-    public List<File> getWorldPopulation() {
-        return snapshortFiles;
-    }
+//    public List<File> getWorldPopulation() {
+//        return snapshotFiles;
+//    }
 
     public void toggleSelection(int position) {
         selectView(position, !mSelectedItemsIds.get(position));

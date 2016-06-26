@@ -194,6 +194,7 @@ public class CurrentJobsAdapter extends BaseAdapter implements View.OnClickListe
                 break;
             case R.id.btn_vehicle_inspection_job:
                 Intent intent = new Intent(mActivity, VehicleInspectionScreen.class);
+                intent.putExtra("jobId",currentJobsDTOsList.get(pos).getJobId());
                 mActivity.startActivity(intent);
                 break;
 

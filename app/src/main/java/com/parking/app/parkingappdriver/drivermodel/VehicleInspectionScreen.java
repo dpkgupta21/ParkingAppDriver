@@ -39,6 +39,7 @@ public class VehicleInspectionScreen extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vehicle_inspection_screen);
+        //String jobId= getIntent().getStringExtra("jobId");
         initViews();
         assignClicks();
     }
@@ -127,6 +128,7 @@ public class VehicleInspectionScreen extends BaseActivity {
                 //showMessageChooseDialog();
                 checkForPartsConditions();
                 Intent inspectIntent = new Intent(mActivity, VehicleInspect.class);
+                inspectIntent.putExtra("jobId", getIntent().getStringExtra("jobId"));
                 inspectIntent.putExtra("InspectDTO", inspectDTO);
                 startActivity(inspectIntent);
                 break;

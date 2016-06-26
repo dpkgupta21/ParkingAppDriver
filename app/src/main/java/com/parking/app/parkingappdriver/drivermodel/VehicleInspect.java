@@ -2,10 +2,17 @@ package com.parking.app.parkingappdriver.drivermodel;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -26,8 +33,12 @@ import com.parking.app.parkingappdriver.model.VehicleInspectDTO;
 import com.parking.app.parkingappdriver.utils.AppConstants;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 public class VehicleInspect extends BaseActivity {
@@ -38,7 +49,7 @@ public class VehicleInspect extends BaseActivity {
     /**
      * Snapshot image files list object
      */
-    private List<File> snapshotFiles;
+    private List<File> snapshotFiles = new ArrayList<>();
     /**
      * Grid view object instance
      */
@@ -49,14 +60,24 @@ public class VehicleInspect extends BaseActivity {
     private VehicleInspectDTO inspectDTO;
     private List<VehicleImagesDTO> imagesDTOs;
 
+
+    private int i = 0;
+    // Use
+    private File _dir;
+    private File _file;
+    private Uri contentUri;
+    private List<String> filePathList = new ArrayList<>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vehicle_inspect);
         mActivity = VehicleInspect.this;
+        createDirectoryForPictures();
         initViews();
         manageGridAdapter();
         singleClickOnGridItem();
+
     }
 
     @Override
@@ -118,10 +139,15 @@ public class VehicleInspect extends BaseActivity {
      */
     private void manageGridAdapter() {
         if (snapshotFiles != null && !snapshotFiles.isEmpty()) {
-            mGridViewAdapter = new GridViewAdapter(this,
-                    R.layout.snapshot_item_view, snapshotFiles);
-            setViewVisibility(R.id.noImageFound, View.GONE);
-            snapShotGrid.setVisibility(View.VISIBLE);
+            if (mGridViewAdapter == null) {
+                mGridViewAdapter = new GridViewAdapter(this,
+                        R.layout.snapshot_item_view, snapshotFiles);
+                setViewVisibility(R.id.noImageFound, View.GONE);
+                snapShotGrid.setVisibility(View.VISIBLE);
+            } else {
+                mGridViewAdapter.setSnapshotFiles(snapshotFiles);
+                mGridViewAdapter.notifyDataSetChanged();
+            }
         } else {
             setViewVisibility(R.id.noImageFound, View.VISIBLE);
             snapShotGrid.setVisibility(View.GONE);
@@ -223,7 +249,7 @@ public class VehicleInspect extends BaseActivity {
                 if (file.isDirectory()) {
                     inFiles.addAll(getDirectoryFiles(file));
                 } else {
-                    if (file.getName().endsWith(".jpg")) {
+                    if (file.getName().endsWith(".png") || file.getName().endsWith(".jpg")) {
                         VehicleImagesDTO dto = new VehicleImagesDTO();
                         dto.setImage_name(file.getName());
                         imagesDTOs.add(dto);
@@ -260,7 +286,8 @@ public class VehicleInspect extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.take_vehicle_button:
-                startActivityForResult(new Intent(mActivity, CapturePicture.class), 1000);
+                takeAPicture();
+                //startActivityForResult(new Intent(mActivity, CapturePicture.class), 1000);
                 break;
             case R.id.toolbar_right_tv:
                 try {
@@ -268,29 +295,291 @@ public class VehicleInspect extends BaseActivity {
                     Intent customerIntent = new Intent(mActivity, CustomerComments.class);
                     customerIntent.putExtra("InspectDTO", inspectDTO);
                     startActivity(customerIntent);
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
         }
     }
 
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1000) {
+//            if (resultCode == RESULT_OK) {
+//                if(snapshotFiles!=null && !snapshotFiles.isEmpty()) {
+//                    snapshotFiles.clear();
+//                }
+//                if(imagesDTOs!=null && imagesDTOs.isEmpty()) {
+//                    imagesDTOs.clear();
+//                }
+//
+//                snapshotFiles = getDirectoryFiles(new File(
+//                        AppConstants.SNAPSHOT_DIRECTORY_PATH));
+//                manageGridAdapter();
+//            }
+//        }
+//    }
+
+
+    private void takeAPicture() {
+        try {
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            _file = new File(_dir, System.currentTimeMillis() + ".png");
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(_file));
+            startActivityForResult(intent, 2000);
+
+
+        } catch (Exception e1) {
+            e1.getStackTrace();
+
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1000) {
-            if (resultCode == RESULT_OK) {
-                if(snapshotFiles!=null && !snapshotFiles.isEmpty()) {
-                    snapshotFiles.clear();
-                }
-                if(imagesDTOs!=null && imagesDTOs.isEmpty()) {
-                    imagesDTOs.clear();
-                }
 
-                snapshotFiles = getDirectoryFiles(new File(
-                        AppConstants.SNAPSHOT_DIRECTORY_PATH));
+        try {
+
+
+            // Make it available in the gallery
+            if (resultCode == RESULT_OK) {
+                //Intent mediaScanIntent = new Intent(MediaStore.ActionImageCapture);
+                Uri contentUri = Uri.fromFile(_file);
+                if (snapshotFiles != null) {
+                    snapshotFiles.add(_file);
+                }
+                filePathList.add(_file.getPath());
+                Bitmap bitmap = getImageResized(contentUri);
+
+
+                exportBitmapAsFile(bitmap, _file.getPath());
+
                 manageGridAdapter();
+
+
             }
+
+
+        } catch (Exception e) {
+            e.getStackTrace();
         }
+    }
+
+
+    public Bitmap getImageResized(Uri selectedImage) {
+        Bitmap bm = null;
+        int[] sampleSizes = new int[]{5, 3, 2, 1};
+        int i = 0;
+        do {
+            bm = decodeBitmap(selectedImage, sampleSizes[i]);
+            //Log.i("info", "GetImageResized resizer: new bitmap width = " + bm.getWidth());
+            i++;
+        } while (bm.getWidth() < 400 && i < sampleSizes.length);
+
+        int rotation = getRotation(selectedImage, true);
+        bm = rotate(bm, rotation);
+
+        return bm;
+    }
+
+    public void exportBitmapAsFile(Bitmap bitmap, String filePath) {
+        //var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+        //var filePath = System.IO.Path.Combine(sdCardPath, "test.png");
+        FileOutputStream stream = null;
+        try {
+            stream = new FileOutputStream(filePath, true);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        try {
+            stream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void createDirectoryForPictures() {
+        try {
+
+
+            _dir = new File(AppConstants.SNAPSHOT_DIRECTORY_PATH);
+            if (!_dir.exists()) {
+                _dir.mkdirs();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Bitmap decodeBitmap(Uri theUri, int sampleSize) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = sampleSize;
+
+        AssetFileDescriptor fileDescriptor = null;
+        try {
+            fileDescriptor = getContentResolver().openAssetFileDescriptor(theUri, "r");
+        } catch (FileNotFoundException e) {
+            e.getStackTrace();
+        }
+        Bitmap actuallyUsableBitmap = null;
+        if (fileDescriptor != null) {
+            actuallyUsableBitmap = BitmapFactory.decodeFileDescriptor(
+                    fileDescriptor.getFileDescriptor(), null, options);
+
+        }
+        return actuallyUsableBitmap;
+    }
+
+    private int getRotation(Uri imageUri, boolean isCamera) {
+        int rotation;
+        if (isCamera) {
+            rotation = getRotationFromCamera(imageUri);
+        } else {
+            rotation = getRotationFromCamera(imageUri);
+        }
+        return rotation;
+    }
+
+    private int getRotationFromCamera(Uri imageFile) {
+        int rotate = 0;
+        try {
+
+            getContentResolver().notifyChange(imageFile, null);
+            ExifInterface exif = new ExifInterface(imageFile.getPath());
+            int orientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotate = 270;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotate = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotate = 90;
+                    break;
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        return rotate;
+    }
+
+    private static Bitmap rotate(Bitmap bm, int rotation) {
+        if (rotation != 0) {
+            Matrix matrix = new Matrix();
+            matrix.postRotate(rotation);
+            Bitmap bmOut = Bitmap.createBitmap(bm, 0, 0,
+                    bm.getWidth(), bm.getHeight(), matrix, true);
+            return bmOut;
+        }
+        return bm;
+    }
+
+
+    public Bitmap LoadAndResizeBitmap(String fileName, int width, int height) {
+
+
+        try {
+
+
+            // First we get the the dimensions of the file on disk
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(fileName, options);
+
+            // Next we calculate the ratio that we need to resize the image by
+            // in order to fit the requested dimensions.
+            int outHeight = options.outHeight;
+            int outWidth = options.outWidth;
+            int inSampleSize = 1;
+
+            if (outHeight > height || outWidth > width) {
+                inSampleSize = outWidth > outHeight
+                        ? outHeight / height
+                        : outWidth / width;
+            }
+
+            // Now we will load the image and have BitmapFactory resize it for us.
+            options.inSampleSize = inSampleSize;
+            options.inJustDecodeBounds = false;
+            Bitmap resizedBitmap = BitmapFactory.decodeFile(fileName, options);
+
+            resizedBitmap = GetPictureStreamWithRotation(resizedBitmap, fileName);
+
+            return resizedBitmap;
+
+
+        } catch (Exception e) {
+            e.getStackTrace();
+            return null;
+        }
+    }
+
+    public static Bitmap GetPictureStreamWithRotation(Bitmap bitmap, String picturePath) {
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(picturePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                (int) ExifInterface.ORIENTATION_UNDEFINED);
+
+        //Bitmap resultBitmap = BitmapFactory.DecodeFile(picturePath);
+        Matrix mtx = new Matrix();
+
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_UNDEFINED: // Nexus 7 landscape...
+                break;
+            case ExifInterface.ORIENTATION_NORMAL: // landscape
+                break;
+            case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                mtx.preRotate(180);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                        bitmap.getHeight(), mtx, false);
+                // mtx.Dispose();
+                mtx = null;
+                break;
+            case ExifInterface.ORIENTATION_FLIP_VERTICAL:
+                break;
+            case ExifInterface.ORIENTATION_TRANSPOSE:
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_90: // portrait
+                mtx.preRotate(90);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                        bitmap.getHeight(), mtx, false);
+                //mtx.Dispose();
+                mtx = null;
+                break;
+            case ExifInterface.ORIENTATION_TRANSVERSE:
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270: // might need to flip horizontally too...
+                mtx.preRotate(270);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                        bitmap.getHeight(), mtx, false);
+                //mtx.Dispose();
+                mtx = null;
+                break;
+            default:
+                mtx.preRotate(90);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                        bitmap.getHeight(), mtx, false);
+                //mtx.Dispose();
+                mtx = null;
+                break;
+        }
+
+        return bitmap;
+
     }
 }

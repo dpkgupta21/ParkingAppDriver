@@ -13,7 +13,8 @@ public class AppConstants {
     public static String STORED_IMAGE_PATH = "ParkingApp";
     public static String CLICKED_IMAGE_PATH = "imagepath";
     public static String SERVICE = "service";
-    public static String SNAPSHOT_DIRECTORY_PATH = Environment.getExternalStorageDirectory()
+    public static String SNAPSHOT_DIRECTORY_PATH = Environment.
+            getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
             + "/" + AppConstants.STORED_IMAGE_PATH + "/";
     public static Bitmap fullScreenBitmap = null;
     public static String imageName = "";

@@ -32,7 +32,9 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name=".view.SplashScreen">
+        <activity
+            android:name=".view.SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,6 +44,7 @@
 
         <activity
             android:name=".view.UserProfileScreen"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
 
@@ -49,23 +52,43 @@
 
         <activity
             android:name=".view.LoginScreen"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
 
-        <activity android:name=".view.ForgetPasswordScreen" />
+        <activity
+            android:name=".view.ForgetPasswordScreen"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".appIntroduction.WelcomeScreen"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
 
-        <activity android:name=".captureImage.CapturePicture" />
-        <activity android:name=".captureImage.ShowFullSnapShotOnGUI" />
-        <activity android:name=".captureImage.ShowingSnapshotScreen" />
+        <activity
+            android:name=".captureImage.CapturePicture"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".captureImage.ShowFullSnapShotOnGUI"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".captureImage.ShowingSnapshotScreen"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".navigationDrawer.DriverNavigationDrawerActivity" />
-        <activity android:name=".drivermodel.VehicleInspectionScreen" />
-        <activity android:name=".drivermodel.CustomerComments" />
-        <activity android:name=".drivermodel.VehicleInspect" />
+        <activity
+            android:name=".navigationDrawer.DriverNavigationDrawerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".drivermodel.VehicleInspectionScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".drivermodel.CustomerComments"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".drivermodel.VehicleInspect"
+            android:screenOrientation="portrait">
+
+        </activity>
 
         <!-- Start Push Notification -->
         <receiver

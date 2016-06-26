@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".usermodel.home.ServicesScreen">
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/toolbar_ll"
@@ -32,7 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar_ll"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/margin_10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -106,11 +106,11 @@
 
 
         <!--<View-->
-            <!--android:id="@+id/view"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/horizontal_line_height"-->
-            <!--android:layout_below="@+id/add_services_ll"-->
-            <!--android:background="@color/grey" />-->
+        <!--android:id="@+id/view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/horizontal_line_height"-->
+        <!--android:layout_below="@+id/add_services_ll"-->
+        <!--android:background="@color/grey" />-->
 
         <RelativeLayout
             android:id="@+id/take_vehicle_button"
