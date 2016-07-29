@@ -40,8 +40,7 @@ public class DriverDetailsAPIHandler {
         try {
             String url = (AppConstants.APP_WEBSERVICE_API_URL + GlobalKeys.DRIVER_DETAILS).trim();
 
-            JsonObjectRequest jsonRequest = new JsonObjectRequest(
-                    Request.Method.GET, url, null,
+            JsonObjectRequest jsonRequest = new JsonObjectRequest(url, null,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {

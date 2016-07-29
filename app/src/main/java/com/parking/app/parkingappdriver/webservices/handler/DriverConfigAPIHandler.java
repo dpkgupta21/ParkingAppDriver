@@ -5,9 +5,6 @@ import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkResponse;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -52,7 +49,6 @@ public class DriverConfigAPIHandler {
                     + "?email=" + SessionManager.getInstance(mActivity).getEmail();
 
             JsonObjectRequest mJsonRequest = new JsonObjectRequest(
-                    Request.Method.GET,
                     url, null,
                     new Response.Listener<JSONObject>() {
                         @Override
